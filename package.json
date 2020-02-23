@@ -8,6 +8,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "firebase": "^7.8.2",
+    "fontfaceobserver": "^2.1.0",
     "formik": "^2.1.4",
     "framer-motion": "^1.8.4",
     "react": "^16.12.0",

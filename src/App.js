@@ -1,15 +1,23 @@
 import React from 'react';
 import ThemeProvider from './style/ThemeProvider';
 import { themeObject } from './style/theme';
-import { Typography } from '@material-ui/core';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import SignIn from './views/SignIn';
+import Home from './views/Home';
+import SignUp from './views/SignUp';
 
 const App = () => {
   return (
-    <div className='App'>
-      <ThemeProvider theme={themeObject}>
-        <Typography variant='h1'>Hello world!</Typography>
-      </ThemeProvider>
-    </div>
+    <ThemeProvider theme={themeObject}>
+      <div className='App'>
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/sign-in' component={SignIn} />
+          <Route exact path='/sign-up' component={SignUp} />
+          <Redirect to='/' />
+        </Switch>
+      </div>
+    </ThemeProvider>
   );
 };
 

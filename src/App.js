@@ -1,14 +1,13 @@
 import React from 'react';
-import GlobalStyle from './style/global-style';
 import ThemeProvider from './style/ThemeProvider';
 import { themeObject } from './style/theme';
+import { Typography } from '@material-ui/core';
 
 const App = () => {
   return (
     <div className='App'>
       <ThemeProvider theme={themeObject}>
-        <GlobalStyle />
-        <h1>Hello world</h1>
+        <Typography variant='h1'>Hello world!</Typography>
       </ThemeProvider>
     </div>
   );

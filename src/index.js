@@ -3,11 +3,16 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import FontFaceObserver from 'fontfaceobserver';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const montserratFont = new FontFaceObserver('Montserrat');
 const openSansFont = new FontFaceObserver('Open Sans');
 
-const rootElement = <App />;
+const rootElement = (
+  <Router>
+    <App />
+  </Router>
+);
 const rootDiv = document.getElementById('root');
 
 Promise.all([montserratFont.load(), openSansFont.load()]).then(() =>

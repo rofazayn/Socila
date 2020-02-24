@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Typography } from '@material-ui/core';
 import fb from '../../firebase';
 import { useHistory, Redirect } from 'react-router-dom';

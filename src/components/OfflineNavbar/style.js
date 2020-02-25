@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 const OfflineNavbar = styled.nav`
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+  margin: 2rem 0;
   .inner-w {
     /* background: pink; */
     display: flex;

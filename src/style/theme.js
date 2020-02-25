@@ -24,7 +24,8 @@ let themeObject = createMuiTheme({
     ].join(','),
     button: {
       textTransform: 'none',
-      fontFamily: 'Montserrat'
+      fontFamily: 'Montserrat',
+      fontWeight: 700
     },
     h1: {
       fontFamily: 'Montserrat',

@@ -5,7 +5,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import SignIn from './views/SignIn';
 import Home from './views/Home';
 import SignUp from './views/SignUp';
-import DummyNavbar from './components/DummyNavbar';
+// import DummyNavbar from './components/DummyNavbar';
 import { AuthProvider } from './context/auth-context';
 import { ProtectedRoute } from './routes';
 import OfflineNavbar from './components/OfflineNavbar';

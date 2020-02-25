@@ -44,6 +44,7 @@ const SignUp = () => {
               value={email}
               placeholder='You email'
               onChange={e => setEmail(e.target.value)}
+              autoComplete='email'
             />
           </label>
           <label htmlFor='password'>
@@ -54,6 +55,7 @@ const SignUp = () => {
               value={password}
               placeholder='Your password'
               onChange={e => setPassword(e.target.value)}
+              autoComplete='new-password'
             />
           </label>
           <label htmlFor='password-confirmation'>
@@ -64,6 +66,7 @@ const SignUp = () => {
               value={passwordConfirmation}
               placeholder='Confirm your password'
               onChange={e => setPasswordConfirmation(e.target.value)}
+              autoComplete='new-password'
             />
           </label>
           <button type='submit'>Create account</button>

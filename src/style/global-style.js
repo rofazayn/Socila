@@ -29,6 +29,7 @@ const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     background-color: white;
     overflow-y: scroll !important;
+    cursor: default;
   }
 
   code {
@@ -46,6 +47,18 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
     overflow-y: hidden;
     /* background: pink; */
+  }
+
+  /* Modifiers */
+  .--underlined {
+    text-decoration: underline;
+  }
+
+  .--clickable-text {
+    cursor: pointer;
+    &:hover {
+      color: ${({ theme }) => theme.palette.primary.main};
+    }
   }
 `;
 

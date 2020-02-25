@@ -1,27 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Typography } from '@material-ui/core';
-import fb from '../../firebase';
-import { useHistory, Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { AuthContext } from '../../context/auth-context';
 import Container from '../../components/layout/Container';
+import SignInForm from '../../components/SignInForm';
+import { Styled } from './style';
+import { ReactComponent as SignInSvg } from '../../assets/svg/PlantDoodle.svg';
 
 const SignIn = () => {
-  const history = useHistory();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleSubmit = async e => {
-    e.preventDefault();
-
-    try {
-      const user = await fb.auth().signInWithEmailAndPassword(email, password);
-      console.log(user);
-      history.push('/');
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   const { currentUser } = useContext(AuthContext);
 
   if (currentUser) {
@@ -29,34 +15,34 @@ const SignIn = () => {
   }
 
   return (
-    <div className='sign-in'>
+    <Styled.SignInView>
       <Container>
-        <Typography variant='h1'>Sign in</Typography>
-        <form onSubmit={handleSubmit} noValidate>
-          <label htmlFor='email'>
-            Email
-            <input
-              type='email'
-              name='email'
-              value={email}
-              placeholder='You email'
-              onChange={e => setEmail(e.target.value)}
-            />
-          </label>
-          <label htmlFor='password'>
-            Password
-            <input
-              type='password'
-              name='password'
-              value={password}
-              placeholder='Your password'
-              onChange={e => setPassword(e.target.value)}
-            />
-          </label>
-          <button type='submit'>Sign in</button>
-        </form>
+        <div className='header-section'>
+          <Typography variant='h6' className='header-text'>
+            Login into your account
+          </Typography>
+        </div>
+        <SignInForm />
+        <div className='helper-section'>
+          <Typography variant='caption' className='helper-text'>
+            No account?{' '}
+            <span className='--underlined --clickable-text'>
+              <Link to='/sign-up'>Sign up</Link>
+            </span>
+          </Typography>
+          <Typography variant='caption' className='helper-text'>
+            |
+          </Typography>
+          <Typography variant='caption' className='helper-text'>
+            Forgot password?{' '}
+            <span className='--underlined --clickable-text'>Recover</span>
+          </Typography>
+        </div>
+        <div className='illustration-section'>
+          <SignInSvg />
+        </div>
       </Container>
-    </div>
+    </Styled.SignInView>
   );
 };
 

@@ -8,13 +8,15 @@ import SignUp from './views/SignUp';
 import DummyNavbar from './components/DummyNavbar';
 import { AuthProvider } from './context/auth-context';
 import { ProtectedRoute } from './routes';
+import OfflineNavbar from './components/OfflineNavbar';
 
 const App = () => {
   return (
     <AuthProvider>
       <ThemeProvider theme={themeObject}>
         <div className='App'>
-          <DummyNavbar />
+          {/* <DummyNavbar /> */}
+          <OfflineNavbar />
           <Switch>
             <ProtectedRoute exact path='/' component={Home} />
             <Route exact path='/sign-in' component={SignIn} />

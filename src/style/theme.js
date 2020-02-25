@@ -7,7 +7,7 @@ let themeObject = createMuiTheme({
     }
   },
   typography: {
-    fontSize: 14,
+    fontSize: 16,
     fontFamily: [
       '"Open Sans"',
       '"Montserrat"',
@@ -22,6 +22,10 @@ let themeObject = createMuiTheme({
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"'
     ].join(','),
+    button: {
+      textTransform: 'none',
+      fontFamily: 'Montserrat'
+    },
     h1: {
       fontFamily: 'Montserrat',
       fontWeight: 700

@@ -17,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
   } */
 
   html, body {
-    font-size: 14px;
+    font-size: 16px;
     height: 100%;
     overflow-x: hidden !important;
   }

@@ -16,7 +16,8 @@ const OfflineNavbar = styled.nav`
         display: flex;
         list-style: none;
         li {
-          a {
+          a,
+          .logout-button {
             display: flex;
             padding: 0.5rem 1rem;
             font-weight: 700;
@@ -24,6 +25,10 @@ const OfflineNavbar = styled.nav`
             &.active {
               color: ${({ theme }) => theme.palette.common.black};
             }
+          }
+          .logout-button {
+            cursor: pointer;
+            color: ${({ theme }) => theme.palette.common.black};
           }
         }
       }

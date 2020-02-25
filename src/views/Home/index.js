@@ -7,14 +7,9 @@ const Home = () => {
   return (
     <div className='home'>
       <Container>
-        <Typography variant='h1'>Welcome to Socila.</Typography>
-        <button
-          onClick={() => {
-            fb.auth().signOut();
-          }}
-        >
-          Log out
-        </button>
+        <Typography centered variant='h1'>
+          Welcome to Socila.
+        </Typography>
       </Container>
     </div>
   );

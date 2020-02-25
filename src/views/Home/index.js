@@ -6,7 +6,12 @@ const Home = () => {
   return (
     <div className='home'>
       <Container>
-        <Typography variant='h1'>Welcome to Socila.</Typography>
+        <Typography variant='h4' gutterBottom>
+          Welcome to Socila
+        </Typography>
+        <Typography variant='body1' style={{ color: 'gray' }}>
+          Socila is currently under development process, please comeback later.
+        </Typography>
       </Container>
     </div>
   );

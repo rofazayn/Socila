@@ -32,6 +32,15 @@ const GlobalStyle = createGlobalStyle`
     cursor: default;
   }
 
+  .home {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
   code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;

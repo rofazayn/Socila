@@ -5,7 +5,7 @@ import { AuthContext } from '../../context/auth-context';
 import Container from '../../components/layout/Container';
 import SignInForm from '../../components/SignInForm';
 import { Styled } from './style';
-import { ReactComponent as SignInSvg } from '../../assets/svg/PlantDoodle.svg';
+import { ReactComponent as SignInSvg } from '../../assets/svg/DoogieDoodle.svg';
 
 const SignIn = () => {
   const { currentUser } = useContext(AuthContext);

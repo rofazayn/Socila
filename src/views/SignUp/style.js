@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const SignInView = styled.main`
+const SignUpView = styled.main`
   min-height: 80vh;
   max-width: 400px;
   margin: 0 auto;
@@ -27,12 +27,11 @@ const SignInView = styled.main`
     margin-bottom: 5rem;
     svg {
       margin-top: ${({ theme }) => `${theme.spacing(2)}px`};
-      width: 100%;
-      /* background: ${({ theme }) => theme.palette.primary.main}; */
+      transform: scale(1.2);
     }
   }
 `;
 
 export const Styled = {
-  SignInView
+  SignUpView
 };

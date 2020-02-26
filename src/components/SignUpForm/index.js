@@ -50,6 +50,8 @@ const SignUpForm = () => {
       >
         {({
           values,
+          touched,
+          errors,
           handleChange,
           handleBlur,
           handleSubmit,
@@ -68,6 +70,7 @@ const SignUpForm = () => {
               autoComplete='name'
               label='Name'
               ref={nameRef}
+              error={touched.name && errors.name ? true : false}
             />
             <TextField
               variant='outlined'
@@ -79,6 +82,7 @@ const SignUpForm = () => {
               onBlur={handleBlur}
               autoComplete='email'
               label='Email'
+              error={touched.email && errors.email ? true : false}
             />
             <TextField
               variant='outlined'
@@ -90,6 +94,7 @@ const SignUpForm = () => {
               onBlur={handleBlur}
               autoComplete='current-password'
               label='Password'
+              error={touched.password && errors.password ? true : false}
             />
             <div className='form-controlers'>
               <FormControlLabel

@@ -21,7 +21,9 @@ const TextField = styled.div`
     }
     &:focus {
       border: 3px solid ${({ theme }) => theme.palette.primary.main};
+      ${props => props.error && `border-color: red`}
     }
+    ${props => props.error && `border-color: red`}
   }
 `;
 

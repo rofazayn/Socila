@@ -2,9 +2,10 @@ import React, { forwardRef } from 'react';
 import { Styled } from './style';
 
 const TextField = forwardRef((props, ref) => {
+  let { error, ...rest } = props;
   return (
-    <Styled.TextField>
-      <input {...props} ref={ref} />
+    <Styled.TextField {...props}>
+      <input {...rest} ref={ref} />
     </Styled.TextField>
   );
 });

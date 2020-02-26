@@ -49,16 +49,16 @@ const SignInForm = () => {
       >
         {({
           values,
+          touched,
+          errors,
           handleChange,
           handleBlur,
           handleSubmit,
           isSubmitting,
-          isValid,
-          isInitialValid
+          isValid
         }) => (
           <form onSubmit={handleSubmit} noValidate>
             <TextField
-              variant='outlined'
               type='email'
               name='email'
               value={values.email}
@@ -68,9 +68,9 @@ const SignInForm = () => {
               autoComplete='email'
               label='Email'
               ref={emailRef}
+              error={touched.email && errors.email ? true : false}
             />
             <TextField
-              variant='outlined'
               type='password'
               name='password'
               value={values.password}
@@ -79,6 +79,7 @@ const SignInForm = () => {
               onBlur={handleBlur}
               autoComplete='current-password'
               label='Password'
+              error={touched.password && errors.password ? true : false}
             />
             <div className='form-controlers'>
               <FormControlLabel

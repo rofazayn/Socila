@@ -18,7 +18,7 @@ const SignInForm = () => {
   const history = useHistory();
 
   useEffect(() => {
-    emailRef.current.focus();
+    // emailRef.current.focus();
   }, [emailRef]);
 
   return (

@@ -18,7 +18,7 @@ const SignUpForm = () => {
   const history = useHistory();
 
   useEffect(() => {
-    nameRef.current.focus();
+    // nameRef.current.focus();
   }, [nameRef]);
 
   return (

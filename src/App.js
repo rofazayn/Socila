@@ -9,6 +9,7 @@ import SignUp from './views/SignUp';
 import { AuthProvider } from './context/auth-context';
 import { ProtectedRoute } from './routes';
 import OfflineNavbar from './components/OfflineNavbar';
+import { AnimatePresence } from 'framer-motion';
 
 const App = () => {
   return (
@@ -17,12 +18,14 @@ const App = () => {
         <div className='App'>
           {/* <DummyNavbar /> */}
           <OfflineNavbar />
-          <Switch>
-            <ProtectedRoute exact path='/' component={Home} />
-            <Route exact path='/sign-in' component={SignIn} />
-            <Route exact path='/sign-up' component={SignUp} />
-            <Redirect to='/' />
-          </Switch>
+          <AnimatePresence>
+            <Switch>
+              <ProtectedRoute exact path='/' component={Home} />
+              <Route exact path='/sign-in' component={SignIn} />
+              <Route exact path='/sign-up' component={SignUp} />
+              <Redirect to='/' />
+            </Switch>
+          </AnimatePresence>
         </div>
       </ThemeProvider>
     </AuthProvider>

@@ -13,7 +13,9 @@ const SignUpForm = styled.div`
       justify-content: space-between;
       .remember-checkbox {
         span:last-child {
-          color: ${({ theme }) => theme.palette.grey[700]};;
+          color: ${({ theme }) => theme.palette.grey[700]};
+          font-size: 14px;
+          /* background: red; */
         }
       }
     }

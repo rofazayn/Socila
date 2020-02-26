@@ -1,60 +1,80 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Styled } from './style';
 import { Formik } from 'formik';
 import fb from '../../firebase';
 import { useHistory } from 'react-router-dom';
 import {
-  TextField,
+  // TextField,
   Button,
   Checkbox,
   FormControlLabel,
   CircularProgress
 } from '@material-ui/core';
+import TextField from '../layout/TextField';
+import vSchema from './validation';
 
 const SignUpForm = () => {
+  let nameRef = useRef();
   const history = useHistory();
+
+  useEffect(() => {
+    nameRef.current.focus();
+  }, [nameRef]);
+
   return (
     <Styled.SignUpForm>
       <Formik
+        validateOnMount={true}
+        validationSchema={vSchema}
         initialValues={{
+          name: '',
           email: '',
           password: '',
           agreed: false
         }}
-        onSubmit={async (values, { setSubmitting }) => {
+        onSubmit={(values, { setSubmitting }) => {
           setSubmitting(true);
-          try {
-            const user = await fb
-              .auth()
-              .createUserWithEmailAndPassword(values.email, values.password);
-            console.log(user);
-            setSubmitting(false);
-            history.push('/');
-          } catch (error) {
-            console.error(error);
-            setSubmitting(false);
-          }
+
+          fb.auth()
+            .createUserWithEmailAndPassword(values.email, values.password)
+            .then(user => {
+              console.log(user);
+              setSubmitting(false);
+              history.push('/');
+            })
+            .catch(err => {
+              console.error(err);
+              setSubmitting(false);
+            });
         }}
       >
-        {({ values, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
+        {({
+          values,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+          isValid
+        }) => (
           <form onSubmit={handleSubmit}>
             <TextField
               variant='outlined'
-              type='name'
+              type='text'
               name='name'
               value={values.name}
-              placeholder='Your name'
+              placeholder='Name'
               onChange={handleChange}
               onBlur={handleBlur}
               autoComplete='name'
               label='Name'
+              ref={nameRef}
             />
             <TextField
               variant='outlined'
               type='email'
               name='email'
               value={values.email}
-              placeholder='Your email'
+              placeholder='Email'
               onChange={handleChange}
               onBlur={handleBlur}
               autoComplete='email'
@@ -65,7 +85,7 @@ const SignUpForm = () => {
               type='password'
               name='password'
               value={values.password}
-              placeholder='Your password'
+              placeholder='Password'
               onChange={handleChange}
               onBlur={handleBlur}
               autoComplete='current-password'
@@ -81,7 +101,6 @@ const SignUpForm = () => {
                     name='agreed'
                     value='agreed'
                     color='primary'
-                    required
                   />
                 }
                 label='I agree to the terms'
@@ -90,7 +109,7 @@ const SignUpForm = () => {
                 type='submit'
                 variant='contained'
                 color='primary'
-                disabled={isSubmitting}
+                disabled={isSubmitting || !isValid}
               >
                 Sign up
                 {isSubmitting && (

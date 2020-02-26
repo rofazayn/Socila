@@ -6,8 +6,17 @@ let themeObject = createMuiTheme({
       main: '#5271ff'
     }
   },
+  overrides: {
+    // Style sheet name ⚛️
+    MuiButton: {
+      // Name of the rule
+      root: {
+        borderRadius: 8
+      }
+    }
+  },
   typography: {
-    fontSize: 16,
+    fontSize: 15,
     fontFamily: [
       '"Open Sans"',
       '"Montserrat"',

@@ -7,7 +7,7 @@ const Home = () => {
     <div className='home'>
       <Container>
         <Typography variant='h4' gutterBottom>
-          Welcome to Socila
+          Welcome to Socila.
         </Typography>
         <Typography variant='body1' style={{ color: 'gray' }}>
           Socila is currently under development process, please comeback later.

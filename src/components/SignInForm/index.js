@@ -63,21 +63,6 @@ const SignInForm = () => {
           isValid
         }) => (
           <form onSubmit={handleSubmit} noValidate>
-            {false && (
-              <Alert severity='error'>
-                <AlertTitle style={{ marginBottom: 8 }}>
-                  Please make sure you made no mistakes then try again!
-                </AlertTitle>
-                <ul>
-                  {touched.email && errors.email ? (
-                    <li>{errors.email}</li>
-                  ) : null}
-                  {touched.password && errors.password ? (
-                    <li>{errors.password}</li>
-                  ) : null}
-                </ul>
-              </Alert>
-            )}
             <TextField
               type='email'
               name='email'
@@ -93,9 +78,9 @@ const SignInForm = () => {
             {touched.email && errors.email ? (
               <AnimatePresence>
                 <motion.div
-                  initial={{ opacity: 0, y: -20 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: -20, height: 0 }}
+                  exit={{ opacity: 0, y: 20, height: 0 }}
+                  animate={{ opacity: 1, y: 0, height: '100%' }}
                   className='--error --center-text'
                 >
                   <ErrorMessage name='email' />
@@ -116,27 +101,29 @@ const SignInForm = () => {
             {touched.password && errors.password ? (
               <AnimatePresence>
                 <motion.div
-                  initial={{ opacity: 0, y: -20 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: -20, height: 0 }}
+                  exit={{ opacity: 0, y: 20, height: 0 }}
+                  animate={{ opacity: 1, y: 0, height: '100%' }}
                   className='--error --center-text'
                 >
                   <ErrorMessage name='password' />
                 </motion.div>
               </AnimatePresence>
             ) : null}
+
             {errors.general ? (
               <AnimatePresence>
                 <motion.div
-                  initial={{ opacity: 0, y: -20 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: -20, height: 0 }}
+                  exit={{ opacity: 0, y: 20, height: 0 }}
+                  animate={{ opacity: 1, y: 0, height: '100%' }}
                   className='--error --center-text'
                 >
                   {errors.general}
                 </motion.div>
               </AnimatePresence>
             ) : null}
+
             <div className='form-controlers'>
               <FormControlLabel
                 className='remember-checkbox'

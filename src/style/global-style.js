@@ -75,7 +75,12 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .--center-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    margin: 0 auto;
+    max-width: 250px;
   }
 `;
 

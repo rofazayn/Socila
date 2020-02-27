@@ -79,9 +79,9 @@ const SignUpForm = () => {
             {touched.name && errors.name ? (
               <AnimatePresence>
                 <motion.div
-                  initial={{ opacity: 0, y: -20 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: -20, height: 0 }}
+                  exit={{ opacity: 0, y: 20, height: 0 }}
+                  animate={{ opacity: 1, y: 0, height: '100%' }}
                   className='--error --center-text'
                 >
                   <ErrorMessage name='name' />
@@ -103,9 +103,9 @@ const SignUpForm = () => {
             {touched.email && errors.email ? (
               <AnimatePresence>
                 <motion.div
-                  initial={{ opacity: 0, y: -20 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: -20, height: 0 }}
+                  exit={{ opacity: 0, y: 20, height: 0 }}
+                  animate={{ opacity: 1, y: 0, height: '100%' }}
                   className='--error --center-text'
                 >
                   <ErrorMessage name='email' />
@@ -127,27 +127,29 @@ const SignUpForm = () => {
             {touched.password && errors.password ? (
               <AnimatePresence>
                 <motion.div
-                  initial={{ opacity: 0, y: -20 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: -20, height: 0 }}
+                  exit={{ opacity: 0, y: 20, height: 0 }}
+                  animate={{ opacity: 1, y: 0, height: '100%' }}
                   className='--error --center-text'
                 >
                   <ErrorMessage name='password' />
                 </motion.div>
               </AnimatePresence>
             ) : null}
+
             {errors.general ? (
               <AnimatePresence>
                 <motion.div
-                  initial={{ opacity: 0, y: -20 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: -20, height: 0 }}
+                  exit={{ opacity: 0, y: 20, height: 0 }}
+                  animate={{ opacity: 1, y: 0, height: '100%' }}
                   className='--error --center-text'
                 >
                   {errors.general}
                 </motion.div>
               </AnimatePresence>
             ) : null}
+
             <div className='form-controlers'>
               <FormControlLabel
                 className='remember-checkbox'

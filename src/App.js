@@ -20,9 +20,9 @@ const App = () => {
           <OfflineNavbar />
           <AnimatePresence>
             <Switch>
-              <ProtectedRoute exact path='/' component={Home} />
               <Route exact path='/sign-in' component={SignIn} />
               <Route exact path='/sign-up' component={SignUp} />
+              <ProtectedRoute exact path='/' component={Home} />
               <Redirect to='/' />
             </Switch>
           </AnimatePresence>

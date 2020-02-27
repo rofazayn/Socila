@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { Styled } from './style';
-import { Formik } from 'formik';
+import { Formik, ErrorMessage } from 'formik';
 import fb from '../../firebase';
 import { useHistory } from 'react-router-dom';
 import {
@@ -10,8 +10,10 @@ import {
   FormControlLabel,
   CircularProgress
 } from '@material-ui/core';
+import { Alert, AlertTitle } from '@material-ui/lab';
 import TextField from '../layout/TextField';
 import vSchema from './validation';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const SignInForm = () => {
   let emailRef = useRef();
@@ -31,7 +33,7 @@ const SignInForm = () => {
           password: '',
           remember: false
         }}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(values, { setSubmitting, setFieldError }) => {
           setSubmitting(true);
 
           fb.auth()
@@ -43,6 +45,9 @@ const SignInForm = () => {
             })
             .catch(err => {
               console.error(err);
+              setFieldError('general', err.message);
+            })
+            .finally(() => {
               setSubmitting(false);
             });
         }}
@@ -58,6 +63,21 @@ const SignInForm = () => {
           isValid
         }) => (
           <form onSubmit={handleSubmit} noValidate>
+            {false && (
+              <Alert severity='error'>
+                <AlertTitle style={{ marginBottom: 8 }}>
+                  Please make sure you made no mistakes then try again!
+                </AlertTitle>
+                <ul>
+                  {touched.email && errors.email ? (
+                    <li>{errors.email}</li>
+                  ) : null}
+                  {touched.password && errors.password ? (
+                    <li>{errors.password}</li>
+                  ) : null}
+                </ul>
+              </Alert>
+            )}
             <TextField
               type='email'
               name='email'
@@ -70,6 +90,18 @@ const SignInForm = () => {
               ref={emailRef}
               error={touched.email && errors.email ? true : false}
             />
+            {touched.email && errors.email ? (
+              <AnimatePresence>
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className='--error --center-text'
+                >
+                  <ErrorMessage name='email' />
+                </motion.div>
+              </AnimatePresence>
+            ) : null}
             <TextField
               type='password'
               name='password'
@@ -81,6 +113,30 @@ const SignInForm = () => {
               label='Password'
               error={touched.password && errors.password ? true : false}
             />
+            {touched.password && errors.password ? (
+              <AnimatePresence>
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className='--error --center-text'
+                >
+                  <ErrorMessage name='password' />
+                </motion.div>
+              </AnimatePresence>
+            ) : null}
+            {errors.general ? (
+              <AnimatePresence>
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className='--error --center-text'
+                >
+                  {errors.general}
+                </motion.div>
+              </AnimatePresence>
+            ) : null}
             <div className='form-controlers'>
               <FormControlLabel
                 className='remember-checkbox'

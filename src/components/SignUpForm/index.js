@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Styled } from './style';
-import { Formik } from 'formik';
+import { Formik, ErrorMessage } from 'formik';
 import fb from '../../firebase';
 import { useHistory } from 'react-router-dom';
 import {
@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 import TextField from '../layout/TextField';
 import vSchema from './validation';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const SignUpForm = () => {
   let nameRef = useRef();
@@ -32,7 +33,7 @@ const SignUpForm = () => {
           password: '',
           agreed: false
         }}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(values, { setSubmitting, setFieldError }) => {
           setSubmitting(true);
 
           fb.auth()
@@ -40,10 +41,13 @@ const SignUpForm = () => {
             .then(user => {
               console.log(user);
               setSubmitting(false);
-              history.push('/');
+              return history.push('/');
             })
             .catch(err => {
               console.error(err);
+              setFieldError('general', err.message);
+            })
+            .finally(() => {
               setSubmitting(false);
             });
         }}
@@ -72,6 +76,18 @@ const SignUpForm = () => {
               ref={nameRef}
               error={touched.name && errors.name ? true : false}
             />
+            {touched.name && errors.name ? (
+              <AnimatePresence>
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className='--error --center-text'
+                >
+                  <ErrorMessage name='name' />
+                </motion.div>
+              </AnimatePresence>
+            ) : null}
             <TextField
               variant='outlined'
               type='email'
@@ -84,6 +100,18 @@ const SignUpForm = () => {
               label='Email'
               error={touched.email && errors.email ? true : false}
             />
+            {touched.email && errors.email ? (
+              <AnimatePresence>
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className='--error --center-text'
+                >
+                  <ErrorMessage name='email' />
+                </motion.div>
+              </AnimatePresence>
+            ) : null}
             <TextField
               variant='outlined'
               type='password'
@@ -96,6 +124,30 @@ const SignUpForm = () => {
               label='Password'
               error={touched.password && errors.password ? true : false}
             />
+            {touched.password && errors.password ? (
+              <AnimatePresence>
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className='--error --center-text'
+                >
+                  <ErrorMessage name='password' />
+                </motion.div>
+              </AnimatePresence>
+            ) : null}
+            {errors.general ? (
+              <AnimatePresence>
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className='--error --center-text'
+                >
+                  {errors.general}
+                </motion.div>
+              </AnimatePresence>
+            ) : null}
             <div className='form-controlers'>
               <FormControlLabel
                 className='remember-checkbox'
@@ -125,6 +177,18 @@ const SignUpForm = () => {
                 )}
               </Button>
             </div>
+            {touched.agreed && errors.agreed ? (
+              <AnimatePresence>
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className='--error --center-text'
+                >
+                  <ErrorMessage name='agreed' />
+                </motion.div>
+              </AnimatePresence>
+            ) : null}
           </form>
         )}
       </Formik>

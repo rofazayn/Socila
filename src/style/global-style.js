@@ -69,6 +69,14 @@ const GlobalStyle = createGlobalStyle`
       color: ${({ theme }) => theme.palette.primary.main};
     }
   }
+
+  .--error {
+    color: red;
+  }
+
+  .--center-text {
+    text-align: center;
+  }
 `;
 
 export default GlobalStyle;

@@ -1,7 +1,8 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
+import { Typography, Button } from '@material-ui/core';
 import Container from '../../components/layout/Container';
 import { motion } from 'framer-motion';
+import fb from '../../firebase';
 
 const Home = () => {
   return (
@@ -16,10 +17,16 @@ const Home = () => {
           <Typography variant='h2' gutterBottom>
             Welcome to Socila.
           </Typography>
-          <Typography variant='body1' style={{ color: 'gray' }}>
+          <Typography
+            variant='body1'
+            style={{ color: 'gray', marginBottom: 32 }}
+          >
             Socila is currently under development process, please comeback
             later.
           </Typography>
+          <Button variant='contained' onClick={() => fb.auth().signOut()}>
+            Log out
+          </Button>
         </Container>
       </div>
     </motion.div>

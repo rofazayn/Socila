@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { Styled } from './style';
 import { Formik, ErrorMessage } from 'formik';
 import fb from '../../firebase';
@@ -10,7 +10,6 @@ import {
   FormControlLabel,
   CircularProgress
 } from '@material-ui/core';
-import { Alert, AlertTitle } from '@material-ui/lab';
 import TextField from '../layout/TextField';
 import vSchema from './validation';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -18,10 +17,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 const SignInForm = () => {
   let emailRef = useRef();
   const history = useHistory();
-
-  useEffect(() => {
-    // emailRef.current.focus();
-  }, [emailRef]);
 
   return (
     <Styled.SignInForm>
@@ -41,7 +36,7 @@ const SignInForm = () => {
             .then(user => {
               console.log(user);
               setSubmitting(false);
-              history.push('/');
+              history.push('/home');
             })
             .catch(err => {
               console.error(err);

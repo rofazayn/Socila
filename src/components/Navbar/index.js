@@ -4,7 +4,12 @@ import Logo from '../layout/Logo';
 import { Typography } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import fb from '../../firebase';
-import 'boxicons';
+import { ReactComponent as HomeIconSvg } from '../../assets/icons/bx-home.svg';
+import { ReactComponent as BellIconSvg } from '../../assets/icons/bx-bell.svg';
+import { ReactComponent as MessageIconSvg } from '../../assets/icons/bx-message.svg';
+import { ReactComponent as UserIconSvg } from '../../assets/icons/bx-user.svg';
+import { ReactComponent as CogIconSvg } from '../../assets/icons/bx-cog.svg';
+import { ReactComponent as LogOutIconSvg } from '../../assets/icons/bx-log-out.svg';
 
 const Navbar = () => {
   return (
@@ -14,41 +19,51 @@ const Navbar = () => {
         <div className='navbar-menu'>
           <ul>
             <li>
-              <Typography variant='h6'>
+              <Typography variant='button'>
                 <NavLink to='/app' exact>
-                  <box-icon name='home' className='icon'></box-icon>
+                  <div className='icon'>
+                    <HomeIconSvg />
+                  </div>
                   Home
                 </NavLink>
               </Typography>
             </li>
             <li>
-              <Typography variant='h6'>
+              <Typography variant='button'>
                 <NavLink to='/app/notifications' exact>
-                  <box-icon name='bell'></box-icon>
+                  <div className='icon'>
+                    <BellIconSvg />
+                  </div>
                   Notifications
                 </NavLink>
               </Typography>
             </li>
             <li>
-              <Typography variant='h6'>
+              <Typography variant='button'>
                 <NavLink to='/app/messages' exact>
-                  <box-icon name='message'></box-icon>
+                  <div className='icon'>
+                    <MessageIconSvg />
+                  </div>
                   Messages
                 </NavLink>
               </Typography>
             </li>
             <li>
-              <Typography variant='h6'>
+              <Typography variant='button'>
                 <NavLink to='/app/profile' exact>
-                  <box-icon name='user'></box-icon>
+                  <div className='icon'>
+                    <UserIconSvg />
+                  </div>
                   Profile
                 </NavLink>
               </Typography>
             </li>
             <li>
-              <Typography variant='h6'>
+              <Typography variant='button'>
                 <NavLink to='/app/settings' exact>
-                  <box-icon name='cog'></box-icon>
+                  <div className='icon'>
+                    <CogIconSvg />
+                  </div>
                   Settings
                 </NavLink>
               </Typography>
@@ -59,11 +74,13 @@ const Navbar = () => {
       <div className='navbar-bot'>
         <Typography
           as='button'
-          variant='h6'
+          variant='button'
           onClick={() => fb.auth().signOut()}
           className='navbar-logout'
         >
-          <box-icon name='log-out'></box-icon>
+          <div className='icon'>
+            <LogOutIconSvg />
+          </div>
           Logout
         </Typography>
       </div>

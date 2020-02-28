@@ -54,7 +54,7 @@ const GlobalStyle = createGlobalStyle`
   .App {
     height: 100%;
     min-height: 100vh;
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
     /* background: pink; */
   }
 

@@ -6,6 +6,7 @@ import { Styled } from './style';
 import fb from '../../firebase';
 import Navbar from '../../components/Navbar';
 import 'boxicons';
+import Main from '../../components/Main';
 
 const Home = () => {
   return (
@@ -15,24 +16,14 @@ const Home = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <Styled.Home>
-        <Container>
+      <Container>
+        <Styled.Home>
           <Navbar />
-          {/* <Typography variant='h2' gutterBottom>
-            Welcome to Socila.
-          </Typography>
-          <Typography
-            variant='body1'
-            style={{ color: 'gray', marginBottom: 32 }}
-          >
-            Socila is currently under development process, please comeback
-            later.
-          </Typography>
-          <Button variant='contained' onClick={() => fb.auth().signOut()}>
-            Log out
-          </Button> */}
-        </Container>
-      </Styled.Home>
+          <Main />
+          {/* Main */}
+          {/* Sidebar */}
+        </Styled.Home>
+      </Container>
     </motion.div>
   );
 };

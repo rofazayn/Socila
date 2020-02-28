@@ -1,16 +1,17 @@
 import styled from 'styled-components';
 
 const Navbar = styled.nav`
-  position: absolute;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0; /* required */
   max-width: 240px;
   width: 100%;
   /* background-color: papayawhip; */
-  top: 0;
   left: 0;
   bottom: 0;
   padding-top: 32px;
   padding-bottom: 32px;
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -32,15 +33,31 @@ const Navbar = styled.nav`
             margin-bottom: 0;
           }
           a {
+            font-size: 16px;
             display: flex;
             align-items: center;
+            /* justify-content: center; */
             padding: 8px 16px;
             border-radius: 16px;
-            /* background: rgba(0, 0, 0, 0.5); */
-            box-icon {
+            .icon {
               margin-inline-end: 16px;
-              width: 28px;
-              height: 28px;
+              /* background: pink; */
+              display: flex;
+              align-items: center;
+              svg {
+                width: 28px;
+                height: 28px;
+                color: black;
+              }
+            }
+            &.active {
+              color: ${({ theme }) => theme.palette.primary.main};
+              .icon {
+                svg {
+                  color: ${({ theme }) => theme.palette.primary.main};
+                  fill: ${({ theme }) => theme.palette.primary.main};
+                }
+              }
             }
           }
         }
@@ -49,14 +66,21 @@ const Navbar = styled.nav`
   }
   .navbar-bot {
     .navbar-logout {
+      font-size: 16px;
       display: flex;
       align-items: center;
       margin-inline-start: 16px;
       cursor: pointer;
-      box-icon {
+      .icon {
         margin-inline-end: 16px;
-        width: 28px;
-        height: 28px;
+        /* background: pink; */
+        display: flex;
+        align-items: center;
+        svg {
+          width: 24px;
+          height: 24px;
+          color: black;
+        }
       }
     }
   }

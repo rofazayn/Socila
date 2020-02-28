@@ -41,7 +41,7 @@ const SignUpForm = () => {
             .then(user => {
               console.log(user);
               setSubmitting(false);
-              return history.push('/home');
+              return history.push('/app');
             })
             .catch(err => {
               console.error(err);

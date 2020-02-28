@@ -36,7 +36,7 @@ const SignInForm = () => {
             .then(user => {
               console.log(user);
               setSubmitting(false);
-              history.push('/home');
+              history.push('/app');
             })
             .catch(err => {
               console.error(err);

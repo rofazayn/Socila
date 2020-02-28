@@ -2,6 +2,7 @@ import React from 'react';
 import { Typography, Button } from '@material-ui/core';
 import Container from '../../components/layout/Container';
 import { motion } from 'framer-motion';
+import { Styled } from './style';
 import fb from '../../firebase';
 
 const Home = () => {
@@ -12,7 +13,7 @@ const Home = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className='home'>
+      <Styled.Home>
         <Container>
           <Typography variant='h2' gutterBottom>
             Welcome to Socila.
@@ -28,7 +29,7 @@ const Home = () => {
             Log out
           </Button>
         </Container>
-      </div>
+      </Styled.Home>
     </motion.div>
   );
 };

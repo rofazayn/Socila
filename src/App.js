@@ -24,8 +24,8 @@ const App = () => {
               <Route exact path='/' component={Welcome} />
               <Route exact path='/sign-in' component={SignIn} />
               <Route exact path='/sign-up' component={SignUp} />
-              <ProtectedRoute exact path='/home' component={Home} />
-              <Redirect to='/' />
+              <ProtectedRoute exact path='/app' component={Home} />
+              <Redirect to='/app' />
             </Switch>
           </AnimatePresence>
         </div>

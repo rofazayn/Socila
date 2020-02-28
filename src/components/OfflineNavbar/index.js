@@ -11,7 +11,7 @@ const OfflineNavbar = () => {
   const { currentUser } = useContext(AuthContext);
   const location = useLocation();
 
-  if (!location.pathname.startsWith('/home')) {
+  if (!location.pathname.startsWith('/app')) {
     return (
       <Styled.OfflineNavbar>
         <Container>
@@ -42,7 +42,7 @@ const OfflineNavbar = () => {
                   <>
                     <li>
                       <Typography variant='button'>
-                        <NavLink to='/home'>Dashboard</NavLink>
+                        <NavLink to='/app'>Dashboard</NavLink>
                       </Typography>
                     </li>
                     <li>

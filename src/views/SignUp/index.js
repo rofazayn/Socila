@@ -12,7 +12,7 @@ const SignUp = () => {
   const { currentUser } = useContext(AuthContext);
 
   if (currentUser) {
-    return <Redirect to='/home' />;
+    return <Redirect to='/app' />;
   }
 
   return (

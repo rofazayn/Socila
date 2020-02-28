@@ -41,6 +41,11 @@ const OfflineNavbar = () => {
                 ) : (
                   <>
                     <li>
+                      <Typography variant='button'>
+                        <NavLink to='/home'>Dashboard</NavLink>
+                      </Typography>
+                    </li>
+                    <li>
                       <Typography
                         variant='button'
                         className='logout-button'

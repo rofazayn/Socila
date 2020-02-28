@@ -3,14 +3,24 @@ import { ReactComponent as LogoSvg } from '../../../assets/svg/logo.svg';
 // import { NavLink } from 'react-router-dom';
 import { Styled } from './style';
 import { AuthContext } from '../../../context/auth-context';
+import { useLocation } from 'react-router-dom';
 
 const Logo = () => {
   const { currentUser } = useContext(AuthContext);
-  return (
-    <Styled.Logo to={!!currentUser ? '/app' : '/'} exact>
-      <LogoSvg className='logo-svg' />
-    </Styled.Logo>
-  );
+  const location = useLocation();
+  if (location.pathname === '/') {
+    return (
+      <Styled.LogoDiv>
+        <LogoSvg className='logo-svg' />
+      </Styled.LogoDiv>
+    );
+  } else {
+    return (
+      <Styled.LogoLink to={!!currentUser ? '/app' : '/'} exact>
+        <LogoSvg className='logo-svg' />
+      </Styled.LogoLink>
+    );
+  }
 };
 
 export default Logo;

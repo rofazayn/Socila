@@ -5,6 +5,9 @@ const Container = styled.div`
   margin: 0 auto;
   padding: 0 1rem;
   width: 100%;
+  position: relative;
+  min-height: 100%;
+  /* background-color: tomato; */
 `;
 
 export const Styled = {

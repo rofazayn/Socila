@@ -4,6 +4,8 @@ import Container from '../../components/layout/Container';
 import { motion } from 'framer-motion';
 import { Styled } from './style';
 import fb from '../../firebase';
+import Navbar from '../../components/Navbar';
+import 'boxicons';
 
 const Home = () => {
   return (
@@ -15,7 +17,8 @@ const Home = () => {
     >
       <Styled.Home>
         <Container>
-          <Typography variant='h2' gutterBottom>
+          <Navbar />
+          {/* <Typography variant='h2' gutterBottom>
             Welcome to Socila.
           </Typography>
           <Typography
@@ -27,7 +30,7 @@ const Home = () => {
           </Typography>
           <Button variant='contained' onClick={() => fb.auth().signOut()}>
             Log out
-          </Button>
+          </Button> */}
         </Container>
       </Styled.Home>
     </motion.div>

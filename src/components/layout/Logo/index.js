@@ -5,18 +5,18 @@ import { Styled } from './style';
 import { AuthContext } from '../../../context/auth-context';
 import { useLocation } from 'react-router-dom';
 
-const Logo = () => {
+const Logo = props => {
   const { currentUser } = useContext(AuthContext);
   const location = useLocation();
   if (location.pathname === '/') {
     return (
-      <Styled.LogoDiv>
+      <Styled.LogoDiv {...props}>
         <LogoSvg className='logo-svg' />
       </Styled.LogoDiv>
     );
   } else {
     return (
-      <Styled.LogoLink to={!!currentUser ? '/app' : '/'} exact>
+      <Styled.LogoLink {...props} to={!!currentUser ? '/app' : '/'} exact>
         <LogoSvg className='logo-svg' />
       </Styled.LogoLink>
     );

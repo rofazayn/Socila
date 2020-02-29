@@ -12,7 +12,7 @@ const SignIn = () => {
   const { currentUser } = useContext(AuthContext);
 
   if (currentUser) {
-    return <Redirect to='/app' />;
+    return <Redirect to='/' />;
   }
 
   return (

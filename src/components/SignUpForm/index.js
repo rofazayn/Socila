@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Styled } from './style';
 import { Formik, ErrorMessage } from 'formik';
 import fb from '../../firebase';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import {
   // TextField,
   Button,
@@ -16,7 +16,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 const SignUpForm = () => {
   let nameRef = useRef();
-  const history = useHistory();
+  // const history = useHistory();
 
   useEffect(() => {
     // nameRef.current.focus();
@@ -41,7 +41,7 @@ const SignUpForm = () => {
             .then(user => {
               console.log(user);
               setSubmitting(false);
-              return history.push('/app');
+              // return history.push('/app');
             })
             .catch(err => {
               console.error(err);

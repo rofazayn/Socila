@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Styled } from './style';
 import { Formik, ErrorMessage } from 'formik';
 import fb from '../../firebase';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import {
   // TextField,
   Button,
@@ -16,7 +16,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const SignInForm = () => {
   let emailRef = useRef();
-  const history = useHistory();
+  // const history = useHistory();
 
   return (
     <Styled.SignInForm>
@@ -36,7 +36,7 @@ const SignInForm = () => {
             .then(user => {
               console.log(user);
               setSubmitting(false);
-              history.push('/app');
+              // history.push('/app');
             })
             .catch(err => {
               console.error(err);

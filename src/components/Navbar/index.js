@@ -20,7 +20,7 @@ const Navbar = () => {
           <ul>
             <li>
               <Typography variant='button'>
-                <NavLink to='/app' exact>
+                <NavLink to='/' exact>
                   <div className='icon'>
                     <HomeIconSvg />
                   </div>
@@ -30,7 +30,7 @@ const Navbar = () => {
             </li>
             <li>
               <Typography variant='button'>
-                <NavLink to='/app/notifications' exact>
+                <NavLink to='/notifications' exact>
                   <div className='icon'>
                     <BellIconSvg />
                   </div>
@@ -40,7 +40,7 @@ const Navbar = () => {
             </li>
             <li>
               <Typography variant='button'>
-                <NavLink to='/app/messages' exact>
+                <NavLink to='/messages' exact>
                   <div className='icon'>
                     <MessageIconSvg />
                   </div>
@@ -50,7 +50,7 @@ const Navbar = () => {
             </li>
             <li>
               <Typography variant='button'>
-                <NavLink to='/app/profile' exact>
+                <NavLink to='/profile' exact>
                   <div className='icon'>
                     <UserIconSvg />
                   </div>
@@ -60,7 +60,7 @@ const Navbar = () => {
             </li>
             <li>
               <Typography variant='button'>
-                <NavLink to='/app/settings' exact>
+                <NavLink to='/settings' exact>
                   <div className='icon'>
                     <CogIconSvg />
                   </div>

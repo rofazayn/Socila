@@ -5,13 +5,11 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import SignIn from './views/SignIn';
 import SignUp from './views/SignUp';
 import { AuthProvider } from './context/auth-context';
-import { ProtectedRoute } from './routes';
+// import { ProtectedRoute } from './routes';
 import OfflineNavbar from './components/OfflineNavbar';
 import { AnimatePresence } from 'framer-motion';
 import Welcome from './views/Welcome';
-import Dashboard from './views/Dashboard';
 import ScrollToTop from './components/ScrollToTop';
-// import Loader from './views/Loader';
 
 const App = () => {
   return (
@@ -19,15 +17,13 @@ const App = () => {
       <ThemeProvider theme={themeObject}>
         <ScrollToTop />
         <div className='App'>
-          {/* <Loader /> */}
           <OfflineNavbar />
           <AnimatePresence>
             <Switch>
-              <Route exact path='/' component={Welcome} />
               <Route exact path='/sign-in' component={SignIn} />
               <Route exact path='/sign-up' component={SignUp} />
-              <ProtectedRoute path='/app' component={Dashboard} />
-              <Redirect to='/app' />
+              <Route path='/' component={Welcome} />
+              <Redirect to='/' />
             </Switch>
           </AnimatePresence>
         </div>

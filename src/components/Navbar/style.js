@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Navbar = styled.nav`
   position: sticky;
   position: -webkit-sticky;
-  top: 0; /* required */
+  top: 0;
   max-width: 230px;
   width: 100%;
   /* background-color: papayawhip; */

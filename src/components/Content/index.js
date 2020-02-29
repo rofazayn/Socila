@@ -5,19 +5,20 @@ import Notifications from '../Notifications';
 import Messages from '../Messages';
 import Profile from '../Profile';
 import Settings from '../Settings';
+import { Styled } from './style';
 
 const Content = () => {
   return (
-    <div className='content'>
+    <Styled.Content className='content'>
       <Switch>
-        <Route path='/app/notifications' component={Notifications} />
-        <Route path='/app/messages' component={Messages} />
-        <Route path='/app/profile' component={Profile} />
-        <Route path='/app/settings' component={Settings} />
-        <Route path='/app' component={Home} />
-        <Redirect to='/app' />
+        <Route exact path='/' component={Home} />
+        <Route exact path='/notifications' component={Notifications} />
+        <Route exact path='/messages' component={Messages} />
+        <Route exact path='/profile' component={Profile} />
+        <Route exact path='/settings' component={Settings} />
+        <Redirect to='/' />
       </Switch>
-    </div>
+    </Styled.Content>
   );
 };
 

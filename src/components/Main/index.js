@@ -1,12 +1,13 @@
 import React from 'react';
 import { Styled } from './style';
 import Content from '../Content';
+import Sidebar from '../Sidebar';
 
 const Main = () => {
   return (
     <Styled.Main>
       <Content />
-      <div className='sidebar'></div>
+      <Sidebar />
     </Styled.Main>
   );
 };

@@ -1,11 +1,6 @@
 import styled from 'styled-components';
 
-const Welcome = styled.main`
-  min-height: 70vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+const Welcome = styled.main``;
 
 export const Styled = {
   Welcome

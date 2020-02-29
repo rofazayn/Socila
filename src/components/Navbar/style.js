@@ -4,6 +4,7 @@ const Navbar = styled.nav`
   position: sticky;
   position: -webkit-sticky;
   top: 0;
+  bottom: 0;
   max-width: 230px;
   width: 100%;
   /* background-color: papayawhip; */

@@ -83,6 +83,55 @@ const GlobalStyle = createGlobalStyle`
     margin: 0 auto;
     max-width: 250px;
   }
+
+  .placeholder {
+    margin-top: 32px;
+    width: 100%;
+    height: 320px;
+    border-radius: 16px;
+    background: ${({ theme }) => theme.palette.primary.main};
+    opacity: 10%;
+    &:nth-of-type(2) {
+      height: 160px;
+    }
+    &:nth-of-type(3) {
+      height: 240px;
+    }
+    &:nth-of-type(4) {
+      height: 360px;
+    }
+    &:nth-of-type(5) {
+      height: 480px;
+    }
+    &:nth-of-type(6) {
+      height: 180px;
+    }
+    &:nth-of-type(7) {
+      height: 240px;
+    }
+    &:last-of-type {
+      margin-bottom: 360px;
+    }
+  }
+
+  .search-placeholder {
+    background: ${({ theme }) => theme.palette.primary.main};
+    opacity: 10%;
+    margin-top: 32px;
+    width: 100%;
+    height: 64px;
+    border-radius: 8px;
+  }
+
+  .sidebar-placeholder {
+    background: ${({ theme }) => theme.palette.primary.main};
+    opacity: 10%;
+    margin-top: 32px;
+    width: 100%;
+    height: 640px;
+    border-radius: 16px;
+  }
+  
 `;
 
 export default GlobalStyle;

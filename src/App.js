@@ -10,12 +10,14 @@ import OfflineNavbar from './components/OfflineNavbar';
 import { AnimatePresence } from 'framer-motion';
 import Welcome from './views/Welcome';
 import Dashboard from './views/Dashboard';
+import ScrollToTop from './components/ScrollToTop';
 // import Loader from './views/Loader';
 
 const App = () => {
   return (
     <AuthProvider>
       <ThemeProvider theme={themeObject}>
+        <ScrollToTop />
         <div className='App'>
           {/* <Loader /> */}
           <OfflineNavbar />

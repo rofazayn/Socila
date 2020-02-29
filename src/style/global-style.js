@@ -12,11 +12,12 @@ const GlobalStyle = createGlobalStyle`
     word-wrap: break-word;
   }
 
-  /* html {
-    overflow-y: hidden;
-  } */
+  html {
+    /* overflow-y: auto; */
+    height: 100%;
+  }
 
-  html, body {
+  body {
     font-size: 15px;
     height: 100%;
     overflow-x: hidden !important;

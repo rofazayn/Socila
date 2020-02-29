@@ -4,7 +4,7 @@ const Navbar = styled.nav`
   position: sticky;
   position: -webkit-sticky;
   top: 0; /* required */
-  max-width: 240px;
+  max-width: 230px;
   width: 100%;
   /* background-color: papayawhip; */
   left: 0;
@@ -28,12 +28,12 @@ const Navbar = styled.nav`
         list-style: none;
         flex-direction: column;
         li {
-          margin-bottom: 8px;
+          margin-bottom: 16px;
           &:last-of-type {
             margin-bottom: 0;
           }
           a {
-            font-size: 16px;
+            font-size: 20px;
             display: flex;
             align-items: center;
             /* justify-content: center; */
@@ -66,7 +66,7 @@ const Navbar = styled.nav`
   }
   .navbar-bot {
     .navbar-logout {
-      font-size: 16px;
+      font-size: 20px;
       display: flex;
       align-items: center;
       margin-inline-start: 16px;
@@ -77,8 +77,8 @@ const Navbar = styled.nav`
         display: flex;
         align-items: center;
         svg {
-          width: 24px;
-          height: 24px;
+          width: 28px;
+          height: 28px;
           color: black;
         }
       }

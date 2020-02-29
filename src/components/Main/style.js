@@ -6,15 +6,18 @@ const Main = styled.main`
   flex-direction: row;
   .content {
     width: 100%;
-    background: pink;
+    /* background: pink; */
     height: 2000px;
+    min-width: 320px;
+    border-inline-start: 1px solid ${({ theme }) => theme.palette.grey[200]};
+    border-inline-end: 1px solid ${({ theme }) => theme.palette.grey[200]};
   }
   .sidebar {
     position: sticky;
     top: 0;
     width: 100%;
-    max-width: 400px;
-    background: papayawhip;
+    max-width: 440px;
+    /* background: papayawhip; */
     height: 100vh;
   }
 `;

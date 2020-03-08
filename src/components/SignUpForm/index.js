@@ -38,18 +38,23 @@ const SignUpForm = () => {
           setSubmitting(true);
 
           let usersRef = fb.firestore().collection('users');
+          let usernamesRef = fb.firestore().collection('usernames');
 
           fb.firestore()
-            .doc(`/users/${values.username}`)
+            .doc(`/usernames/${values.username}`)
             .get()
             .then(doc => {
               if (doc.exists) {
-                return setFieldError('general', 'Username is already taken');
+                setFieldError('general', 'Username is taken');
+                setSubmitting(false);
               } else {
                 return fb
                   .auth()
                   .createUserWithEmailAndPassword(values.email, values.password)
                   .then(userCreds => {
+                    usernamesRef
+                      .doc(`${values.username}`)
+                      .set({ userId: userCreds.user.uid });
                     usersRef.doc(`${userCreds.user.uid}`).set({
                       email: values.email,
                       username: values.username,

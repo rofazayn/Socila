@@ -8,14 +8,14 @@ export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = fb.auth().onAuthStateChanged(user => {
+    const unsubscribeFromAuth = fb.auth().onAuthStateChanged(user => {
       if (user) {
         setCurrentUser(user);
       } else {
         setCurrentUser(false);
       }
     });
-    return () => unsubscribe();
+    return () => unsubscribeFromAuth();
   }, []);
 
   return (

@@ -29,6 +29,7 @@ const SignUpForm = () => {
         validationSchema={vSchema}
         initialValues={{
           name: '',
+          username: '',
           email: '',
           password: '',
           agreed: false
@@ -36,19 +37,36 @@ const SignUpForm = () => {
         onSubmit={(values, { setSubmitting, setFieldError }) => {
           setSubmitting(true);
 
-          fb.auth()
-            .createUserWithEmailAndPassword(values.email, values.password)
-            .then(user => {
-              console.log(user);
-              setSubmitting(false);
-              // return history.push('/app');
-            })
-            .catch(err => {
-              console.error(err);
-              setFieldError('general', err.message);
-            })
-            .finally(() => {
-              setSubmitting(false);
+          let usersRef = fb.firestore().collection('users');
+
+          fb.firestore()
+            .doc(`/users/${values.username}`)
+            .get()
+            .then(doc => {
+              if (doc.exists) {
+                return setFieldError('general', 'Username is already taken');
+              } else {
+                return fb
+                  .auth()
+                  .createUserWithEmailAndPassword(values.email, values.password)
+                  .then(userCreds => {
+                    usersRef.doc(`${userCreds.user.uid}`).set({
+                      email: values.email,
+                      username: values.username,
+                      name: values.name,
+                      createdAt: new Date().toISOString(),
+                      userId: userCreds.user.uid
+                    });
+                    setSubmitting(false);
+                  })
+                  .catch(err => {
+                    console.error(err);
+                    setFieldError('general', err.message);
+                  })
+                  .finally(() => {
+                    setSubmitting(false);
+                  });
+              }
             });
         }}
       >
@@ -85,6 +103,30 @@ const SignUpForm = () => {
                   className='--error --center-text'
                 >
                   <ErrorMessage name='name' />
+                </motion.div>
+              </AnimatePresence>
+            ) : null}
+            <TextField
+              variant='outlined'
+              type='text'
+              name='username'
+              value={values.username}
+              placeholder='Username'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              autoComplete='Username'
+              label='username'
+              error={touched.username && errors.username ? true : false}
+            />
+            {touched.username && errors.username ? (
+              <AnimatePresence>
+                <motion.div
+                  initial={{ opacity: 0, y: -20, height: 0 }}
+                  exit={{ opacity: 0, y: 20, height: 0 }}
+                  animate={{ opacity: 1, y: 0, height: '100%' }}
+                  className='--error --center-text'
+                >
+                  <ErrorMessage name='username' />
                 </motion.div>
               </AnimatePresence>
             ) : null}

@@ -5,10 +5,18 @@ const vSchema = Yup.object().shape({
     .required('Name is required')
     .matches(
       /^([a-zA-Z0-9]+|[a-zA-Z0-9]+\s{1}[a-zA-Z0-9]{1,}|[a-zA-Z0-9]+\s{1}[a-zA-Z0-9]{3,}\s{1}[a-zA-Z0-9]{1,})$/,
-      'Name must be full and capitalized.'
+      'Please enter your real name.'
     )
     .min(2, 'Name is too short.')
     .max(80, 'Name is too long.'),
+  username: Yup.string()
+    .required('Username is required')
+    .matches(
+      /^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/,
+      'Letters and numbers only'
+    )
+    .min(6, 'Username is too short.')
+    .max(30, 'Username is too long.'),
   email: Yup.string()
     .email('Enter a valid email.')
     .required('Email address is required.'),

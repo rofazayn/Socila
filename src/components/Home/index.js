@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Styled } from './style';
 import TopBar from '../TopBar';
 import { ReactComponent as HomeIconSvg } from '../../assets/icons/bx-home.svg';
 import Wrapper from '../Wrapper';
 import { motion } from 'framer-motion';
-import { AuthContext } from '../../context/auth-context';
+import PostsList from '../PostsList';
+import PostCreator from '../PostCreator';
 
 const Home = () => {
   return (
@@ -16,15 +17,9 @@ const Home = () => {
     >
       <Styled.Home className='home-page'>
         <TopBar title={`Home`} icon={<HomeIconSvg />} />
+        <PostCreator />
         <Wrapper>
-          <div className='placeholder'></div>
-          <div className='placeholder'></div>
-          <div className='placeholder'></div>
-          <div className='placeholder'></div>
-          <div className='placeholder'></div>
-          <div className='placeholder'></div>
-          <div className='placeholder'></div>
-          <div className='placeholder'></div>
+          <PostsList />
         </Wrapper>
       </Styled.Home>
     </motion.div>

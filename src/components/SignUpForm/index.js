@@ -18,9 +18,9 @@ const SignUpForm = () => {
   let nameRef = useRef();
   // const history = useHistory();
 
-  useEffect(() => {
-    // nameRef.current.focus();
-  }, [nameRef]);
+  // useEffect(() => {
+  //   nameRef.current.focus();
+  // }, [nameRef]);
 
   return (
     <Styled.SignUpForm>
@@ -58,7 +58,9 @@ const SignUpForm = () => {
                     usersRef.doc(`${userCreds.user.uid}`).set({
                       email: values.email,
                       username: values.username,
-                      name: values.name,
+                      firstName: values.firstName,
+                      lastName: values.lastName,
+                      fullName: `${values.firstName} ${values.lastName}`,
                       createdAt: new Date().toISOString(),
                       userId: userCreds.user.uid
                     });
@@ -89,17 +91,16 @@ const SignUpForm = () => {
             <TextField
               variant='outlined'
               type='text'
-              name='name'
-              value={values.name}
-              placeholder='Name'
+              name='firstName'
+              value={values.firstName}
+              placeholder='First name'
               onChange={handleChange}
               onBlur={handleBlur}
-              autoComplete='name'
-              label='Name'
-              ref={nameRef}
-              error={touched.name && errors.name ? true : false}
+              autoComplete='firstName'
+              label='First name'
+              error={touched.firstName && errors.firstName ? true : false}
             />
-            {touched.name && errors.name ? (
+            {touched.firstName && errors.firstName ? (
               <AnimatePresence>
                 <motion.div
                   initial={{ opacity: 0, y: -20, height: 0 }}
@@ -107,7 +108,31 @@ const SignUpForm = () => {
                   animate={{ opacity: 1, y: 0, height: '100%' }}
                   className='--error --center-text'
                 >
-                  <ErrorMessage name='name' />
+                  <ErrorMessage name='firstName' />
+                </motion.div>
+              </AnimatePresence>
+            ) : null}
+            <TextField
+              variant='outlined'
+              type='text'
+              name='lastName'
+              value={values.lastName}
+              placeholder='Last name'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              autoComplete='lastName'
+              label='Last name'
+              error={touched.lastName && errors.lastName ? true : false}
+            />
+            {touched.lastName && errors.lastName ? (
+              <AnimatePresence>
+                <motion.div
+                  initial={{ opacity: 0, y: -20, height: 0 }}
+                  exit={{ opacity: 0, y: 20, height: 0 }}
+                  animate={{ opacity: 1, y: 0, height: '100%' }}
+                  className='--error --center-text'
+                >
+                  <ErrorMessage name='lastName' />
                 </motion.div>
               </AnimatePresence>
             ) : null}

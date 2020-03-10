@@ -1,7 +1,15 @@
 import * as Yup from 'yup';
 
 const vSchema = Yup.object().shape({
-  name: Yup.string()
+  firstName: Yup.string()
+    .required('Name is required')
+    .matches(
+      /^([a-zA-Z0-9]+|[a-zA-Z0-9]+\s{1}[a-zA-Z0-9]{1,}|[a-zA-Z0-9]+\s{1}[a-zA-Z0-9]{3,}\s{1}[a-zA-Z0-9]{1,})$/,
+      'Please enter your real name.'
+    )
+    .min(2, 'Name is too short.')
+    .max(80, 'Name is too long.'),
+  lastName: Yup.string()
     .required('Name is required')
     .matches(
       /^([a-zA-Z0-9]+|[a-zA-Z0-9]+\s{1}[a-zA-Z0-9]{1,}|[a-zA-Z0-9]+\s{1}[a-zA-Z0-9]{3,}\s{1}[a-zA-Z0-9]{1,})$/,

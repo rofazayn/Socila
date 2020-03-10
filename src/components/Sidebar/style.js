@@ -9,6 +9,7 @@ const Sidebar = styled.aside`
   height: 100vh;
   overflow-y: scroll;
   padding-inline-start: 16px;
+  display: none;
   &::-webkit-scrollbar {
     display: none;
   }

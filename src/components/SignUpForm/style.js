@@ -11,6 +11,9 @@ const SignUpForm = styled.div`
       display: flex;
       flex-direction: row;
       justify-content: space-between;
+      .name-group {
+        display: flex;
+      }
       .remember-checkbox {
         span:last-child {
           color: ${({ theme }) => theme.palette.grey[700]};

@@ -6,6 +6,7 @@ const Content = styled.div`
   /* background: pink; */
   /* height: 2000px; */
   /* overflow: hidden; */
+  max-width: 700px;
   min-width: 320px;
   border-inline-start: 1px solid ${({ theme }) => theme.palette.grey[200]};
   border-inline-end: 1px solid ${({ theme }) => theme.palette.grey[200]};

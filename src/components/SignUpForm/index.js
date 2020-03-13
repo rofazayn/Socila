@@ -45,13 +45,14 @@ const SignUpForm = () => {
             .get()
             .then(doc => {
               if (doc.exists) {
-                setFieldError('general', 'Username is taken');
                 setSubmitting(false);
+                setFieldError('general', 'Username is taken');
               } else {
                 return fb
                   .auth()
                   .createUserWithEmailAndPassword(values.email, values.password)
                   .then(userCreds => {
+                    setSubmitting(false);
                     usernamesRef
                       .doc(`${values.username}`)
                       .set({ userId: userCreds.user.uid });
@@ -64,7 +65,6 @@ const SignUpForm = () => {
                       createdAt: new Date().toISOString(),
                       userId: userCreds.user.uid
                     });
-                    setSubmitting(false);
                   })
                   .catch(err => {
                     console.error(err);

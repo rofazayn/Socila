@@ -12,28 +12,6 @@ const PostCreator = styled.div`
     align-items: flex-start;
     border-bottom: 1px solid ${({ theme }) => theme.palette.grey[200]};
     padding-bottom: 32px;
-    .avatar {
-      min-height: 64px;
-      min-width: 64px;
-      border-radius: 100%;
-      background-color: ${({ theme }) => theme.palette.grey[200]};
-      flex-grow: 1;
-      margin-inline-end: 16px;
-      border: 2px solid ${({ theme }) => theme.palette.grey[300]};
-      position: relative;
-      overflow: hidden;
-      svg {
-        position: absolute;
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        width: 50%;
-        height: 50%;
-        margin: auto;
-        fill: ${({ theme }) => theme.palette.grey[800]};
-      }
-    }
     form {
       display: flex;
       height: 100%;
@@ -47,7 +25,7 @@ const PostCreator = styled.div`
         height: 100%;
         padding: 16px;
         background-color: ${({ theme }) => theme.palette.grey[100]};
-        border: 2px solid ${({ theme }) => theme.palette.grey[100]};
+        border: 3px solid ${({ theme }) => theme.palette.grey[100]};
         color: ${({ theme }) => theme.palette.grey[800]};
         border-radius: 16px;
         justify-content: flex-start;
@@ -60,7 +38,7 @@ const PostCreator = styled.div`
           color: ${({ theme }) => theme.palette.grey[400]};
         }
         &:focus {
-          border: 2px solid ${({ theme }) => theme.palette.primary.main};
+          border-color: ${({ theme }) => theme.palette.primary.main};
         }
         &::-webkit-scrollbar {
           display: none;

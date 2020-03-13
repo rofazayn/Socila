@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 const PostsList = styled.div`
   display: flex;
-  background: pink;
-  height: 500px;
+  padding-top: 24px;
+  flex-direction: column;
 `;
 
 export const Styled = {

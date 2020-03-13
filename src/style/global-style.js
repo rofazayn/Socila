@@ -119,8 +119,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .search-placeholder {
-    background: ${({ theme }) => theme.palette.primary.main};
-    opacity: 10%;
+    background: ${({ theme }) => theme.palette.grey[100]};
     margin-top: 32px;
     width: 100%;
     height: 64px;
@@ -128,8 +127,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .sidebar-placeholder {
-    background: ${({ theme }) => theme.palette.primary.main};
-    opacity: 10%;
+    background: ${({ theme }) => theme.palette.grey[100]};
     margin-top: 32px;
     width: 100%;
     height: 640px;

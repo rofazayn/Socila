@@ -1,0 +1,7 @@
+{
+  //tsconfig.json
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
+  }
+}

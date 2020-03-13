@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import fb from '../../firebase';
 import { Styled } from './style';
+import PostPreview from '../PostPreview';
 
 const PostsList = () => {
   const [posts, setPosts] = React.useState([]);
@@ -10,8 +11,11 @@ const PostsList = () => {
     postsRef
       .get()
       .then(data => {
-        data.forEach(doc => setPosts([doc.data()]));
+        let newPosts = [];
+        data.forEach(doc => newPosts.push(doc.data()));
+        return newPosts;
       })
+      .then(newPosts => setPosts([...newPosts]))
       .catch(err => console.error(err));
   }, []);
 
@@ -21,7 +25,10 @@ const PostsList = () => {
 
   return (
     <Styled.PostsList>
-      <h1>posts</h1>
+      {posts &&
+        posts.map(post => {
+          return <PostPreview post={post} key={post.createdAt} />;
+        })}
     </Styled.PostsList>
   );
 };

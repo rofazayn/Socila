@@ -11,8 +11,11 @@ import { AnimatePresence } from 'framer-motion';
 import Welcome from './views/Welcome';
 import ScrollToTop from './components/ScrollToTop';
 import { BrowserRouter as Router } from 'react-router-dom';
+import * as dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 
 const App = () => {
+  dayjs.extend(relativeTime);
   return (
     <Router>
       <AuthProvider>

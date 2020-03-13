@@ -6,7 +6,7 @@ const PostCreator = styled.div`
   /* display: flex; */
   overflow: hidden;
   .form-wrapper {
-    height: 144px;
+    height: 160px;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -24,6 +24,7 @@ const PostCreator = styled.div`
         width: 100%;
         height: 100%;
         padding: 16px;
+        padding-inline-end: 64px;
         background-color: ${({ theme }) => theme.palette.grey[100]};
         border: 3px solid ${({ theme }) => theme.palette.grey[100]};
         color: ${({ theme }) => theme.palette.grey[800]};

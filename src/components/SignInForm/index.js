@@ -1,10 +1,9 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { Styled } from './style';
 import { Formik, ErrorMessage } from 'formik';
 import fb from '../../firebase';
-// import { useHistory } from 'react-router-dom';
+
 import {
-  // TextField,
   Button,
   Checkbox,
   FormControlLabel,
@@ -15,9 +14,6 @@ import vSchema from './validation';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const SignInForm = () => {
-  let emailRef = useRef();
-  // const history = useHistory();
-
   return (
     <Styled.SignInForm>
       <Formik
@@ -35,15 +31,11 @@ const SignInForm = () => {
             .signInWithEmailAndPassword(values.email, values.password)
             .then(user => {
               console.log(user);
-              setSubmitting(false);
-              // history.push('/app');
             })
             .catch(err => {
+              setSubmitting(false);
               console.error(err);
               setFieldError('general', err.message);
-            })
-            .finally(() => {
-              setSubmitting(false);
             });
         }}
       >
@@ -67,7 +59,6 @@ const SignInForm = () => {
               onBlur={handleBlur}
               autoComplete='email'
               label='Email'
-              ref={emailRef}
               error={touched.email && errors.email ? true : false}
             />
             {touched.email && errors.email ? (

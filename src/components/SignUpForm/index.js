@@ -1,10 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { Styled } from './style';
 import { Formik, ErrorMessage } from 'formik';
 import fb from '../../firebase';
-// import { useHistory } from 'react-router-dom';
+
 import {
-  // TextField,
   Button,
   Checkbox,
   FormControlLabel,
@@ -15,13 +14,6 @@ import vSchema from './validation';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const SignUpForm = () => {
-  let nameRef = useRef();
-  // const history = useHistory();
-
-  // useEffect(() => {
-  //   nameRef.current.focus();
-  // }, [nameRef]);
-
   return (
     <Styled.SignUpForm>
       <Formik
@@ -45,14 +37,13 @@ const SignUpForm = () => {
             .get()
             .then(doc => {
               if (doc.exists) {
-                setSubmitting(false);
                 setFieldError('general', 'Username is taken');
+                setSubmitting(false);
               } else {
                 return fb
                   .auth()
                   .createUserWithEmailAndPassword(values.email, values.password)
                   .then(userCreds => {
-                    setSubmitting(false);
                     usernamesRef
                       .doc(`${values.username}`)
                       .set({ userId: userCreds.user.uid });
@@ -67,11 +58,9 @@ const SignUpForm = () => {
                     });
                   })
                   .catch(err => {
+                    setSubmitting(false);
                     console.error(err);
                     setFieldError('general', err.message);
-                  })
-                  .finally(() => {
-                    setSubmitting(false);
                   });
               }
             });

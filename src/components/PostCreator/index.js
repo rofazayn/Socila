@@ -14,7 +14,7 @@ const PostCreator = () => {
           <textarea
             type='text'
             autoComplete='false'
-            placeholder="What's on your mind, Khaleed?"
+            placeholder="What's on your mind, Abderraouf?"
           />
           <div className='submit-button'>
             <IconButton type='submit' size='medium'>

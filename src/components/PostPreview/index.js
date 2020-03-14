@@ -33,7 +33,13 @@ const PostPreview = ({ post }) => {
             <Typography variant='body1'>{post.body}</Typography>
           </div>
         </div>
-        <div className='section-footer'></div>
+        <div className='section-footer'>
+          <div className='reactions'>
+            <div className='reaction love'></div>
+            <div className='reaction comment'></div>
+            <div className='reaction share'></div>
+          </div>
+        </div>
       </div>
     </Styled.PostPreview>
   );

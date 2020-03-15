@@ -18,9 +18,10 @@ const Home = () => {
       <Styled.Home className='home-page'>
         <TopBar title={`Home`} icon={<HomeIconSvg />} />
         <PostCreator />
-        <Wrapper>
+        <PostsList />
+        {/* <Wrapper>
           <PostsList />
-        </Wrapper>
+        </Wrapper> */}
       </Styled.Home>
     </motion.div>
   );

@@ -1,7 +1,10 @@
 import React from 'react';
 import { Styled } from './style';
 import Avatar from '../Avatar';
-import { Typography } from '@material-ui/core';
+import { Typography, Button } from '@material-ui/core';
+import { ReactComponent as HeartIcon } from '../../assets/icons/bx-heart.svg';
+import { ReactComponent as CommentIcon } from '../../assets/icons/bx-comment.svg';
+import { ReactComponent as ShareIcon } from '../../assets/icons/bx-share.svg';
 import * as dayjs from 'dayjs';
 
 const PostPreview = ({ post }) => {
@@ -33,11 +36,22 @@ const PostPreview = ({ post }) => {
             <Typography variant='body1'>{post.body}</Typography>
           </div>
         </div>
-        <div className='section-footer'>
+        <div className='post-footer'>
           <div className='reactions'>
-            <div className='reaction love'></div>
-            <div className='reaction comment'></div>
-            <div className='reaction share'></div>
+            <div className='reactions-group'>
+              <div className='reaction love'>
+                <Button startIcon={<HeartIcon />}>Love</Button>
+                <div className='count'>{post.likeCount}</div>
+              </div>
+              <div className='reaction comment'>
+                <Button startIcon={<CommentIcon />}>Comment</Button>
+                <div className='count'>{post.commentCount}</div>
+              </div>
+            </div>
+            <div className='reaction share'>
+              <Button startIcon={<ShareIcon />}>Share</Button>
+              <div className='count'>{post.shareCount}</div>
+            </div>
           </div>
         </div>
       </div>

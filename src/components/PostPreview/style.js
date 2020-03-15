@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const PostPreview = styled.div`
   display: flex;
   padding: 24px 16px 16px 16px;
-  /* border-radius: 8px; */
+  margin-bottom: 8px;
   transition: all 250ms ease-in-out;
   &:hover {
     /* cursor: pointer; */
@@ -73,6 +73,7 @@ const PostPreview = styled.div`
             }
           }
           &.share {
+            margin: 0 16px;
             button:hover {
               svg {
                 fill: green;

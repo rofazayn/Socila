@@ -24,15 +24,17 @@ const Avatar = styled.div`
     fill: ${({ theme }) => theme.palette.grey[800]};
   }
   img {
+    /* object-fit: cover; */
+    /* object-position: center center; */
     position: absolute;
     top: 0;
     right: 0;
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     margin: auto;
-    object-fit: cover;
+    display: flex;
   }
 `;
 

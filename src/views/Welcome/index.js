@@ -5,13 +5,13 @@ import Dashboard from '../Dashboard';
 import Landing from '../Landing';
 
 const Welcome = () => {
-  const { currentUser } = React.useContext(AuthContext);
+  const { currentUser, userDetails } = React.useContext(AuthContext);
 
   return (
     <>
-      {currentUser === null ? (
+      {currentUser === null || userDetails === null ? (
         <Loader />
-      ) : currentUser === false ? (
+      ) : currentUser === false || userDetails === null ? (
         <Landing />
       ) : (
         <Dashboard />

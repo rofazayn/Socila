@@ -29,9 +29,6 @@ const SignInForm = () => {
 
           fb.auth()
             .signInWithEmailAndPassword(values.email, values.password)
-            .then(user => {
-              console.log(user);
-            })
             .catch(err => {
               setSubmitting(false);
               console.error(err);

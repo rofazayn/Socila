@@ -19,9 +19,9 @@ const PostsList = () => {
       .catch(err => console.error(err));
   }, []);
 
-  useEffect(() => {
-    console.log(posts);
-  }, [posts]);
+  // useEffect(() => {
+  //   console.log(posts);
+  // }, [posts]);
 
   return (
     <Styled.PostsList>

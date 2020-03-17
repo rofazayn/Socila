@@ -13,7 +13,6 @@ const Home = () => {
       initial={{ opacity: 0 }}
       exit={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
     >
       <Styled.Home className='home-page'>
         <TopBar title={`Home`} icon={<HomeIconSvg />} />

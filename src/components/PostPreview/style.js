@@ -5,9 +5,11 @@ const PostPreview = styled.div`
   padding: 24px 16px 16px 16px;
   margin-bottom: 8px;
   transition: all 250ms ease-in-out;
+  border-inline-start: 2px solid transparent;
   &:hover {
     /* cursor: pointer; */
-    background: ${({ theme }) => theme.palette.grey[100]};
+    background: ${({ theme }) => theme.palette.grey[50]};
+    border-inline-start: 2px solid ${({ theme }) => theme.palette.primary.light};
   }
   .post-section {
     display: flex;
@@ -29,20 +31,20 @@ const PostPreview = styled.div`
       }
       .author-username {
         p {
-          color: ${({ theme }) => theme.palette.grey[600]};
+          color: ${({ theme }) => theme.palette.text.disabled};
           text-decoration: underline;
         }
       }
       .time-posted {
         p {
-          color: ${({ theme }) => theme.palette.grey[600]};
+          color: ${({ theme }) => theme.palette.text.disabled};
           /* text-decoration: underline; */
         }
       }
     }
     .post-body {
       p {
-        color: ${({ theme }) => theme.palette.grey[800]};
+        color: ${({ theme }) => theme.palette.text.primary};
         line-height: 1.8;
       }
     }
@@ -58,6 +60,9 @@ const PostPreview = styled.div`
           flex-direction: row;
           justify-content: space-between;
           align-items: center;
+          .count {
+            margin-inline-start: 8px;
+          }
           &.love {
             button:hover {
               svg {
@@ -67,6 +72,7 @@ const PostPreview = styled.div`
           }
           &.comment {
             margin-inline-start: 16px;
+
             button:hover {
               svg {
                 /* fill: blue; */
@@ -74,7 +80,10 @@ const PostPreview = styled.div`
             }
           }
           &.share {
-            margin: 0 16px;
+            margin-inline-end: 16px;
+            .count {
+              margin-inline-end: 8px;
+            }
             button:hover {
               svg {
                 /* fill: green; */
@@ -82,13 +91,20 @@ const PostPreview = styled.div`
             }
           }
           button {
-            margin-inline-end: 8px;
-            color: ${({ theme }) => theme.palette.grey[700]};
+            /* margin-inline-end: 8px; */
+            color: ${({ theme }) => theme.palette.text.secondary};
+            transition: all ease-in-out 250ms;
             svg {
-              width: 22px;
-              height: 22px;
-              fill: ${({ theme }) => theme.palette.grey[700]};
+              width: 20px;
+              height: 20px;
+              fill: ${({ theme }) => theme.palette.text.secondary};
               transition: all ease-in-out 250ms;
+            }
+            &:hover {
+              color: ${({ theme }) => theme.palette.primary.main};
+              svg {
+                fill: ${({ theme }) => theme.palette.primary.main};
+              }
             }
           }
         }

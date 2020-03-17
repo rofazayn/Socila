@@ -20,7 +20,7 @@ const OfflineNavbar = styled.nav`
             display: flex;
             padding: 0.5rem 1rem;
             font-weight: 700;
-            color: ${({ theme }) => theme.palette.grey[500]};
+            color: ${({ theme }) => theme.palette.grey[700]};
             &.active {
               color: ${({ theme }) => theme.palette.common.black};
             }

@@ -54,8 +54,8 @@ const PostPreview = ({ post }) => {
                 </div>
               </div>
               <div className='reaction share'>
-                <Button startIcon={<ShareIcon />}>Share</Button>
                 <div className='count'>{post.shareCount}</div>
+                <Button startIcon={<ShareIcon />}>Share</Button>
               </div>
             </div>
           </div>

@@ -27,7 +27,7 @@ const PostCreator = styled.div`
         padding-inline-end: 64px;
         background-color: ${({ theme }) => theme.palette.grey[100]};
         border: 3px solid ${({ theme }) => theme.palette.grey[100]};
-        color: ${({ theme }) => theme.palette.grey[800]};
+        color: ${({ theme }) => theme.palette.text.primary};
         border-radius: 16px;
         justify-content: flex-start;
         align-items: flex-start;
@@ -37,10 +37,19 @@ const PostCreator = styled.div`
         transition: all 200ms ease-in-out;
         &::placeholder {
           color: ${({ theme }) => theme.palette.grey[400]};
+          transition: all 200ms ease-in-out;
+        }
+        &:hover {
+          background-color: ${({ theme }) => theme.palette.grey[200]};
+          border-color: ${({ theme }) => theme.palette.grey[200]};
+          &::placeholder {
+            border-color: ${({ theme }) => theme.palette.grey[500]};
+          }
         }
         &:focus {
           border-color: ${({ theme }) => theme.palette.primary.main};
         }
+
         &::-webkit-scrollbar {
           display: none;
         }

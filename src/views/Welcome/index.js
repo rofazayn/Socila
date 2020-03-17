@@ -11,10 +11,12 @@ const Welcome = () => {
     <>
       {currentUser === null || userDetails === null ? (
         <Loader />
-      ) : currentUser === false ? (
+      ) : currentUser === false && userDetails === false ? (
         <Landing />
-      ) : (
+      ) : currentUser && userDetails ? (
         <Dashboard />
+      ) : (
+        <Loader />
       )}
     </>
   );

@@ -53,6 +53,7 @@ const Navbar = styled.nav`
                 width: 28px;
                 height: 28px;
                 color: black;
+                transition: all ease-in-out 250ms;
               }
             }
             &.active {

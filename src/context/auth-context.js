@@ -19,6 +19,7 @@ export const AuthProvider = ({ children }) => {
           .then(doc => setUserDetails(doc.data()));
       } else {
         setCurrentUser(false);
+        setUserDetails(null);
       }
     });
     return () => unsubscribeFromAuth();

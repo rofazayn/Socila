@@ -9,6 +9,8 @@ const PostsList = () => {
   useEffect(() => {
     let postsRef = fb.firestore().collection('posts');
     postsRef
+      .orderBy('createdAt', 'desc')
+      .limit(10)
       .get()
       .then(data => {
         let newPosts = [];

@@ -43,6 +43,7 @@ const PostPreview = styled.div`
     .post-body {
       p {
         color: ${({ theme }) => theme.palette.grey[800]};
+        line-height: 1.8;
       }
     }
     .post-footer {
@@ -60,7 +61,7 @@ const PostPreview = styled.div`
           &.love {
             button:hover {
               svg {
-                fill: red;
+                /* fill: red; */
               }
             }
           }
@@ -68,7 +69,7 @@ const PostPreview = styled.div`
             margin-inline-start: 16px;
             button:hover {
               svg {
-                fill: blue;
+                /* fill: blue; */
               }
             }
           }
@@ -76,7 +77,7 @@ const PostPreview = styled.div`
             margin: 0 16px;
             button:hover {
               svg {
-                fill: green;
+                /* fill: green; */
               }
             }
           }

@@ -2,7 +2,7 @@ import React from 'react';
 import { Styled } from './style';
 import TopBar from '../TopBar';
 import { ReactComponent as HomeIconSvg } from '../../assets/icons/bx-home.svg';
-import Wrapper from '../Wrapper';
+// import Wrapper from '../Wrapper';
 import { motion } from 'framer-motion';
 import PostsList from '../PostsList';
 import PostCreator from '../PostCreator';

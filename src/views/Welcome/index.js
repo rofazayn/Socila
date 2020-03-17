@@ -11,7 +11,7 @@ const Welcome = () => {
     <>
       {currentUser === null || userDetails === null ? (
         <Loader />
-      ) : currentUser === false || userDetails === null ? (
+      ) : currentUser === false ? (
         <Landing />
       ) : (
         <Dashboard />

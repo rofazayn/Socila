@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Styled } from './style';
 import { IconButton } from '@material-ui/core';
 import { ReactComponent as SendIconSvg } from '../../assets/icons/bx-send.svg';
@@ -32,10 +32,6 @@ const PostCreator = () => {
       })
       .catch(err => console.log(err));
   }
-
-  useEffect(() => {
-    console.log(userDetails);
-  }, [userDetails]);
 
   return (
     <Styled.PostCreator className='.post-creator'>

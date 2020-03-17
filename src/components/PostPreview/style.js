@@ -6,6 +6,7 @@ const PostPreview = styled.div`
   margin-bottom: 8px;
   transition: all 250ms ease-in-out;
   border-inline-start: 2px solid transparent;
+
   &:hover {
     /* cursor: pointer; */
     background: ${({ theme }) => theme.palette.grey[50]};
@@ -14,6 +15,9 @@ const PostPreview = styled.div`
   .post-section {
     display: flex;
     flex-direction: column;
+    &.details {
+      width: 100%;
+    }
 
     .post-header {
       display: flex;
@@ -50,6 +54,7 @@ const PostPreview = styled.div`
     }
     .post-footer {
       padding-top: 8px;
+      transform: translateX(-8px);
       .reactions {
         display: flex;
         flex-direction: row;

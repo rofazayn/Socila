@@ -16,12 +16,12 @@ const PostPreview = ({ post }) => {
       animate={{ opacity: 1 }}
     >
       <Styled.PostPreview>
-        <div className='post-section'>
+        <div className='post-section avatar'>
           <div className='avatar'>
             <Avatar imgUrl={post.authorImage} alt={post.authorFullName} />
           </div>
         </div>
-        <div className='post-section'>
+        <div className='post-section details'>
           <div className='post-header'>
             <div className='author-name spaced'>
               <Typography variant='body2'>{post.authorFullName}</Typography>

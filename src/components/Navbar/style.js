@@ -35,11 +35,15 @@ const Navbar = styled.nav`
           }
           a {
             font-size: 20px;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             /* justify-content: center; */
             padding: 8px 16px;
             border-radius: 16px;
+            transition: all ease-in-out 250ms;
+            &:hover {
+              background-color: ${({ theme }) => theme.palette.action.hover};
+            }
             .icon {
               margin-inline-end: 16px;
               /* background: pink; */

@@ -1,25 +1,10 @@
-import React, { useEffect } from 'react';
-import fb from '../../firebase';
+import React from 'react';
 import { Styled } from './style';
 import PostPreview from '../PostPreview';
+import usePosts from '../../hooks/usePosts';
 
 const PostsList = () => {
-  const [posts, setPosts] = React.useState([]);
-
-  useEffect(() => {
-    let postsRef = fb.firestore().collection('posts');
-    postsRef
-      .orderBy('createdAt', 'desc')
-      .limit(10)
-      .get()
-      .then(data => {
-        let newPosts = [];
-        data.forEach(doc => newPosts.push(doc.data()));
-        return newPosts;
-      })
-      .then(newPosts => setPosts([...newPosts]))
-      .catch(err => console.error(err));
-  }, []);
+  const posts = usePosts();
 
   // useEffect(() => {
   //   console.log(posts);

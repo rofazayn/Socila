@@ -7,8 +7,7 @@ function usePosts() {
   const [posts, postsDispatch] = useReducer(postsReducer, []);
 
   useEffect(() => {
-    let unsubscribe = fb
-      .firestore()
+    fb.firestore()
       .collection('posts')
       .orderBy('createdAt', 'desc')
       .limit(10)
@@ -16,16 +15,16 @@ function usePosts() {
       .then(data => {
         let newPosts = [];
         data.forEach(doc => newPosts.push(doc.data()));
-        postsDispatch({ type: postsTypes.GET_POSTS, payload: newPosts });
+        return postsDispatch({ type: postsTypes.GET_POSTS, payload: newPosts });
       })
       .catch(err => {
-        console.error(err);
+        return console.error(err);
       });
 
-    return () => unsubscribe();
+    // return () => unsubscribe();
   }, []);
 
-  return posts;
+  return { posts, postsDispatch };
 }
 
 export default usePosts;

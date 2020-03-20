@@ -1,11 +1,11 @@
 import { postsTypes } from '../constants';
 
-// let postsRef = fb.firestore().collection('posts');
-
 const postsReducer = (state, action) => {
   switch (action.type) {
-    case postsTypes.GET_POSTS:
+    case postsTypes.SET_POSTS:
       return [...state, ...action.payload];
+    case postsTypes.ADD_POST:
+      return [action.payload, ...state];
     default:
       throw new Error();
   }

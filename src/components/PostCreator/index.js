@@ -6,31 +6,38 @@ import { ReactComponent as SendIconSvg } from '../../assets/icons/bx-send.svg';
 import Avatar from '../Avatar';
 import { AuthContext } from '../../context/auth-context';
 import fb from '../../firebase';
+import { postsTypes } from '../../constants';
+import usePosts from '../../hooks/usePosts';
 
 const PostCreator = () => {
   const { userDetails } = useContext(AuthContext);
   const [postInput, setPostInput] = useState('');
 
-  function createPost(e) {
+  const { postsDispatch } = usePosts();
+
+  async function createPost(e) {
     e.preventDefault();
     let postsRef = fb.firestore().collection('posts');
 
-    postsRef
+    let newPost = {
+      authorFullName: userDetails.fullName,
+      authorImage: userDetails.profileImage,
+      authorUsername: userDetails.username,
+      body: postInput.trim(),
+      commentCount: 0,
+      likeCount: 0,
+      shareCount: 0,
+      createdAt: new Date().toISOString()
+    };
+
+    await postsRef
       .doc()
-      .set({
-        authorFullName: userDetails.fullName,
-        authorImage: userDetails.profileImage,
-        authorUsername: userDetails.username,
-        body: postInput.trim(),
-        commentCount: 0,
-        likeCount: 0,
-        shareCount: 0,
-        createdAt: new Date().toISOString()
-      })
+      .set(newPost)
       .then(() => {
         setPostInput('');
+        return postsDispatch({ type: postsTypes.ADD_POST, payload: newPost });
       })
-      .catch(err => console.log(err));
+      .catch(err => console.error(err));
   }
 
   return (

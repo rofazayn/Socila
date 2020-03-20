@@ -5,7 +5,7 @@ const PostsList = styled.div`
   /* padding-top: 16px; */
   padding-bottom: 20vh;
   flex-direction: column;
-  .posts-loading {
+  .posts-fallback {
     display: flex;
     align-items: center;
     justify-content: center;

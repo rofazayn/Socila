@@ -3,10 +3,12 @@ import postsReducer from '../reducers/postsReducer';
 
 export const PostsContext = createContext();
 export const PostsProvider = ({ children }) => {
-  const [posts, dispatch] = useReducer(postsReducer, []);
+  const [posts, postsDispatch] = useReducer(postsReducer, []);
 
   return (
-    <PostsContext.Provider value={{ posts: posts, postsDispatch: dispatch }}>
+    <PostsContext.Provider
+      value={{ posts: posts, postsDispatch: postsDispatch }}
+    >
       {children}
     </PostsContext.Provider>
   );

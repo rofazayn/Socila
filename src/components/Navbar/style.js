@@ -6,6 +6,7 @@ const Navbar = styled.nav`
   top: 0;
   bottom: 0;
   max-width: 230px;
+  /* min-width: 230px; */
   width: 100%;
   /* background-color: papayawhip; */
   left: 0;
@@ -16,6 +17,8 @@ const Navbar = styled.nav`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow: hidden;
+  background: white;
   /* align-items: space; */
   .navbar-top {
     .navbar-logo {

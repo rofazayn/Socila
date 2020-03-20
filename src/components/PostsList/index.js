@@ -6,13 +6,9 @@ import usePosts from '../../hooks/usePosts';
 const PostsList = () => {
   const posts = usePosts();
 
-  // useEffect(() => {
-  //   console.log(posts);
-  // }, [posts]);
-
   return (
     <Styled.PostsList>
-      {posts &&
+      {posts.length > 0 &&
         posts.map(post => {
           return <PostPreview post={post} key={post.createdAt} />;
         })}

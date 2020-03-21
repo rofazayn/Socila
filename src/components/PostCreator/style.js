@@ -58,7 +58,7 @@ const PostCreator = styled.div`
         position: absolute;
         bottom: 8px;
         right: 8px;
-        svg {
+        .create-post-icon {
           fill: ${({ theme }) => theme.palette.grey[600]};
           width: 32px;
           height: 32px;

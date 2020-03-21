@@ -2,13 +2,14 @@ import React, { useContext } from 'react';
 import { Styled } from './style';
 import { IconButton, CircularProgress } from '@material-ui/core';
 import { ReactComponent as SendIconSvg } from '../../assets/icons/bx-send.svg';
-
 import Avatar from '../Avatar';
 import { AuthContext } from '../../context/auth-context';
 import fb from '../../firebase';
 import { postsTypes } from '../../constants';
 import usePosts from '../../hooks/usePosts';
-import { Formik } from 'formik';
+import { Formik, ErrorMessage } from 'formik';
+import vSchema from './validation';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const PostCreator = () => {
   const { userDetails } = useContext(AuthContext);
@@ -45,33 +46,68 @@ const PostCreator = () => {
 
   return (
     <Styled.PostCreator className='.post-creator'>
-      <div className='form-wrapper'>
-        <Avatar imgUrl={userDetails.profileImage || null} />
-        <Formik initialValues={{ body: '' }} onSubmit={createPost}>
-          {({ values, handleChange, handleSubmit, isSubmitting }) => (
-            <form noValidate onSubmit={handleSubmit}>
-              <textarea
-                type='text'
-                name='body'
-                value={values.body}
-                autoComplete='false'
-                onChange={handleChange}
-                placeholder={`What's on your mind, ${userDetails &&
-                  userDetails.firstName}`}
-              />
-              <div className='submit-button'>
-                <IconButton type='submit' size='medium'>
-                  {isSubmitting ? (
-                    <CircularProgress size={32} />
-                  ) : (
-                    <SendIconSvg className='create-post-icon' />
-                  )}
-                </IconButton>
-              </div>
-            </form>
-          )}
-        </Formik>
-      </div>
+      <Formik
+        initialValues={{ body: '' }}
+        onSubmit={createPost}
+        validationSchema={vSchema}
+        validateOnMount={true}
+      >
+        {({
+          values,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+          isValid,
+          touched,
+          errors
+        }) => (
+          <>
+            <div className='form-wrapper'>
+              <Avatar imgUrl={userDetails.profileImage || null} />
+              <form noValidate onSubmit={handleSubmit}>
+                <textarea
+                  type='text'
+                  name='body'
+                  value={values.body}
+                  autoComplete='false'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder={`What's on your mind, ${userDetails &&
+                    userDetails.firstName}`}
+                />
+                <div className='submit-button'>
+                  <IconButton
+                    type='submit'
+                    size='medium'
+                    disabled={isSubmitting || !isValid}
+                  >
+                    {isSubmitting ? (
+                      <CircularProgress size={32} />
+                    ) : (
+                      <SendIconSvg className='create-post-icon' />
+                    )}
+                  </IconButton>
+                </div>
+              </form>
+            </div>
+            <div className='error-area'>
+              {touched.body && errors.body ? (
+                <AnimatePresence>
+                  <motion.div
+                    initial={{ opacity: 0, y: -20, height: 0 }}
+                    exit={{ opacity: 0, y: 20, height: 0 }}
+                    animate={{ opacity: 1, y: 0, height: '100%' }}
+                    className='--error --center-text'
+                  >
+                    <ErrorMessage name='body' />
+                  </motion.div>
+                </AnimatePresence>
+              ) : null}
+            </div>
+          </>
+        )}
+      </Formik>
     </Styled.PostCreator>
   );
 };

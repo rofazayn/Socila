@@ -5,13 +5,20 @@ const PostCreator = styled.div`
   margin: 8px 16px 0 16px;
   /* display: flex; */
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid ${({ theme }) => theme.palette.grey[200]};
+  .error-area {
+    width: 100%;
+    padding-bottom: 16px;
+  }
+
   .form-wrapper {
     height: 160px;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    border-bottom: 1px solid ${({ theme }) => theme.palette.grey[200]};
-    padding-bottom: 32px;
+    padding-bottom: 16px;
     form {
       display: flex;
       height: 100%;

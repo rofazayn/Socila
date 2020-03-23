@@ -18,7 +18,7 @@ function usePosts() {
         .get()
         .then(data => {
           let newPosts = [];
-          data.forEach(doc => newPosts.push(doc.data()));
+          data.forEach(doc => newPosts.push({ postId: doc.id, ...doc.data() }));
           return postsDispatch({
             type: postsTypes.SET_POSTS,
             payload: newPosts
@@ -59,12 +59,65 @@ function usePosts() {
       console.error(error);
     }
   }
+
+  const likePost = async postId => {
+    const postDoc = fb.firestore().doc(`/posts/${postId}`);
+
+    // Reference the like
+    const likeDoc = fb
+      .firestore()
+      .collection('likes')
+      .where('userId', '==', userDetails.userId)
+      .where('postId', '==', postId)
+      .limit(1);
+
+    let postData = {};
+
+    postDoc
+      .get()
+      .then(doc => {
+        if (doc.exists) {
+          postData = doc.data();
+          postData.postId = doc.id;
+
+          return likeDoc.get();
+        } else {
+          throw new Error();
+        }
+      })
+      .then(data => {
+        if (data.empty) {
+          return fb
+            .firestore()
+            .collection('likes')
+            .add({
+              postId,
+              userId: userDetails.userId,
+              username: userDetails.username
+            })
+            .then(() => {
+              postData.likeCount++;
+              return postDoc.update({ likeCount: postData.likeCount });
+            })
+            .then(() => {
+              postsDispatch({ type: postsTypes.LIKE_POST, payload: postData });
+            });
+        } else {
+          console.log('Post already liked!');
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+
   return {
     posts,
     postsDispatch: postsDispatch,
     postsActions: {
       fetchPosts,
-      createPost
+      createPost,
+      likePost
     }
   };
 }

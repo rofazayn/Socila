@@ -11,11 +11,15 @@ const PostsList = () => {
     postsActions.fetchPosts();
   }, []);
 
+  useEffect(() => {
+    console.log(posts);
+  }, [posts]);
+
   return (
     <Styled.PostsList>
       {posts.length > 0 ? (
         posts.map(post => {
-          return <PostPreview post={post} key={post.createdAt} />;
+          return <PostPreview key={post.postId} {...post} />;
         })
       ) : (
         <div className='posts-fallback'>

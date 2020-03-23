@@ -7,8 +7,21 @@ import { ReactComponent as CommentIcon } from '../../assets/icons/bx-comment.svg
 import { ReactComponent as ShareIcon } from '../../assets/icons/bx-share.svg';
 import * as dayjs from 'dayjs';
 import { motion } from 'framer-motion';
+import usePosts from '../../hooks/usePosts';
 
-const PostPreview = ({ post }) => {
+const PostPreview = ({
+  postId,
+  authorImage,
+  authorFullName,
+  authorUsername,
+  createdAt,
+  body,
+  likeCount,
+  commentCount,
+  shareCount
+}) => {
+  const { postsActions } = usePosts();
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -18,43 +31,48 @@ const PostPreview = ({ post }) => {
       <Styled.PostPreview>
         <div className='post-section avatar'>
           <div className='avatar'>
-            <Avatar imgUrl={post.authorImage} alt={post.authorFullName} />
+            <Avatar imgUrl={authorImage} alt={authorFullName} />
           </div>
         </div>
         <div className='post-section details'>
           <div className='post-header'>
             <div className='author-name spaced'>
-              <Typography variant='body2'>{post.authorFullName}</Typography>
+              <Typography variant='body2'>{authorFullName}</Typography>
             </div>
 
             <div className='author-username spaced'>
-              <Typography variant='body2'>@{post.authorUsername}</Typography>
+              <Typography variant='body2'>@{authorUsername}</Typography>
             </div>
             <div className='time-posted spaced'>
               <Typography variant='body2'>
-                {dayjs(post.createdAt).fromNow()}
+                {dayjs(createdAt).fromNow()}
               </Typography>
             </div>
           </div>
           <div className='post-main'>
             <div className='post-body'>
-              <Typography variant='body1'>{post.body}</Typography>
+              <Typography variant='body1'>{body}</Typography>
             </div>
           </div>
           <div className='post-footer'>
             <div className='reactions'>
               <div className='reactions-group'>
                 <div className='reaction love'>
-                  <Button startIcon={<HeartIcon />}>Love</Button>
-                  <div className='count'>{post.likeCount}</div>
+                  <Button
+                    startIcon={<HeartIcon />}
+                    onClick={() => postsActions.likePost(postId)}
+                  >
+                    Like
+                  </Button>
+                  <div className='count'>{likeCount}</div>
                 </div>
                 <div className='reaction comment'>
                   <Button startIcon={<CommentIcon />}>Comment</Button>
-                  <div className='count'>{post.commentCount}</div>
+                  <div className='count'>{commentCount}</div>
                 </div>
               </div>
               <div className='reaction share'>
-                <div className='count'>{post.shareCount}</div>
+                <div className='count'>{shareCount}</div>
                 <Button startIcon={<ShareIcon />}>Share</Button>
               </div>
             </div>

@@ -4,51 +4,20 @@ import { IconButton, CircularProgress } from '@material-ui/core';
 import { ReactComponent as SendIconSvg } from '../../assets/icons/bx-send.svg';
 import Avatar from '../Avatar';
 import { AuthContext } from '../../context/auth-context';
-import fb from '../../firebase';
-import { postsTypes } from '../../constants';
-import usePosts from '../../hooks/usePosts';
 import { Formik, ErrorMessage } from 'formik';
 import vSchema from './validation';
 import { AnimatePresence, motion } from 'framer-motion';
+import usePosts from '../../hooks/usePosts';
 
 const PostCreator = () => {
   const { userDetails } = useContext(AuthContext);
-
-  const { postsDispatch } = usePosts();
-
-  async function createPost(values, actions) {
-    let postsRef = fb.firestore().collection('posts');
-
-    let newPost = {
-      authorFullName: userDetails.fullName,
-      authorImage: userDetails.profileImage,
-      authorUsername: userDetails.username,
-      body: values.body.trim(),
-      commentCount: 0,
-      likeCount: 0,
-      shareCount: 0,
-      createdAt: new Date().toISOString()
-    };
-
-    try {
-      await postsRef
-        .doc()
-        .set(newPost)
-        .then(() => {
-          actions.resetForm();
-          return postsDispatch({ type: postsTypes.ADD_POST, payload: newPost });
-        })
-        .catch(err => console.error(err));
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  const { postsActions } = usePosts();
 
   return (
     <Styled.PostCreator className='.post-creator'>
       <Formik
         initialValues={{ body: '' }}
-        onSubmit={createPost}
+        onSubmit={postsActions.createPost}
         validationSchema={vSchema}
         validateOnMount={true}
       >

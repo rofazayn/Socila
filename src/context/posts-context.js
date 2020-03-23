@@ -7,7 +7,10 @@ export const PostsProvider = ({ children }) => {
 
   return (
     <PostsContext.Provider
-      value={{ posts: posts, postsDispatch: postsDispatch }}
+      value={{
+        posts: posts,
+        postsDispatch: postsDispatch
+      }}
     >
       {children}
     </PostsContext.Provider>

@@ -13,13 +13,15 @@ const PostCreator = () => {
   const { userDetails } = useContext(AuthContext);
   const { postsActions } = usePosts();
 
+  const initialValues = { body: '' };
+
   return (
     <Styled.PostCreator className='.post-creator'>
       <Formik
-        initialValues={{ body: '' }}
+        validateOnMount={true}
+        initialValues={initialValues}
         onSubmit={postsActions.createPost}
         validationSchema={vSchema}
-        validateOnMount={true}
       >
         {({
           values,
@@ -61,7 +63,7 @@ const PostCreator = () => {
               </form>
             </div>
             <div className='error-area'>
-              {touched.body && errors.body ? (
+              {errors.body ? (
                 <AnimatePresence>
                   <motion.div
                     initial={{ opacity: 0, y: -20, height: 0 }}

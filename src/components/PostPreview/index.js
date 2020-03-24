@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Styled } from './style';
 import Avatar from '../Avatar';
 import { Typography, Button } from '@material-ui/core';
@@ -8,6 +8,7 @@ import { ReactComponent as ShareIcon } from '../../assets/icons/bx-share.svg';
 import * as dayjs from 'dayjs';
 import { motion } from 'framer-motion';
 import usePosts from '../../hooks/usePosts';
+import { AuthContext } from '../../context/auth-context';
 
 const PostPreview = ({
   postId,
@@ -21,6 +22,26 @@ const PostPreview = ({
   shareCount
 }) => {
   const { postsActions } = usePosts();
+  const { userDetails } = useContext(AuthContext);
+
+  const isPostLiked = () => {
+    if (
+      userDetails.likes &&
+      userDetails.likes.find(like => like.postId === postId)
+    ) {
+      return true;
+    }
+
+    return false;
+  };
+
+  function handleLikePost() {
+    postsActions.likePost(postId);
+  }
+
+  function handleUnlikePost() {
+    postsActions.unlikePost(postId);
+  }
 
   return (
     <motion.div
@@ -60,9 +81,9 @@ const PostPreview = ({
                 <div className='reaction love'>
                   <Button
                     startIcon={<HeartIcon />}
-                    onClick={() => postsActions.likePost(postId)}
+                    onClick={isPostLiked() ? handleUnlikePost : handleLikePost}
                   >
-                    Like
+                    {isPostLiked() ? 'Unlike' : 'Like'}
                   </Button>
                   <div className='count'>{likeCount}</div>
                 </div>

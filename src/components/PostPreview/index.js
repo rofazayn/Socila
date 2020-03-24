@@ -78,7 +78,11 @@ const PostPreview = ({
           <div className='post-footer'>
             <div className='reactions'>
               <div className='reactions-group'>
-                <div className='reaction love'>
+                <div
+                  className={`reaction love ${
+                    isPostLiked() ? '--liked' : null
+                  }`}
+                >
                   <Button
                     startIcon={<HeartIcon />}
                     onClick={isPostLiked() ? handleUnlikePost : handleLikePost}

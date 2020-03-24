@@ -6,7 +6,7 @@ const PostPreview = styled.div`
   margin-bottom: 8px;
   transition: all 250ms ease-in-out;
   border-inline-start: 2px solid transparent;
-
+  cursor: pointer;
   &:hover {
     /* cursor: pointer; */
     background: ${({ theme }) => theme.palette.grey[50]};
@@ -67,8 +67,22 @@ const PostPreview = styled.div`
           align-items: center;
           .count {
             margin-inline-start: 8px;
+            font-weight: bold;
+            color: ${({ theme }) => theme.palette.text.secondary};
           }
           &.love {
+            &.--liked {
+              button {
+                color: ${({ theme }) => theme.palette.primary.main};
+                svg {
+                  fill: ${({ theme }) => theme.palette.primary.main};
+                }
+              }
+              .count {
+                color: ${({ theme }) => theme.palette.primary.main};
+                font-weight: bold;
+              }
+            }
             button:hover {
               svg {
                 /* fill: red; */
@@ -99,6 +113,7 @@ const PostPreview = styled.div`
             /* margin-inline-end: 8px; */
             color: ${({ theme }) => theme.palette.text.secondary};
             transition: all ease-in-out 250ms;
+
             svg {
               width: 20px;
               height: 20px;

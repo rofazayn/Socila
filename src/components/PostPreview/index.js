@@ -86,19 +86,24 @@ const PostPreview = ({
                   <Button
                     startIcon={<HeartIcon />}
                     onClick={isPostLiked() ? handleUnlikePost : handleLikePost}
+                    className='fancy-button'
                   >
                     {isPostLiked() ? 'Unlike' : 'Like'}
                   </Button>
                   <div className='count'>{likeCount}</div>
                 </div>
                 <div className='reaction comment'>
-                  <Button startIcon={<CommentIcon />}>Comment</Button>
+                  <Button startIcon={<CommentIcon />} className='fancy-button'>
+                    Comment
+                  </Button>
                   <div className='count'>{commentCount}</div>
                 </div>
               </div>
               <div className='reaction share'>
                 <div className='count'>{shareCount}</div>
-                <Button startIcon={<ShareIcon />}>Share</Button>
+                <Button startIcon={<ShareIcon />} className='fancy-button'>
+                  Share
+                </Button>
               </div>
             </div>
           </div>

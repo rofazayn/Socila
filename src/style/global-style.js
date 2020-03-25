@@ -132,7 +132,36 @@ const GlobalStyle = createGlobalStyle`
     height: 640px;
     border-radius: 16px;
   }
-  
+
+  .fancy-button {
+    /* margin-inline-end: 8px; */
+    color: ${({ theme }) => theme.palette.text.primary};
+    background-color: ${({ theme }) => theme.palette.grey[200]};
+    border: 2px solid transparent;
+    padding: 6px 12px;
+    transition: all ease-in-out 200ms;
+    font-size: 14px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+      fill: ${({ theme }) => theme.palette.text.primary};
+      transition: all ease-in-out 200ms;
+    }
+      &:hover {
+        color: ${({ theme }) => theme.palette.primary.main};
+        border-color: ${({ theme }) => theme.palette.primary.main};;
+        svg {
+          fill: ${({ theme }) => theme.palette.primary.main};
+        }
+      }
+    }
+    &.--active {
+      color: ${({ theme }) => theme.palette.primary.main};
+                svg {
+                  fill: ${({ theme }) => theme.palette.primary.main};
+                }
+    }
 `;
 
 export default GlobalStyle;

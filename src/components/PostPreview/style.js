@@ -5,12 +5,13 @@ const PostPreview = styled.div`
   padding: 24px 16px 16px 16px;
   margin-bottom: 8px;
   transition: all 250ms ease-in-out;
-  border-inline-start: 2px solid transparent;
+  /* border-inline-start: 2px solid transparent; */
   cursor: pointer;
   &:hover {
     /* cursor: pointer; */
     background: ${({ theme }) => theme.palette.grey[50]};
-    border-inline-start: 2px solid ${({ theme }) => theme.palette.primary.light};
+    /* border-inline-start: 2px solid ${({ theme }) =>
+      theme.palette.primary.light}; */
   }
   .post-section {
     display: flex;
@@ -53,7 +54,7 @@ const PostPreview = styled.div`
       }
     }
     .post-footer {
-      padding-top: 8px;
+      padding-top: 16px;
       transform: translateX(-8px);
       .reactions {
         display: flex;
@@ -65,6 +66,7 @@ const PostPreview = styled.div`
           flex-direction: row;
           justify-content: space-between;
           align-items: center;
+          
           .count {
             margin-inline-start: 8px;
             font-weight: bold;
@@ -109,24 +111,7 @@ const PostPreview = styled.div`
               }
             }
           }
-          button {
-            /* margin-inline-end: 8px; */
-            color: ${({ theme }) => theme.palette.text.secondary};
-            transition: all ease-in-out 250ms;
-
-            svg {
-              width: 20px;
-              height: 20px;
-              fill: ${({ theme }) => theme.palette.text.secondary};
-              transition: all ease-in-out 250ms;
-            }
-            &:hover {
-              color: ${({ theme }) => theme.palette.primary.main};
-              svg {
-                fill: ${({ theme }) => theme.palette.primary.main};
-              }
-            }
-          }
+          
         }
         .reactions-group {
           display: flex;

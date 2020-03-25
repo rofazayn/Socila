@@ -158,9 +158,9 @@ const GlobalStyle = createGlobalStyle`
     }
     &.--active {
       color: ${({ theme }) => theme.palette.primary.main};
-                svg {
-                  fill: ${({ theme }) => theme.palette.primary.main};
-                }
+      svg {
+        fill: ${({ theme }) => theme.palette.primary.main};
+      }
     }
 `;
 

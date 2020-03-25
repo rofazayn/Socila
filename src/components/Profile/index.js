@@ -1,9 +1,9 @@
 import React from 'react';
 import { Styled } from './style';
-import Wrapper from '../Wrapper';
 import TopBar from '../TopBar';
 import { ReactComponent as UserIconSvg } from '../../assets/icons/bx-user.svg';
 import { motion } from 'framer-motion';
+import ProfileInfo from '../ProfileInfo';
 
 const Profile = () => {
   return (
@@ -15,16 +15,9 @@ const Profile = () => {
     >
       <Styled.Profile className='profile-page'>
         <TopBar title={'Profile'} icon={<UserIconSvg />} />
-        <Wrapper>
-          <div className='placeholder'></div>
-          <div className='placeholder'></div>
-          <div className='placeholder'></div>
-          <div className='placeholder'></div>
-          <div className='placeholder'></div>
-          <div className='placeholder'></div>
-          <div className='placeholder'></div>
-          <div className='placeholder'></div>
-        </Wrapper>
+        <ProfileInfo />
+        {/* <ProfileActions />
+        <ProfileContent /> */}
       </Styled.Profile>
     </motion.div>
   );

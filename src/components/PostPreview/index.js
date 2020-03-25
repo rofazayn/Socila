@@ -88,7 +88,7 @@ const PostPreview = ({
                     onClick={isPostLiked() ? handleUnlikePost : handleLikePost}
                     className='fancy-button'
                   >
-                    {isPostLiked() ? 'Unlike' : 'Like'}
+                    {isPostLiked() ? 'Liked' : 'Like'}
                   </Button>
                   <div className='count'>{likeCount}</div>
                 </div>

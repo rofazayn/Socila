@@ -3,10 +3,10 @@ import { ReactComponent as UserIconSvg } from '../../assets/icons/bx-user.svg';
 import { Styled } from './style.js';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const Avatar = ({ imgUrl, alt }) => {
+const Avatar = ({ imgUrl, alt, size }) => {
   const [loaded, setLoaded] = useState(false);
   return (
-    <Styled.Avatar>
+    <Styled.Avatar size={size}>
       <img
         src={imgUrl}
         alt={alt}

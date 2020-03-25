@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 const Avatar = styled.div`
-  /* display: inline-block; */
-  min-height: 64px;
-  min-width: 64px;
-  max-width: 64px;
-  max-height: 64px;
+  display: inline-flex;
+  min-height: ${({ size }) => (size ? size : '64px')};
+  min-width: ${({ size }) => (size ? size : '64px')};
+  max-width: ${({ size }) => (size ? size : '64px')};
+  max-height: ${({ size }) => (size ? size : '64px')};
   border-radius: 100%;
   background-color: ${({ theme }) => theme.palette.grey[200]};
   margin-inline-end: 16px;

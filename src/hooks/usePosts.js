@@ -60,122 +60,171 @@ function usePosts() {
     }
   }
 
-  const likePost = postId => {
-    const postDoc = fb.firestore().doc(`/posts/${postId}`);
-
-    // Reference the like
-    const likeDoc = fb
-      .firestore()
-      .collection('likes')
-      .where('userId', '==', userDetails.userId)
-      .where('postId', '==', postId)
-      .limit(1);
-
-    let postData = {};
-
-    postDoc
-      .get()
-      .then(doc => {
-        if (doc.exists) {
-          postData = doc.data();
-          postData.postId = doc.id;
-
-          return likeDoc.get();
-        } else {
-          throw new Error();
-        }
-      })
-      .then(data => {
-        if (data.empty) {
-          let likeData = {
-            postId: postId,
-            userId: userDetails.userId,
-            username: userDetails.username
-          };
-          return fb
-            .firestore()
-            .collection('likes')
-            .add(likeData)
-            .then(doc => {
-              postData.likeCount++;
-              likeData.likeId = doc.id;
-              return postDoc.update({ likeCount: postData.likeCount });
-            })
-            .then(() => {
-              postsDispatch({ type: postsTypes.LIKE_POST, payload: postData });
-              userDetailsDispatch({
-                type: userTypes.ADD_LIKE,
-                payload: likeData
-              });
-            });
-        } else {
-          console.log('Post already liked!');
-        }
-      })
-      .catch(err => {
-        console.error(err);
+  const likePost = async postId => {
+    try {
+      const postDoc = fb.firestore().doc(`/posts/${postId}`);
+      userDetailsDispatch({
+        type: userTypes.ADD_FAKE_LIKE,
+        payload: postId
       });
+
+      // Reference the like
+      const likeDoc = fb
+        .firestore()
+        .collection('likes')
+        .where('userId', '==', userDetails.userId)
+        .where('postId', '==', postId)
+        .limit(1);
+
+      let postData = {};
+
+      await postDoc
+        .get()
+        .then(doc => {
+          if (doc.exists) {
+            postData = doc.data();
+            postData.postId = doc.id;
+
+            return likeDoc.get();
+          } else {
+            throw new Error();
+          }
+        })
+        .then(data => {
+          if (data.empty) {
+            let likeData = {
+              postId: postId,
+              userId: userDetails.userId,
+              username: userDetails.username
+            };
+            return fb
+              .firestore()
+              .collection('likes')
+              .add(likeData)
+              .then(doc => {
+                postData.likeCount++;
+                likeData.likeId = doc.id;
+                return postDoc.update({ likeCount: postData.likeCount });
+              })
+              .then(() => {
+                postsDispatch({
+                  type: postsTypes.LIKE_POST,
+                  payload: postData
+                });
+                userDetailsDispatch({
+                  type: userTypes.REMOVE_FAKE_LIKE,
+                  payload: postId
+                });
+                userDetailsDispatch({
+                  type: userTypes.ADD_LIKE,
+                  payload: likeData
+                });
+              })
+              .catch(err => {
+                userDetailsDispatch({
+                  type: userTypes.ADD_FAKE_LIKE,
+                  payload: postId
+                });
+                console.log(err);
+              });
+          } else {
+            userDetailsDispatch({
+              type: userTypes.ADD_FAKE_LIKE,
+              payload: postId
+            });
+            console.log('Post already liked!');
+          }
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    } catch (error) {
+      return new Error();
+    }
   };
 
-  const unlikePost = postId => {
-    const postDoc = fb.firestore().doc(`/posts/${postId}`);
-
-    // Reference the like
-    const likeDoc = fb
-      .firestore()
-      .collection('likes')
-      .where('userId', '==', userDetails.userId)
-      .where('postId', '==', postId)
-      .limit(1);
-
-    let postData = {};
-
-    postDoc
-      .get()
-      .then(doc => {
-        if (doc.exists) {
-          postData = doc.data();
-          postData.postId = doc.id;
-
-          return likeDoc.get();
-        } else {
-          return console.log('Post not found');
-        }
-      })
-      .then(data => {
-        if (data.empty) {
-          console.log('Post not liked!');
-        } else {
-          let likeData = {
-            postId: postId,
-            userId: userDetails.userId,
-            username: userDetails.username
-          };
-          return fb
-            .firestore()
-            .doc(`/likes/${data.docs[0].id}`)
-            .get()
-            .then(doc => {
-              postData.likeCount--;
-              likeData.likeId = doc.id;
-              doc.ref.delete();
-              return postDoc.update({ likeCount: postData.likeCount });
-            })
-            .then(() => {
-              postsDispatch({
-                type: postsTypes.UNLIKE_POST,
-                payload: postData
-              });
-              userDetailsDispatch({
-                type: userTypes.REMOVE_LIKE,
-                payload: likeData.likeId
-              });
-            });
-        }
-      })
-      .catch(err => {
-        console.error(err);
+  const unlikePost = async postId => {
+    try {
+      const postDoc = fb.firestore().doc(`/posts/${postId}`);
+      userDetailsDispatch({
+        type: userTypes.REMOVE_FAKE_LIKE,
+        payload: postId
       });
+
+      // Reference the like
+      const likeDoc = fb
+        .firestore()
+        .collection('likes')
+        .where('userId', '==', userDetails.userId)
+        .where('postId', '==', postId)
+        .limit(1);
+
+      let postData = {};
+
+      await postDoc
+        .get()
+        .then(doc => {
+          if (doc.exists) {
+            postData = doc.data();
+            postData.postId = doc.id;
+
+            return likeDoc.get();
+          } else {
+            return console.log('Post not found');
+          }
+        })
+        .then(data => {
+          if (data.empty) {
+            console.log('Post not liked!');
+          } else {
+            let likeData = {
+              postId: postId,
+              userId: userDetails.userId,
+              username: userDetails.username
+            };
+            return fb
+              .firestore()
+              .doc(`/likes/${data.docs[0].id}`)
+              .get()
+              .then(doc => {
+                postData.likeCount--;
+                likeData.likeId = doc.id;
+                doc.ref.delete();
+                return postDoc.update({ likeCount: postData.likeCount });
+              })
+              .then(() => {
+                postsDispatch({
+                  type: postsTypes.UNLIKE_POST,
+                  payload: postData
+                });
+                userDetailsDispatch({
+                  type: userTypes.REMOVE_FAKE_LIKE,
+                  payload: postId
+                });
+                userDetailsDispatch({
+                  type: userTypes.REMOVE_LIKE,
+                  payload: likeData.likeId
+                });
+              })
+              .catch(err => {
+                userDetailsDispatch({
+                  type: userTypes.REMOVE_FAKE_LIKE,
+                  payload: postId
+                });
+                console.error(err);
+              });
+          }
+        })
+        .catch(err => {
+          userDetailsDispatch({
+            type: userTypes.REMOVE_FAKE_LIKE,
+            payload: postId
+          });
+          console.error(err);
+        });
+    } catch (error) {
+      return new Error();
+    }
   };
 
   return {

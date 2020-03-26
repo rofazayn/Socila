@@ -14,10 +14,19 @@ const userReducer = (state, action) => {
     case userTypes.ADD_LIKE:
       return { ...state, likes: [...state.likes, action.payload] };
 
+    case userTypes.ADD_FAKE_LIKE:
+      return { ...state, likes: [...state.likes, { postId: action.payload }] };
+
     case userTypes.REMOVE_LIKE:
       return {
         ...state,
         likes: [...state.likes.filter(like => like.likeId !== action.payload)]
+      };
+
+    case userTypes.REMOVE_FAKE_LIKE:
+      return {
+        ...state,
+        likes: [...state.likes.filter(like => like.postId !== action.payload)]
       };
 
     default:

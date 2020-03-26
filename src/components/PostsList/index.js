@@ -11,10 +11,6 @@ const PostsList = () => {
     postsActions.fetchPosts();
   }, []);
 
-  useEffect(() => {
-    console.log(posts);
-  }, [posts]);
-
   return (
     <Styled.PostsList>
       {posts.length > 0 ? (

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Styled } from './style';
 import Avatar from '../Avatar';
-import { Typography, Button } from '@material-ui/core';
+import { Typography, Button, CircularProgress } from '@material-ui/core';
 import { ReactComponent as HeartIcon } from '../../assets/icons/bx-heart.svg';
 import { ReactComponent as CommentIcon } from '../../assets/icons/bx-comment.svg';
 import { ReactComponent as ShareIcon } from '../../assets/icons/bx-share.svg';
@@ -9,6 +9,7 @@ import * as dayjs from 'dayjs';
 import { motion } from 'framer-motion';
 import usePosts from '../../hooks/usePosts';
 import { AuthContext } from '../../context/auth-context';
+import { Formik } from 'formik';
 
 const PostPreview = ({
   postId,
@@ -35,13 +36,15 @@ const PostPreview = ({
     return false;
   };
 
-  function handleLikePost() {
-    postsActions.likePost(postId);
-  }
+  const handleLike = values => {
+    let isLiked = isPostLiked();
 
-  function handleUnlikePost() {
-    postsActions.unlikePost(postId);
-  }
+    if (!isLiked) {
+      return postsActions.likePost(values.postId);
+    }
+
+    return postsActions.unlikePost(values.postId);
+  };
 
   return (
     <motion.div
@@ -83,13 +86,30 @@ const PostPreview = ({
                     isPostLiked() ? '--liked' : null
                   }`}
                 >
-                  <Button
-                    startIcon={<HeartIcon />}
-                    onClick={isPostLiked() ? handleUnlikePost : handleLikePost}
-                    className='fancy-button'
+                  <Formik
+                    initialValues={{ postId: postId }}
+                    onSubmit={handleLike}
                   >
-                    {isPostLiked() ? 'Liked' : 'Like'}
-                  </Button>
+                    {({ values, handleSubmit, isSubmitting }) => (
+                      <form onSubmit={handleSubmit}>
+                        <input type='hidden' value={values.postId} />
+                        <Button
+                          startIcon={
+                            isSubmitting ? (
+                              <CircularProgress size={18} />
+                            ) : (
+                              <HeartIcon />
+                            )
+                          }
+                          type='submit'
+                          className='fancy-button'
+                          disabled={isSubmitting}
+                        >
+                          {isPostLiked() ? 'Liked' : 'Like'}
+                        </Button>
+                      </form>
+                    )}
+                  </Formik>
                   <div className='count'>{likeCount}</div>
                 </div>
                 <div className='reaction comment'>

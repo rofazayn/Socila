@@ -48,9 +48,9 @@ function usePosts() {
 
     try {
       await postsRef
-        .doc()
-        .set(newPost)
-        .then(() => {
+        .add(newPost)
+        .then(doc => {
+          newPost.postId = doc.id;
           actions.resetForm();
           return postsDispatch({ type: postsTypes.ADD_POST, payload: newPost });
         })

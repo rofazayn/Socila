@@ -63,7 +63,7 @@ const PostCreator = () => {
               </form>
             </div>
             <div className='error-area'>
-              {errors.body ? (
+              {errors.body && false ? (
                 <AnimatePresence>
                   <motion.div
                     initial={{ opacity: 0, y: -20, height: 0 }}

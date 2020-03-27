@@ -6,7 +6,6 @@ import { ReactComponent as HomeIconSvg } from '../../assets/icons/bx-home.svg';
 import { motion } from 'framer-motion';
 import PostsList from '../PostsList';
 import PostCreator from '../PostCreator';
-import { PostsProvider } from '../../context/posts-context';
 
 const Home = () => {
   return (
@@ -16,14 +15,9 @@ const Home = () => {
       animate={{ opacity: 1 }}
     >
       <Styled.Home className='home-page'>
-        <PostsProvider>
-          <TopBar title={`Home`} icon={<HomeIconSvg />} />
-          <PostCreator />
-          <PostsList />
-          {/* <Wrapper>
-          <PostsList />
-        </Wrapper> */}
-        </PostsProvider>
+        <TopBar title={`Home`} icon={<HomeIconSvg />} />
+        <PostCreator />
+        <PostsList />
       </Styled.Home>
     </motion.div>
   );

@@ -53,10 +53,9 @@ export function useFetchPosts(userId) {
             });
         }
       } catch (error) {
-        console.error(error);
+        return console.error(error);
       }
     };
-
     fetchPosts();
   }, [postsDispatch, userId]);
 

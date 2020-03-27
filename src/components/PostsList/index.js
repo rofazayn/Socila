@@ -4,12 +4,12 @@ import PostPreview from '../PostPreview';
 import { CircularProgress } from '@material-ui/core';
 import { useFetchPosts } from '../../hooks/usePosts';
 
-const PostsList = () => {
-  const { posts } = useFetchPosts();
+const PostsList = ({ userId }) => {
+  const { posts } = useFetchPosts(userId);
 
   return (
     <Styled.PostsList>
-      {posts.length > 0 ? (
+      {posts && posts.length > 0 ? (
         posts.map(post => {
           return <PostPreview key={post.postId} {...post} />;
         })

@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Styled } from './style';
 import TopBar from '../TopBar';
 import { ReactComponent as UserIconSvg } from '../../assets/icons/bx-user.svg';
 import { motion } from 'framer-motion';
 import ProfileInfo from '../ProfileInfo';
+import PostsList from '../PostsList';
+import { AuthContext } from '../../context/auth-context';
 
 const Profile = () => {
+  const { userDetails } = useContext(AuthContext);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -16,6 +20,7 @@ const Profile = () => {
       <Styled.Profile className='profile-page'>
         <TopBar title={'Profile'} icon={<UserIconSvg />} />
         <ProfileInfo />
+        <PostsList userId={userDetails.userId} />
         {/* <ProfileActions />
         <ProfileContent /> */}
       </Styled.Profile>

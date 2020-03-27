@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Styled } from './style';
 import Navbar from '../../components/Navbar';
 import Main from '../../components/Main';
+import { PostsProvider } from '../../context/posts-context';
 
 const Dashboard = () => {
   return (
@@ -13,12 +14,14 @@ const Dashboard = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <Container>
-        <Styled.Dashboard>
-          <Navbar />
-          <Main />
-        </Styled.Dashboard>
-      </Container>
+      <PostsProvider>
+        <Container>
+          <Styled.Dashboard>
+            <Navbar />
+            <Main />
+          </Styled.Dashboard>
+        </Container>
+      </PostsProvider>
     </motion.div>
   );
 };

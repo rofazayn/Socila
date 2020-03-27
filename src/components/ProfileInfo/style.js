@@ -81,6 +81,7 @@ const ProfileInfo = styled.div`
   .profile-actions {
     padding: 16px;
     padding-inline-start: 48px;
+    padding-inline-end: 0;
     border-bottom: 1px solid ${({ theme }) => theme.palette.grey[200]};
     display: flex;
     flex-direction: row;

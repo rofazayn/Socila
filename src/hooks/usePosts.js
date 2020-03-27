@@ -74,7 +74,7 @@ function usePosts() {
     let newPost = {
       authorId: userDetails.userId,
       authorFullName: userDetails.fullName,
-      authorImage: userDetails.profileImage,
+      authorImage: userDetails.profileImage || null,
       authorUsername: userDetails.username,
       body: values.body.trim(),
       commentCount: 0,

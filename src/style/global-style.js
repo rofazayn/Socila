@@ -92,8 +92,8 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     height: 320px;
     border-radius: 16px;
-    background: ${({ theme }) => theme.palette.primary.main};
-    opacity: 10%;
+    background: ${({ theme }) => theme.palette.grey[100]};
+    /* opacity: 10%; */
     &:nth-of-type(2) {
       height: 160px;
     }
@@ -158,6 +158,7 @@ const GlobalStyle = createGlobalStyle`
     }
     &.--active {
       color: ${({ theme }) => theme.palette.primary.main};
+      border-color: ${({ theme }) => theme.palette.primary.main};
       svg {
         fill: ${({ theme }) => theme.palette.primary.main};
       }

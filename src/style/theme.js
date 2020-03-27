@@ -59,6 +59,13 @@ let themeObject = createMuiTheme({
     h6: {
       fontFamily: 'Montserrat',
       fontWeight: 700
+    },
+    subtitle1: {
+      fontFamily: 'Montserrat',
+      fontWeight: 700
+    },
+    body1: {
+      lineHeight: 1.7
     }
   }
 });

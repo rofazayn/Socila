@@ -5,11 +5,11 @@ import { Typography, Button, CircularProgress } from '@material-ui/core';
 import { ReactComponent as HeartIcon } from '../../assets/icons/bx-heart.svg';
 import { ReactComponent as CommentIcon } from '../../assets/icons/bx-comment.svg';
 import { ReactComponent as ShareIcon } from '../../assets/icons/bx-share.svg';
-import * as dayjs from 'dayjs';
 import { motion } from 'framer-motion';
 import usePosts from '../../hooks/usePosts';
 import { AuthContext } from '../../context/auth-context';
 import { Formik } from 'formik';
+import dayjs from '../../helpers/dayjs';
 
 const PostPreview = ({
   postId,

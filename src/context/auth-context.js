@@ -48,10 +48,6 @@ export const AuthProvider = ({ children }) => {
     return () => unsubscribeFromAuth();
   }, []);
 
-  useEffect(() => {
-    console.log(userDetails);
-  }, [userDetails]);
-
   return (
     <AuthContext.Provider
       value={{

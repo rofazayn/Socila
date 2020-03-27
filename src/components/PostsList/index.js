@@ -1,15 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Styled } from './style';
 import PostPreview from '../PostPreview';
 import { CircularProgress } from '@material-ui/core';
-import usePosts from '../../hooks/usePosts';
+import { useFetchPosts } from '../../hooks/usePosts';
 
 const PostsList = () => {
-  const { posts, postsActions } = usePosts();
-
-  useEffect(() => {
-    postsActions.fetchPosts();
-  }, []);
+  const { posts } = useFetchPosts();
 
   return (
     <Styled.PostsList>

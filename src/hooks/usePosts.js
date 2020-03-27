@@ -1,41 +1,79 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { PostsContext } from '../context/posts-context';
 import { AuthContext } from '../context/auth-context';
 import fb from '../firebase';
 import { postsTypes, userTypes } from '../constants';
 
+export function useFetchPosts(userId) {
+  const { posts, postsDispatch } = useContext(PostsContext);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        if (!userId) {
+          await fb
+            .firestore()
+            .collection('posts')
+            .orderBy('createdAt', 'desc')
+            .limit(10)
+            .get()
+            .then(data => {
+              let newPosts = [];
+              data.forEach(doc =>
+                newPosts.push({ postId: doc.id, ...doc.data() })
+              );
+              return postsDispatch({
+                type: postsTypes.SET_POSTS,
+                payload: newPosts
+              });
+            })
+            .catch(err => {
+              return console.error(err);
+            });
+        } else {
+          await fb
+            .firestore()
+            .collection('posts')
+            .where('authorId', '==', userId)
+            .orderBy('createdAt', 'desc')
+            .limit(10)
+            .get()
+            .then(data => {
+              let newPosts = [];
+              data.forEach(doc =>
+                newPosts.push({ postId: doc.id, ...doc.data() })
+              );
+              return postsDispatch({
+                type: postsTypes.SET_POSTS,
+                payload: newPosts
+              });
+            })
+            .catch(err => {
+              return console.error(err);
+            });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchPosts();
+  }, [postsDispatch, userId]);
+
+  return {
+    posts
+  };
+}
+
 function usePosts() {
   const { posts, postsDispatch } = useContext(PostsContext);
   const { userDetails, userDetailsDispatch } = useContext(AuthContext);
-
-  async function fetchPosts() {
-    try {
-      await fb
-        .firestore()
-        .collection('posts')
-        .orderBy('createdAt', 'desc')
-        .limit(10)
-        .get()
-        .then(data => {
-          let newPosts = [];
-          data.forEach(doc => newPosts.push({ postId: doc.id, ...doc.data() }));
-          return postsDispatch({
-            type: postsTypes.SET_POSTS,
-            payload: newPosts
-          });
-        })
-        .catch(err => {
-          return console.error(err);
-        });
-    } catch (error) {
-      console.error(error);
-    }
-  }
 
   async function createPost(values, actions) {
     let postsRef = fb.firestore().collection('posts');
 
     let newPost = {
+      authorId: userDetails.userId,
       authorFullName: userDetails.fullName,
       authorImage: userDetails.profileImage,
       authorUsername: userDetails.username,
@@ -231,7 +269,6 @@ function usePosts() {
     posts,
     postsDispatch: postsDispatch,
     postsActions: {
-      fetchPosts,
       createPost,
       likePost,
       unlikePost

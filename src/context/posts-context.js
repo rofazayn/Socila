@@ -3,7 +3,7 @@ import postsReducer from '../reducers/postsReducer';
 
 export const PostsContext = createContext();
 export const PostsProvider = ({ children }) => {
-  const [posts, postsDispatch] = useReducer(postsReducer, []);
+  const [posts, postsDispatch] = useReducer(postsReducer, null);
 
   return (
     <PostsContext.Provider

@@ -4,6 +4,7 @@ import { AuthContext } from '../../context/auth-context';
 import Avatar from '../Avatar';
 import { Typography, Button } from '@material-ui/core';
 import { ReactComponent as EditIcon } from '../../assets/icons/bx-edit.svg';
+import coverPlaceholderImage from '../../assets/images/cover-placeholder.png';
 import dayjs from '../../helpers/dayjs';
 
 const ProfileInfo = () => {
@@ -14,7 +15,7 @@ const ProfileInfo = () => {
       <div className='profile-images'>
         <div className='cover'>
           {userDetails.coverImage ? (
-            <img src={userDetails.coverImage || null} alt='Cover' />
+            <img src={userDetails.coverImage} alt='Cover' />
           ) : null}
         </div>
         <div className='pic'>

@@ -57,6 +57,12 @@ export function useFetchPosts(userId) {
       }
     };
     fetchPosts();
+
+    return () => {
+      return postsDispatch({
+        type: postsTypes.CLEAR_POSTS
+      });
+    };
   }, [postsDispatch, userId]);
 
   return {

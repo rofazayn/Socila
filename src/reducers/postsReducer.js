@@ -4,6 +4,8 @@ const postsReducer = (state, action) => {
   switch (action.type) {
     case postsTypes.SET_POSTS:
       return [...action.payload];
+    case postsTypes.CLEAR_POSTS:
+      return null;
     case postsTypes.ADD_POST:
       return [action.payload, ...state];
     case postsTypes.LIKE_POST:

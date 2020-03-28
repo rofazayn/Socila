@@ -10,6 +10,9 @@ const PostsList = styled.div`
     align-items: center;
     justify-content: center;
     padding-top: 40px;
+    .no-posts {
+      color: ${({ theme }) => theme.palette.text.disabled};
+    }
   }
 `;
 

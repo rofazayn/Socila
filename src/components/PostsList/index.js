@@ -2,7 +2,8 @@ import React from 'react';
 import { Styled } from './style';
 import PostPreview from '../PostPreview';
 import { CircularProgress, Typography } from '@material-ui/core';
-import { ReactComponent as NoPostsSvg } from '../../assets/svg/SitReadingDoodle.svg';
+import { ReactComponent as NoPostsSvg } from '../../assets/svg/TreeSwing.svg';
+import { ReactComponent as NoPostsEndSvg } from '../../assets/svg/FinishLine.svg';
 import { useFetchPosts } from '../../hooks/usePosts';
 
 const PostsList = ({ userId }) => {
@@ -16,9 +17,17 @@ const PostsList = ({ userId }) => {
           <CircularProgress />
         </div>
       ) : posts && posts.length > 0 ? (
-        posts.map(post => {
-          return <PostPreview key={post.postId} {...post} />;
-        })
+        <>
+          {posts.map(post => {
+            return <PostPreview key={post.postId} {...post} />;
+          })}
+          <div className='posts-fallback no-posts --end'>
+            <NoPostsEndSvg />
+            <Typography variant='body2'>
+              You have reached the end of your feed
+            </Typography>
+          </div>
+        </>
       ) : (
         <div className='posts-fallback no-posts'>
           <NoPostsSvg />

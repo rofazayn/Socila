@@ -13,6 +13,9 @@ const PostsList = styled.div`
     justify-content: center;
     flex-direction: column;
     &.no-posts {
+      &.--end {
+        margin-top: 36px;
+      }
       p {
         color: ${({ theme }) => theme.palette.text.disabled};
       }

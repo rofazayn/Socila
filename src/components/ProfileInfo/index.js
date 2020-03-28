@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { Styled } from './style';
 import { AuthContext } from '../../context/auth-context';
-import Avatar from '../Avatar';
 import { Typography, Button } from '@material-ui/core';
 import { ReactComponent as EditIcon } from '../../assets/icons/bx-edit.svg';
-import coverPlaceholderImage from '../../assets/images/cover-placeholder.png';
 import dayjs from '../../helpers/dayjs';
+import Avatar from '../Avatar';
+import CoverImage from '../CoverImage';
 
 const ProfileInfo = () => {
   const { userDetails } = useContext(AuthContext);
@@ -14,9 +14,7 @@ const ProfileInfo = () => {
     <Styled.ProfileInfo>
       <div className='profile-images'>
         <div className='cover'>
-          {userDetails.coverImage ? (
-            <img src={userDetails.coverImage} alt='Cover' />
-          ) : null}
+          <CoverImage imgUrl={userDetails.coverImage || null} />
         </div>
         <div className='pic'>
           <Avatar imgUrl={userDetails.profileImage || null} size='96px' />

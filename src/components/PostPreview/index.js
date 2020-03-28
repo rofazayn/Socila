@@ -11,17 +11,18 @@ import { AuthContext } from '../../context/auth-context';
 import { Formik } from 'formik';
 import dayjs from '../../helpers/dayjs';
 
-const PostPreview = ({
-  postId,
-  authorImage,
-  authorFullName,
-  authorUsername,
-  createdAt,
-  body,
-  likeCount,
-  commentCount,
-  shareCount
-}) => {
+const PostPreview = props => {
+  const {
+    postId,
+    authorImage,
+    authorFullName,
+    authorUsername,
+    createdAt,
+    body,
+    likeCount,
+    commentCount,
+    shareCount
+  } = props;
   const { postsActions } = usePosts();
   const { userDetails } = useContext(AuthContext);
 

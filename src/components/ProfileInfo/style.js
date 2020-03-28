@@ -14,7 +14,7 @@ const ProfileInfo = styled.div`
     .cover {
       display: flex;
       background: ${({ theme }) => theme.palette.grey[100]};
-      margin-inline-start: 48px;
+      /* margin-inline-start: 48px; */
       border-radius: 16px;
       width: 100%;
       height: 100%;
@@ -26,14 +26,14 @@ const ProfileInfo = styled.div`
       position: absolute;
       top: 0;
       bottom: 0;
-      left: 0;
+      left: 24px;
       margin: auto 0;
       padding-top: 32px;
     }
   }
   .profile-details {
-    padding-inline-start: 48px;
-    padding-inline-end: 16px;
+    padding-inline-start: 8px;
+    padding-inline-end: 8px;
     border-bottom: 1px solid ${({ theme }) => theme.palette.grey[200]};
     .info {
       display: flex;
@@ -69,14 +69,14 @@ const ProfileInfo = styled.div`
     .bio {
       padding-bottom: 8px;
       p {
-        color: ${({ theme }) => theme.palette.text.primary};
+        color: ${({ theme }) => theme.palette.text.secondary};
       }
     }
   }
   .profile-actions {
-    padding: 16px;
-    padding-inline-start: 48px;
-    padding-inline-end: 0;
+    padding: 16px 0;
+    /* padding-inline-start: 16px; */
+    /* padding-inline-end: 0; */
     border-bottom: 1px solid ${({ theme }) => theme.palette.grey[200]};
     display: flex;
     flex-direction: row;

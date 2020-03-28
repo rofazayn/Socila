@@ -2,10 +2,12 @@ import React from 'react';
 import { Styled } from './style';
 import PostPreview from '../PostPreview';
 import { CircularProgress, Typography } from '@material-ui/core';
+import { ReactComponent as NoPostsSvg } from '../../assets/svg/SitReadingDoodle.svg';
 import { useFetchPosts } from '../../hooks/usePosts';
 
 const PostsList = ({ userId }) => {
   const { posts } = useFetchPosts(userId);
+  // const posts = [];
 
   return (
     <Styled.PostsList>
@@ -18,8 +20,9 @@ const PostsList = ({ userId }) => {
           return <PostPreview key={post.postId} {...post} />;
         })
       ) : (
-        <div className='posts-fallback'>
-          <Typography variant='body1' className='no-posts'>
+        <div className='posts-fallback no-posts'>
+          <NoPostsSvg />
+          <Typography variant='body2'>
             There are no posts available at the moment.
           </Typography>
         </div>

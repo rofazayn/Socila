@@ -37,11 +37,13 @@ const ProfileInfo = () => {
             </Typography>
           </div>
         </div>
-        <div className='bio'>
-          <Typography variant='body1' className='bio'>
-            {userDetails.bio}
-          </Typography>
-        </div>
+        {userDetails.bio && (
+          <div className='bio'>
+            <Typography variant='body1' className='bio'>
+              {userDetails.bio}
+            </Typography>
+          </div>
+        )}
       </div>
       <div className='profile-actions'>
         <div className='actions'>

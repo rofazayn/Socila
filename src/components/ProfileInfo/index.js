@@ -48,8 +48,12 @@ const ProfileInfo = () => {
       <div className='profile-actions'>
         <div className='actions'>
           <Button className='fancy-button --active'>Posts</Button>
-          <Button className='fancy-button'>Replies</Button>
-          <Button className='fancy-button'>Reacts</Button>
+          <Button className='fancy-button'>
+            <span className='count'>0</span> Following
+          </Button>
+          <Button className='fancy-button'>
+            <span className='count'>0</span> Followers
+          </Button>
         </div>
         <div className='actions edit-profile'>
           <Button className='fancy-button' startIcon={<EditIcon />}>

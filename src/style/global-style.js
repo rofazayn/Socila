@@ -142,6 +142,11 @@ const GlobalStyle = createGlobalStyle`
     transition: all ease-in-out 200ms;
     font-size: 14px;
 
+    .count {
+      font-weight: bold;
+      padding-inline-end: 8px;
+    }
+
     svg {
       width: 18px;
       height: 18px;

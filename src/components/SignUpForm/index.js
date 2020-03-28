@@ -48,13 +48,16 @@ const SignUpForm = () => {
                       .doc(`${values.username}`)
                       .set({ userId: userCreds.user.uid });
                     usersRef.doc(`${userCreds.user.uid}`).set({
+                      userId: userCreds.user.uid,
                       email: values.email,
                       username: values.username,
                       firstName: values.firstName,
                       lastName: values.lastName,
                       fullName: `${values.firstName} ${values.lastName}`,
                       createdAt: new Date().toISOString(),
-                      userId: userCreds.user.uid
+                      bio: '',
+                      profileImage: null,
+                      coverImage: null
                     });
                   })
                   .catch(err => {

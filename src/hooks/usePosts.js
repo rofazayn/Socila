@@ -100,10 +100,6 @@ function usePosts() {
   const likePost = async postId => {
     try {
       const postDoc = fb.firestore().doc(`/posts/${postId}`);
-      userDetailsDispatch({
-        type: userTypes.ADD_FAKE_LIKE,
-        payload: postId
-      });
 
       // Reference the like
       const likeDoc = fb
@@ -149,26 +145,14 @@ function usePosts() {
                   payload: postData
                 });
                 userDetailsDispatch({
-                  type: userTypes.REMOVE_FAKE_LIKE,
-                  payload: postId
-                });
-                userDetailsDispatch({
                   type: userTypes.ADD_LIKE,
                   payload: likeData
                 });
               })
               .catch(err => {
-                userDetailsDispatch({
-                  type: userTypes.ADD_FAKE_LIKE,
-                  payload: postId
-                });
                 console.log(err);
               });
           } else {
-            userDetailsDispatch({
-              type: userTypes.ADD_FAKE_LIKE,
-              payload: postId
-            });
             console.log('Post already liked!');
           }
         })
@@ -183,10 +167,6 @@ function usePosts() {
   const unlikePost = async postId => {
     try {
       const postDoc = fb.firestore().doc(`/posts/${postId}`);
-      userDetailsDispatch({
-        type: userTypes.REMOVE_FAKE_LIKE,
-        payload: postId
-      });
 
       // Reference the like
       const likeDoc = fb
@@ -235,28 +215,16 @@ function usePosts() {
                   payload: postData
                 });
                 userDetailsDispatch({
-                  type: userTypes.REMOVE_FAKE_LIKE,
-                  payload: postId
-                });
-                userDetailsDispatch({
                   type: userTypes.REMOVE_LIKE,
                   payload: likeData.likeId
                 });
               })
               .catch(err => {
-                userDetailsDispatch({
-                  type: userTypes.REMOVE_FAKE_LIKE,
-                  payload: postId
-                });
                 console.error(err);
               });
           }
         })
         .catch(err => {
-          userDetailsDispatch({
-            type: userTypes.REMOVE_FAKE_LIKE,
-            payload: postId
-          });
           console.error(err);
         });
     } catch (error) {

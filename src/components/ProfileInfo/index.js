@@ -3,44 +3,52 @@ import { Styled } from './style';
 import { AuthContext } from '../../context/auth-context';
 import { Typography, Button } from '@material-ui/core';
 import { ReactComponent as EditIcon } from '../../assets/icons/bx-edit.svg';
+import { ReactComponent as FollowIcon } from '../../assets/icons/bx-user-plus.svg';
 import dayjs from '../../helpers/dayjs';
 import Avatar from '../Avatar';
 import CoverImage from '../CoverImage';
 
-const ProfileInfo = () => {
+const ProfileInfo = ({ user }) => {
   const { userDetails } = useContext(AuthContext);
+
+  const isCurrentUser = () => {
+    if (user.userId === userDetails.userId) {
+      return true;
+    }
+
+    return false;
+  };
 
   return (
     <Styled.ProfileInfo>
       <div className='profile-images'>
         <div className='cover'>
-          <CoverImage imgUrl={userDetails.coverImage || null} />
+          <CoverImage imgUrl={user.coverImage || null} />
         </div>
         <div className='pic'>
-          <Avatar imgUrl={userDetails.profileImage || null} size='96px' />
+          <Avatar imgUrl={user.profileImage || null} size='96px' />
         </div>
       </div>
       <div className='profile-details'>
         <div className='info'>
           <div className='name'>
             <Typography variant='subtitle1' className='full-name'>
-              {userDetails.fullName}
+              {user.fullName}
             </Typography>
             <Typography variant='body2' className='username'>
-              @{userDetails.username}
+              @{user.username}
             </Typography>
           </div>
           <div className='rest'>
             <Typography variant='body2' className='joined'>
-              Joined{' '}
-              <span>{dayjs(userDetails.createdAt).format('MMM YYYY')}</span>
+              Joined <span>{dayjs(user.createdAt).format('MMM YYYY')}</span>
             </Typography>
           </div>
         </div>
-        {userDetails.bio && (
+        {user.bio && (
           <div className='bio'>
             <Typography variant='body1' className='bio'>
-              {userDetails.bio}
+              {user.bio}
             </Typography>
           </div>
         )}
@@ -55,11 +63,19 @@ const ProfileInfo = () => {
             <span className='count'>0</span> Followers
           </Button>
         </div>
-        <div className='actions edit-profile'>
-          <Button className='fancy-button' startIcon={<EditIcon />}>
-            Edit my profile
-          </Button>
-        </div>
+        {isCurrentUser() ? (
+          <div className='actions edit-profile'>
+            <Button className='fancy-button' startIcon={<EditIcon />}>
+              Edit my profile
+            </Button>
+          </div>
+        ) : (
+          <div className='actions edit-profile'>
+            <Button className='fancy-button' startIcon={<FollowIcon />}>
+              Follow
+            </Button>
+          </div>
+        )}
       </div>
     </Styled.ProfileInfo>
   );

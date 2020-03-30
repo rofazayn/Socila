@@ -4,73 +4,7 @@ import { AuthContext } from '../context/auth-context';
 import fb from '../firebase';
 import { postsTypes, userTypes } from '../constants';
 
-export function useFetchPosts(userId) {
-  const { posts, postsDispatch } = useContext(PostsContext);
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        if (!userId) {
-          await fb
-            .firestore()
-            .collection('posts')
-            .orderBy('createdAt', 'desc')
-            .limit(10)
-            .get()
-            .then(data => {
-              let newPosts = [];
-              data.forEach(doc =>
-                newPosts.push({ postId: doc.id, ...doc.data() })
-              );
-              return postsDispatch({
-                type: postsTypes.SET_POSTS,
-                payload: newPosts
-              });
-            })
-            .catch(err => {
-              return console.error(err);
-            });
-        } else {
-          await fb
-            .firestore()
-            .collection('posts')
-            .where('authorId', '==', userId)
-            .orderBy('createdAt', 'desc')
-            .limit(10)
-            .get()
-            .then(data => {
-              let newPosts = [];
-              data.forEach(doc =>
-                newPosts.push({ postId: doc.id, ...doc.data() })
-              );
-              return postsDispatch({
-                type: postsTypes.SET_POSTS,
-                payload: newPosts
-              });
-            })
-            .catch(err => {
-              return console.error(err);
-            });
-        }
-      } catch (error) {
-        return console.error(error);
-      }
-    };
-    fetchPosts();
-
-    return () => {
-      return postsDispatch({
-        type: postsTypes.CLEAR_POSTS
-      });
-    };
-  }, [postsDispatch, userId]);
-
-  return {
-    posts
-  };
-}
-
-function usePosts() {
+export function usePosts() {
   const { posts, postsDispatch } = useContext(PostsContext);
   const { userDetails, userDetailsDispatch } = useContext(AuthContext);
 
@@ -246,6 +180,72 @@ function usePosts() {
       likePost,
       unlikePost
     }
+  };
+}
+
+export function useFetchPosts(userId) {
+  const { posts, postsDispatch } = useContext(PostsContext);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        if (!userId) {
+          await fb
+            .firestore()
+            .collection('posts')
+            .orderBy('createdAt', 'desc')
+            .limit(10)
+            .get()
+            .then(data => {
+              let newPosts = [];
+              data.forEach(doc =>
+                newPosts.push({ postId: doc.id, ...doc.data() })
+              );
+              return postsDispatch({
+                type: postsTypes.SET_POSTS,
+                payload: newPosts
+              });
+            })
+            .catch(err => {
+              return console.error(err);
+            });
+        } else {
+          await fb
+            .firestore()
+            .collection('posts')
+            .where('authorId', '==', userId)
+            .orderBy('createdAt', 'desc')
+            .limit(10)
+            .get()
+            .then(data => {
+              let newPosts = [];
+              data.forEach(doc =>
+                newPosts.push({ postId: doc.id, ...doc.data() })
+              );
+              return postsDispatch({
+                type: postsTypes.SET_POSTS,
+                payload: newPosts
+              });
+            })
+            .catch(err => {
+              return console.error(err);
+            });
+        }
+      } catch (error) {
+        return console.error(error);
+      }
+    };
+    fetchPosts();
+
+    return () => {
+      return postsDispatch({
+        type: postsTypes.CLEAR_POSTS
+      });
+    };
+  }, [postsDispatch, userId]);
+
+  return {
+    posts
   };
 }
 

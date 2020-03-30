@@ -6,7 +6,7 @@ const PostPreview = styled.div`
   margin-bottom: 8px;
   transition: all 250ms ease-in-out;
   /* border-inline-start: 2px solid transparent; */
-  cursor: pointer;
+  /* cursor: pointer; */
   &:hover {
     /* cursor: pointer; */
     background: ${({ theme }) => theme.palette.grey[50]};

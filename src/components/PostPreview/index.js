@@ -10,10 +10,12 @@ import usePosts from '../../hooks/usePosts';
 import { AuthContext } from '../../context/auth-context';
 import { Formik } from 'formik';
 import dayjs from '../../helpers/dayjs';
+import { Link } from 'react-router-dom';
 
 const PostPreview = props => {
   const {
     postId,
+    authorId,
     authorImage,
     authorFullName,
     authorUsername,
@@ -25,6 +27,14 @@ const PostPreview = props => {
   } = props;
   const { postsActions } = usePosts();
   const { userDetails } = useContext(AuthContext);
+
+  const isCurrentUser = () => {
+    if (authorId === userDetails.userId) {
+      return true;
+    }
+
+    return false;
+  };
 
   const isPostLiked = () => {
     if (
@@ -62,7 +72,11 @@ const PostPreview = props => {
         <div className='post-section details'>
           <div className='post-header'>
             <div className='author-name spaced'>
-              <Typography variant='body2'>{authorFullName}</Typography>
+              <Typography variant='body2'>
+                <Link to={isCurrentUser() ? '/profile' : `/users/${authorId}`}>
+                  {authorFullName}
+                </Link>
+              </Typography>
             </div>
 
             <div className='author-username spaced'>

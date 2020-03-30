@@ -6,6 +6,7 @@ import Messages from '../Messages';
 import Profile from '../Profile';
 import Settings from '../Settings';
 import { Styled } from './style';
+import PublicProfile from '../PublicProfile';
 
 const Content = () => {
   return (
@@ -15,6 +16,7 @@ const Content = () => {
         <Route exact path='/notifications' component={Notifications} />
         <Route exact path='/messages' component={Messages} />
         <Route exact path='/profile' component={Profile} />
+        <Route exact path='/users/:userId' component={PublicProfile} />
         <Route exact path='/settings' component={Settings} />
         <Redirect to='/' />
       </Switch>

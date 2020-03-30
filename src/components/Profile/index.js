@@ -18,7 +18,7 @@ const Profile = () => {
     >
       <Styled.Profile className='profile-page'>
         <TopBar title={'Profile'} icon={<UserIconSvg />} />
-        <ProfileInfo />
+        <ProfileInfo user={userDetails} />
         <PostsList userId={userDetails.userId} />
         {/* <ProfileActions />
         <ProfileContent /> */}

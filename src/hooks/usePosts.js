@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { PostsContext } from '../context/posts-context';
 import { AuthContext } from '../context/auth-context';
 import fb from '../firebase';
@@ -184,7 +184,7 @@ export function usePosts() {
 }
 
 export function useFetchPosts(userId) {
-  const { posts, postsDispatch } = useContext(PostsContext);
+  const { postsState, postsDispatch } = useContext(PostsContext);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -245,8 +245,49 @@ export function useFetchPosts(userId) {
   }, [postsDispatch, userId]);
 
   return {
-    posts
+    posts: postsState.posts
   };
 }
+
+export const useFetchPost = postId => {
+  const { postsState, postsDispatch } = useContext(PostsContext);
+
+  useEffect(() => {
+    const fetchUser = async postId => {
+      try {
+        fb.firestore()
+          .collection('posts')
+          .doc(postId)
+          .get()
+          .then(doc => {
+            if (doc.exists) {
+              return postsDispatch({
+                type: postsTypes.SELECT_POST,
+                payload: { postId: doc.id, ...doc.data() }
+              });
+            } else {
+              return postsDispatch({
+                type: postsTypes.SELECT_POST,
+                payload: null
+              });
+            }
+          });
+      } catch (error) {
+        return console.error(error);
+      }
+    };
+
+    fetchUser(postId);
+
+    return () => {
+      return postsDispatch({
+        type: postsTypes.SELECT_POST,
+        payload: null
+      });
+    };
+  }, [postsDispatch, postId]);
+
+  return { post: postsState.selectedPost };
+};
 
 export default usePosts;

@@ -11,12 +11,14 @@ const TopBar = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;  
-  /* border-bottom: 1px solid ${({ theme }) => theme.palette.grey[200]}; */
+  justify-content: space-between;
   background-color: white;
   clip-path: inset(0 0 -500px 0);
   z-index: 10;
   transition: box-shadow ease-in-out 200ms;
+  &.--initial-bordered {
+    border-bottom: 1px solid ${({ theme }) => theme.palette.grey[200]} !important;
+  }
   &.--moved {
     box-shadow: 0 0 30px 0 ${({ theme }) => theme.palette.grey[300]};
   }

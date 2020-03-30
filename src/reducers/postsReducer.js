@@ -3,17 +3,23 @@ import { postsTypes } from '../constants';
 const postsReducer = (state, action) => {
   switch (action.type) {
     case postsTypes.SET_POSTS:
-      return [...action.payload];
+      return { posts: [...action.payload] };
+    case postsTypes.SELECT_POST:
+      return { ...state, selectedPost: action.payload };
     case postsTypes.CLEAR_POSTS:
-      return null;
+      return { posts: null, selectedPost: null };
     case postsTypes.ADD_POST:
-      return [action.payload, ...state];
+      return { posts: [action.payload, ...state.posts] };
     case postsTypes.LIKE_POST:
-      let targetPost = state.findIndex(
-        post => post.postId === action.payload.postId
-      );
-      state[targetPost] = action.payload;
-      return [...state];
+      if (state.posts === null || state.posts === []) {
+        return { ...state, selectedPost: action.payload };
+      } else {
+        let targetPost = state.posts.findIndex(
+          post => post.postId === action.payload.postId
+        );
+        state.posts[targetPost] = action.payload;
+      }
+      return state;
     default:
       throw new Error();
   }

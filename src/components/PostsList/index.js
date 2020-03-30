@@ -8,6 +8,7 @@ import { useFetchPosts } from '../../hooks/usePosts';
 
 const PostsList = ({ userId }) => {
   const { posts } = useFetchPosts(userId);
+  console.log(posts);
   // const posts = [];
 
   return (

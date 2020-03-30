@@ -7,12 +7,14 @@ import Profile from '../Profile';
 import Settings from '../Settings';
 import { Styled } from './style';
 import PublicProfile from '../PublicProfile';
+import PostDetailed from '../PostDetailed';
 
 const Content = () => {
   return (
     <Styled.Content className='content'>
       <Switch>
         <Route exact path='/' component={Home} />
+        <Route exact path='/posts/:postId' component={PostDetailed} />
         <Route exact path='/notifications' component={Notifications} />
         <Route exact path='/messages' component={Messages} />
         <Route exact path='/profile' component={Profile} />

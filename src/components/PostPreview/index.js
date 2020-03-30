@@ -90,16 +90,16 @@ const PostPreview = props => {
           </div>
           <div className='post-main'>
             <div className='post-body'>
-              <Typography variant='body1'>{body}</Typography>
+              <Link to={`/posts/${postId}`}>
+                <Typography variant='body1'>{body}</Typography>
+              </Link>
             </div>
           </div>
           <div className='post-footer'>
             <div className='reactions'>
               <div className='reactions-group'>
                 <div
-                  className={`reaction love ${
-                    isPostLiked() ? '--liked' : null
-                  }`}
+                  className={`reaction love ${isPostLiked() ? '--liked' : ''}`}
                 >
                   <Formik
                     initialValues={{ postId: postId }}

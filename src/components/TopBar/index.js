@@ -5,7 +5,7 @@ import { Styled } from './style';
 import { useState } from 'react';
 import { useScrollPosition } from '../../hooks/layout/useScroll';
 
-const TopBar = ({ title, icon }) => {
+const TopBar = ({ title, icon, border }) => {
   const [moving, setMoving] = useState(false);
 
   useScrollPosition(({ prevPos, currPos }) => {
@@ -17,7 +17,10 @@ const TopBar = ({ title, icon }) => {
   });
 
   return (
-    <Styled.TopBar className={`content-top ${moving && '--moved'}`}>
+    <Styled.TopBar
+      className={`content-top ${moving && '--moved'} ${border &&
+        '--initial-bordered'}`}
+    >
       <Typography variant='h6' className='page-title'>
         {title}
       </Typography>

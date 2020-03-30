@@ -10,6 +10,7 @@ export const userTypes = {
 // Posts constants
 export const postsTypes = {
   SET_POSTS: 'SET_POSTS',
+  SELECT_POST: 'SELECT_POST',
   CLEAR_POSTS: 'CLEAR_POSTS',
   ADD_POST: 'ADD_POST'
 };

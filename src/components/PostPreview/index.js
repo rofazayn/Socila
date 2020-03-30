@@ -66,7 +66,9 @@ const PostPreview = props => {
       <Styled.PostPreview>
         <div className='post-section avatar'>
           <div className='avatar'>
-            <Avatar imgUrl={authorImage} alt={authorFullName} />
+            <Link to={isCurrentUser() ? '/profile' : `/users/${authorId}`}>
+              <Avatar imgUrl={authorImage} alt={authorFullName} />
+            </Link>
           </div>
         </div>
         <div className='post-section details'>
@@ -80,7 +82,9 @@ const PostPreview = props => {
             </div>
 
             <div className='author-username spaced'>
-              <Typography variant='body2'>@{authorUsername}</Typography>
+              <Link to={isCurrentUser() ? '/profile' : `/users/${authorId}`}>
+                <Typography variant='body2'>@{authorUsername}</Typography>
+              </Link>
             </div>
             <div className='time-posted spaced'>
               <Typography variant='body2'>

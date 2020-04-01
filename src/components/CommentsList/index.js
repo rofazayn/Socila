@@ -5,7 +5,7 @@ import { Styled } from './style';
 const CommentsList = () => {
   return (
     <Styled.CommentsList>
-      <Typography variant='h6'>Comments on this post:</Typography>
+      <Typography variant='body1'>Comments on this post:</Typography>
     </Styled.CommentsList>
   );
 };

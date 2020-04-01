@@ -268,7 +268,7 @@ export const useFetchPost = postId => {
             } else {
               return postsDispatch({
                 type: postsTypes.SELECT_POST,
-                payload: null
+                payload: { noPost: true }
               });
             }
           });
@@ -282,7 +282,7 @@ export const useFetchPost = postId => {
     return () => {
       return postsDispatch({
         type: postsTypes.SELECT_POST,
-        payload: null
+        payload: {}
       });
     };
   }, [postsDispatch, postId]);

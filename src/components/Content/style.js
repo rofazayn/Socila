@@ -13,5 +13,5 @@ const Content = styled.div`
 `;
 
 export const Styled = {
-  Content
+  Content,
 };

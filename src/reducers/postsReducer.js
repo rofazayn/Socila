@@ -1,4 +1,4 @@
-import { postsTypes } from '../constants';
+import { postsTypes, commentsTypes } from '../constants';
 
 const postsReducer = (state, action) => {
   switch (action.type) {
@@ -15,11 +15,23 @@ const postsReducer = (state, action) => {
         return { ...state, selectedPost: action.payload };
       } else {
         let targetPost = state.posts.findIndex(
-          post => post.postId === action.payload.postId
+          (post) => post.postId === action.payload.postId
         );
         state.posts[targetPost] = action.payload;
       }
       return state;
+    case commentsTypes.SET_POST_COMMENTS:
+      return {
+        ...state,
+        selectedPost: { ...state.selectedPost, comments: action.payload },
+      };
+
+    case commentsTypes.CLEAR_POST_COMMENTS:
+      return {
+        ...state,
+        selectedPost: { ...state.selectedPost, comments: null },
+      };
+
     default:
       throw new Error();
   }

@@ -35,7 +35,7 @@ const PostDetailed = () => {
             border={true}
           />
           <PostPreview {...post} />
-          <CommentsList />
+          {postId && <CommentsList postId={postId} />}
         </>
       ) : null}
     </Styled.PostDetailed>

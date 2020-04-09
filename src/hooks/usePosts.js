@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { PostsContext } from '../context/posts-context';
 import { AuthContext } from '../context/auth-context';
 import fb from '../firebase';
@@ -20,24 +20,24 @@ export function usePosts() {
       commentCount: 0,
       likeCount: 0,
       shareCount: 0,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
     };
 
     try {
       await postsRef
         .add(newPost)
-        .then(doc => {
+        .then((doc) => {
           newPost.postId = doc.id;
           actions.resetForm();
           return postsDispatch({ type: postsTypes.ADD_POST, payload: newPost });
         })
-        .catch(err => console.error(err));
+        .catch((err) => console.error(err));
     } catch (error) {
       console.error(error);
     }
   }
 
-  const likePost = async postId => {
+  const likePost = async (postId) => {
     try {
       const postDoc = fb.firestore().doc(`/posts/${postId}`);
 
@@ -53,7 +53,7 @@ export function usePosts() {
 
       await postDoc
         .get()
-        .then(doc => {
+        .then((doc) => {
           if (doc.exists) {
             postData = doc.data();
             postData.postId = doc.id;
@@ -63,18 +63,18 @@ export function usePosts() {
             throw new Error();
           }
         })
-        .then(data => {
+        .then((data) => {
           if (data.empty) {
             let likeData = {
               postId: postId,
               userId: userDetails.userId,
-              username: userDetails.username
+              username: userDetails.username,
             };
             return fb
               .firestore()
               .collection('likes')
               .add(likeData)
-              .then(doc => {
+              .then((doc) => {
                 postData.likeCount++;
                 likeData.likeId = doc.id;
                 return postDoc.update({ likeCount: postData.likeCount });
@@ -82,21 +82,21 @@ export function usePosts() {
               .then(() => {
                 postsDispatch({
                   type: postsTypes.LIKE_POST,
-                  payload: postData
+                  payload: postData,
                 });
                 userDetailsDispatch({
                   type: userTypes.ADD_LIKE,
-                  payload: likeData
+                  payload: likeData,
                 });
               })
-              .catch(err => {
+              .catch((err) => {
                 console.log(err);
               });
           } else {
             console.log('Post already liked!');
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.error(err);
         });
     } catch (error) {
@@ -104,7 +104,7 @@ export function usePosts() {
     }
   };
 
-  const unlikePost = async postId => {
+  const unlikePost = async (postId) => {
     try {
       const postDoc = fb.firestore().doc(`/posts/${postId}`);
 
@@ -120,7 +120,7 @@ export function usePosts() {
 
       await postDoc
         .get()
-        .then(doc => {
+        .then((doc) => {
           if (doc.exists) {
             postData = doc.data();
             postData.postId = doc.id;
@@ -130,20 +130,20 @@ export function usePosts() {
             return console.log('Post not found');
           }
         })
-        .then(data => {
+        .then((data) => {
           if (data.empty) {
             console.log('Post not liked!');
           } else {
             let likeData = {
               postId: postId,
               userId: userDetails.userId,
-              username: userDetails.username
+              username: userDetails.username,
             };
             return fb
               .firestore()
               .doc(`/likes/${data.docs[0].id}`)
               .get()
-              .then(doc => {
+              .then((doc) => {
                 postData.likeCount--;
                 likeData.likeId = doc.id;
                 doc.ref.delete();
@@ -152,19 +152,19 @@ export function usePosts() {
               .then(() => {
                 postsDispatch({
                   type: postsTypes.UNLIKE_POST,
-                  payload: postData
+                  payload: postData,
                 });
                 userDetailsDispatch({
                   type: userTypes.REMOVE_LIKE,
-                  payload: likeData.likeId
+                  payload: likeData.likeId,
                 });
               })
-              .catch(err => {
+              .catch((err) => {
                 console.error(err);
               });
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.error(err);
         });
     } catch (error) {
@@ -178,8 +178,8 @@ export function usePosts() {
     postsActions: {
       createPost,
       likePost,
-      unlikePost
-    }
+      unlikePost,
+    },
   };
 }
 
@@ -196,17 +196,17 @@ export function useFetchPosts(userId) {
             .orderBy('createdAt', 'desc')
             .limit(10)
             .get()
-            .then(data => {
+            .then((data) => {
               let newPosts = [];
-              data.forEach(doc =>
+              data.forEach((doc) =>
                 newPosts.push({ postId: doc.id, ...doc.data() })
               );
               return postsDispatch({
                 type: postsTypes.SET_POSTS,
-                payload: newPosts
+                payload: newPosts,
               });
             })
-            .catch(err => {
+            .catch((err) => {
               return console.error(err);
             });
         } else {
@@ -217,17 +217,17 @@ export function useFetchPosts(userId) {
             .orderBy('createdAt', 'desc')
             .limit(10)
             .get()
-            .then(data => {
+            .then((data) => {
               let newPosts = [];
-              data.forEach(doc =>
+              data.forEach((doc) =>
                 newPosts.push({ postId: doc.id, ...doc.data() })
               );
               return postsDispatch({
                 type: postsTypes.SET_POSTS,
-                payload: newPosts
+                payload: newPosts,
               });
             })
-            .catch(err => {
+            .catch((err) => {
               return console.error(err);
             });
         }
@@ -239,36 +239,36 @@ export function useFetchPosts(userId) {
 
     return () => {
       return postsDispatch({
-        type: postsTypes.CLEAR_POSTS
+        type: postsTypes.CLEAR_POSTS,
       });
     };
   }, [postsDispatch, userId]);
 
   return {
-    posts: postsState.posts
+    posts: postsState.posts,
   };
 }
 
-export const useFetchPost = postId => {
+export const useFetchPost = (postId) => {
   const { postsState, postsDispatch } = useContext(PostsContext);
 
   useEffect(() => {
-    const fetchUser = async postId => {
+    const fetchPost = async (postId) => {
       try {
         fb.firestore()
           .collection('posts')
           .doc(postId)
           .get()
-          .then(doc => {
+          .then((doc) => {
             if (doc.exists) {
               return postsDispatch({
                 type: postsTypes.SELECT_POST,
-                payload: { postId: doc.id, ...doc.data() }
+                payload: { postId: doc.id, ...doc.data() },
               });
             } else {
               return postsDispatch({
                 type: postsTypes.SELECT_POST,
-                payload: { noPost: true }
+                payload: { noPost: true },
               });
             }
           });
@@ -277,12 +277,12 @@ export const useFetchPost = postId => {
       }
     };
 
-    fetchUser(postId);
+    fetchPost(postId);
 
     return () => {
       return postsDispatch({
         type: postsTypes.SELECT_POST,
-        payload: {}
+        payload: {},
       });
     };
   }, [postsDispatch, postId]);

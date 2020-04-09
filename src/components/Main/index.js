@@ -7,7 +7,7 @@ const Main = () => {
   return (
     <Styled.Main>
       <Content />
-      <Sidebar />
+      {/* <Sidebar /> */}
     </Styled.Main>
   );
 };

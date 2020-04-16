@@ -14,10 +14,17 @@ const postsReducer = (state, action) => {
       };
     case postsTypes.CLEAR_POSTS:
       return { posts: null, selectedPost: { post: null, comments: null } };
+    // return state;
     case postsTypes.ADD_POST:
-      return { posts: [action.payload, ...state.posts] };
+      return {
+        posts: [action.payload, ...state.posts],
+        selectedPost: { post: null, comments: null },
+      };
     case postsTypes.LIKE_POST:
-      if (state.posts === null || state.posts === []) {
+      if (
+        state.selectedPost.post !== null &&
+        state.selectedPost.post.postId === action.payload.postId
+      ) {
         return {
           ...state,
           selectedPost: {
@@ -26,10 +33,12 @@ const postsReducer = (state, action) => {
           },
         };
       } else {
-        let targetPost = state.posts.findIndex(
-          (post) => post.postId === action.payload.postId
-        );
-        state.posts[targetPost] = action.payload;
+        if (state.posts !== null) {
+          let targetPost = state.posts.findIndex(
+            (post) => post.postId === action.payload.postId
+          );
+          state.posts[targetPost] = action.payload;
+        }
       }
       return state;
     case commentsTypes.SET_POST_COMMENTS:
@@ -44,7 +53,7 @@ const postsReducer = (state, action) => {
     case commentsTypes.CLEAR_POST_COMMENTS:
       return {
         ...state,
-        selectedPost: { post: state.selectedPost, comments: null },
+        selectedPost: { post: state.selectedPost.post, comments: null },
       };
 
     default:

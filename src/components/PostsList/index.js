@@ -22,12 +22,12 @@ const PostsList = ({ userId }) => {
           {posts.map((post) => {
             return <PostPreview key={post.postId} {...post} />;
           })}
-          <div className='posts-fallback no-posts --end'>
+          {/* <div className='posts-fallback no-posts --end'>
             <NoPostsEndSvg />
             <Typography variant='body2'>
               You have reached the end of your feed
             </Typography>
-          </div>
+          </div> */}
         </>
       ) : (
         <div className='posts-fallback no-posts'>

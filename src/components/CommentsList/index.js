@@ -27,7 +27,7 @@ const CommentsList = ({ postId }) => {
         <div className='posts-fallback no-posts'>
           <NoPostsSvg />
           <Typography variant='body2'>
-            There are no comments available at the moment.
+            There are no comments on this post yet.
           </Typography>
         </div>
       )}

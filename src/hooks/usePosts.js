@@ -235,10 +235,7 @@ export function useFetchPosts(userId) {
         return console.error(error);
       }
     };
-
-    if (postsState.posts === null || postsState.posts === []) {
-      fetchPosts();
-    }
+    fetchPosts();
 
     return () => {
       return postsDispatch({

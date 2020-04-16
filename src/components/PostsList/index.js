@@ -3,7 +3,7 @@ import { Styled } from './style';
 import PostPreview from '../PostPreview';
 import { CircularProgress, Typography } from '@material-ui/core';
 import { ReactComponent as NoPostsSvg } from '../../assets/svg/TreeSwing.svg';
-import { ReactComponent as NoPostsEndSvg } from '../../assets/svg/FinishLine.svg';
+// import { ReactComponent as NoPostsEndSvg } from '../../assets/svg/FinishLine.svg';
 import { useFetchPosts } from '../../hooks/usePosts';
 
 const PostsList = ({ userId }) => {

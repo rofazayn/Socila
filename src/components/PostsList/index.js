@@ -19,7 +19,7 @@ const PostsList = ({ userId }) => {
         </div>
       ) : posts && posts.length > 0 ? (
         <>
-          {posts.map(post => {
+          {posts.map((post) => {
             return <PostPreview key={post.postId} {...post} />;
           })}
           <div className='posts-fallback no-posts --end'>

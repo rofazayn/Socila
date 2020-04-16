@@ -23,9 +23,13 @@ const PostPreview = styled.div`
     .post-header {
       display: flex;
       flex-direction: row;
-      align-items: flex-start;
-      justify-content: flex-start;
+      /* align-items: center; */
+      justify-content: space-between;
       margin-bottom: 8px;
+      .header-section {
+        display: flex;
+        align-items: flex-start;
+      }
       .spaced {
         padding-inline-end: 8px;
       }
@@ -48,6 +52,8 @@ const PostPreview = styled.div`
       }
     }
     .post-body {
+      padding-inline-start: 80px;
+      margin-top: -48px;
       p {
         color: ${({ theme }) => theme.palette.text.primary};
         line-height: 1.8;
@@ -56,6 +62,7 @@ const PostPreview = styled.div`
     .post-footer {
       padding-top: 16px;
       transform: translateX(-8px);
+      padding-inline-start: 80px;
       .reactions {
         display: flex;
         flex-direction: row;
@@ -125,5 +132,5 @@ const PostPreview = styled.div`
 `;
 
 export const Styled = {
-  PostPreview
+  PostPreview,
 };

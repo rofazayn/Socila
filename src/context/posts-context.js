@@ -5,14 +5,17 @@ export const PostsContext = createContext();
 export const PostsProvider = ({ children }) => {
   const [state, dispatch] = useReducer(postsReducer, {
     posts: null,
-    selectedPost: null
+    selectedPost: {
+      post: null,
+      comments: null,
+    },
   });
 
   return (
     <PostsContext.Provider
       value={{
         postsState: state,
-        postsDispatch: dispatch
+        postsDispatch: dispatch,
       }}
     >
       {children}

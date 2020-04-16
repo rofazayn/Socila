@@ -15,11 +15,11 @@ const PostDetailed = () => {
 
   return (
     <Styled.PostDetailed>
-      {post === null ? (
+      {post.post === null ? (
         <div className='posts-fallback'>
           <CircularProgress />
         </div>
-      ) : post && post.noPost === true ? (
+      ) : post.post && post.post.noPost === true ? (
         <>
           <TopBar title={'Whoops!'} icon={<PostIconSvg />} border={true} />
           <div className='posts-fallback no-posts'>
@@ -27,14 +27,14 @@ const PostDetailed = () => {
             <Typography variant='body2'>Post cannot be found</Typography>
           </div>
         </>
-      ) : post ? (
+      ) : post.post ? (
         <>
           <TopBar
-            title={`${post.authorFullName}'s post`}
+            title={`${post.post.authorFullName}'s post`}
             icon={<PostIconSvg />}
             border={true}
           />
-          <PostPreview {...post} />
+          <PostPreview {...post.post} />
           {postId && <CommentsList postId={postId} />}
         </>
       ) : null}

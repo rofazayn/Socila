@@ -12,7 +12,7 @@ import { Formik } from 'formik';
 import dayjs from '../../helpers/dayjs';
 import { Link } from 'react-router-dom';
 
-const PostPreview = props => {
+const PostPreview = (props) => {
   const {
     postId,
     authorId,
@@ -23,7 +23,7 @@ const PostPreview = props => {
     body,
     likeCount,
     commentCount,
-    shareCount
+    shareCount,
   } = props;
   const { postsActions } = usePosts();
   const { userDetails } = useContext(AuthContext);
@@ -39,7 +39,7 @@ const PostPreview = props => {
   const isPostLiked = () => {
     if (
       userDetails.likes &&
-      userDetails.likes.find(like => like.postId === postId)
+      userDetails.likes.find((like) => like.postId === postId)
     ) {
       return true;
     }
@@ -47,7 +47,7 @@ const PostPreview = props => {
     return false;
   };
 
-  const handleLike = values => {
+  const handleLike = (values) => {
     let isLiked = isPostLiked();
 
     if (!isLiked) {
@@ -64,34 +64,43 @@ const PostPreview = props => {
       animate={{ opacity: 1 }}
     >
       <Styled.PostPreview>
-        <div className='post-section avatar'>
-          <div className='avatar'>
-            <Link to={isCurrentUser() ? '/profile' : `/users/${authorId}`}>
-              <Avatar imgUrl={authorImage} alt={authorFullName} />
-            </Link>
-          </div>
-        </div>
         <div className='post-section details'>
           <div className='post-header'>
-            <div className='author-name spaced'>
-              <Typography variant='body2'>
+            <div className='header-section'>
+              <div className='avatar'>
                 <Link to={isCurrentUser() ? '/profile' : `/users/${authorId}`}>
-                  {authorFullName}
+                  <Avatar imgUrl={authorImage} alt={authorFullName} />
                 </Link>
-              </Typography>
+              </div>
+
+              <div className='author-name spaced'>
+                <Typography variant='body2'>
+                  <Link
+                    to={isCurrentUser() ? '/profile' : `/users/${authorId}`}
+                  >
+                    {authorFullName}
+                  </Link>
+                </Typography>
+              </div>
+
+              <div className='header-section'>
+                <div className='author-username spaced'>
+                  <Link
+                    to={isCurrentUser() ? '/profile' : `/users/${authorId}`}
+                  >
+                    <Typography variant='body2'>@{authorUsername}</Typography>
+                  </Link>
+                </div>
+              </div>
             </div>
 
-            <div className='author-username spaced'>
-              <Link to={isCurrentUser() ? '/profile' : `/users/${authorId}`}>
-                <Typography variant='body2'>@{authorUsername}</Typography>
-              </Link>
-            </div>
             <div className='time-posted spaced'>
               <Typography variant='body2'>
                 {dayjs(createdAt).fromNow()}
               </Typography>
             </div>
           </div>
+
           <div className='post-main'>
             <div className='post-body'>
               <Link to={`/posts/${postId}`}>

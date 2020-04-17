@@ -9,7 +9,7 @@ const vSchema = Yup.object().shape({
     .min(6, 'Password is too short.')
     .max(50, 'Password is too long.'),
   // .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
-  remember: Yup.boolean()
+  remember: Yup.boolean(),
 });
 
 export default vSchema;

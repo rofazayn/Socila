@@ -192,6 +192,15 @@ const GlobalStyle = createGlobalStyle`
       }
     }
   }
+
+  .mui-fixed {
+  /*
+   * make sure that added right padding
+   * actually pushes contents to the left
+   */
+  box-sizing: border-box;
+  padding: 0;
+}
 `;
 
 export default GlobalStyle;

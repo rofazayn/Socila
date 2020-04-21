@@ -129,6 +129,8 @@ const PostPreview = styled.div`
       }
     }
   }
+
+  
 `;
 
 export const Styled = {

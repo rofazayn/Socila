@@ -1,15 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Styled } from './style';
 import Avatar from '../Avatar';
-import {
-  Typography,
-  Button,
-  CircularProgress,
-  Dialog,
-  DialogContentText,
-  DialogTitle,
-  DialogContent,
-} from '@material-ui/core';
+import { Typography, Button, CircularProgress } from '@material-ui/core';
 import { ReactComponent as HeartIcon } from '../../assets/icons/bx-heart.svg';
 import { ReactComponent as CommentIcon } from '../../assets/icons/bx-comment.svg';
 import { ReactComponent as ShareIcon } from '../../assets/icons/bx-share.svg';
@@ -19,6 +11,7 @@ import { AuthContext } from '../../context/auth-context';
 import { Formik } from 'formik';
 import dayjs from '../../helpers/dayjs';
 import { Link } from 'react-router-dom';
+import CommentCreator from '../CommentCreator';
 
 const PostPreview = (props) => {
   const {
@@ -69,10 +62,6 @@ const PostPreview = (props) => {
 
   function handleCommentClickOpen() {
     setOpenCommentDialog(true);
-  }
-
-  function handleCommentClose() {
-    setOpenCommentDialog(false);
   }
 
   return (
@@ -166,136 +155,6 @@ const PostPreview = (props) => {
                   >
                     Comment
                   </Button>
-                  <Dialog
-                    open={openCommentDialog}
-                    onClose={handleCommentClose}
-                    disableScrollLock={true}
-                  >
-                    <div className='post-section details'>
-                      <div className='post-header'>
-                        <div className='header-section'>
-                          <div className='avatar'>
-                            <Link
-                              to={
-                                isCurrentUser()
-                                  ? '/profile'
-                                  : `/users/${authorId}`
-                              }
-                            >
-                              <Avatar
-                                imgUrl={authorImage}
-                                alt={authorFullName}
-                              />
-                            </Link>
-                          </div>
-
-                          <div className='author-name spaced'>
-                            <Typography variant='body2'>
-                              <Link
-                                to={
-                                  isCurrentUser()
-                                    ? '/profile'
-                                    : `/users/${authorId}`
-                                }
-                              >
-                                {authorFullName}
-                              </Link>
-                            </Typography>
-                          </div>
-
-                          <div className='header-section'>
-                            <div className='author-username spaced'>
-                              <Link
-                                to={
-                                  isCurrentUser()
-                                    ? '/profile'
-                                    : `/users/${authorId}`
-                                }
-                              >
-                                <Typography variant='body2'>
-                                  @{authorUsername}
-                                </Typography>
-                              </Link>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className='time-posted spaced'>
-                          <Typography variant='body2'>
-                            {dayjs(createdAt).fromNow()}
-                          </Typography>
-                        </div>
-                      </div>
-
-                      <div className='post-main'>
-                        <div className='post-body'>
-                          <Link to={`/posts/${postId}`}>
-                            <Typography variant='body1'>{body}</Typography>
-                          </Link>
-                        </div>
-                      </div>
-                      <div className='post-footer'>
-                        <div className='reactions'>
-                          <div className='reactions-group'>
-                            <div
-                              className={`reaction love ${
-                                isPostLiked() ? '--liked' : ''
-                              }`}
-                            >
-                              <Formik
-                                initialValues={{ postId: postId }}
-                                onSubmit={handleLike}
-                              >
-                                {({ values, handleSubmit, isSubmitting }) => (
-                                  <form onSubmit={handleSubmit}>
-                                    <input
-                                      type='hidden'
-                                      value={values.postId}
-                                    />
-                                    <Button
-                                      startIcon={
-                                        isSubmitting ? (
-                                          <CircularProgress size={18} />
-                                        ) : (
-                                          <HeartIcon />
-                                        )
-                                      }
-                                      type='submit'
-                                      className='fancy-button'
-                                      disabled={isSubmitting}
-                                    >
-                                      {isPostLiked() ? 'Liked' : 'Like'}
-                                    </Button>
-                                  </form>
-                                )}
-                              </Formik>
-                              <div className='count'>{likeCount}</div>
-                            </div>
-                            <div className='reaction comment'>
-                              <Button
-                                startIcon={<CommentIcon />}
-                                className='fancy-button'
-                                onClick={handleCommentClickOpen}
-                              >
-                                Comment
-                              </Button>
-
-                              <div className='count'>{commentCount}</div>
-                            </div>
-                          </div>
-                          <div className='reaction share'>
-                            <div className='count'>{shareCount}</div>
-                            <Button
-                              startIcon={<ShareIcon />}
-                              className='fancy-button'
-                            >
-                              Share
-                            </Button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </Dialog>
                   <div className='count'>{commentCount}</div>
                 </div>
               </div>
@@ -308,6 +167,11 @@ const PostPreview = (props) => {
             </div>
           </div>
         </div>
+        <CommentCreator
+          openCommentDialog={openCommentDialog}
+          setOpenCommentDialog={setOpenCommentDialog}
+          {...props}
+        />
       </Styled.PostPreview>
     </motion.div>
   );

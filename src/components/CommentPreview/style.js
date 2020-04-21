@@ -130,6 +130,13 @@ const CommentPreview = styled.div`
       }
     }
   }
+
+  .comment-dialog {
+    .post-section {
+      padding: 16px;
+      background: red;
+    }
+  }
 `;
 
 export const Styled = {

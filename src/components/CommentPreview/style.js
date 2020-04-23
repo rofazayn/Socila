@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 const CommentPreview = styled.div`
   display: flex;
-  padding: 24px 16px 16px 16px;
+  padding: 8px 16px 8px 16px;
   margin-bottom: 8px;
-  padding-inline-start: 40px;
+  /* padding-inline-start: 40px; */
   transition: all 250ms ease-in-out;
   /* border-inline-start: 2px solid transparent; */
   /* cursor: pointer; */
@@ -53,8 +53,8 @@ const CommentPreview = styled.div`
       }
     }
     .comment-body {
-      padding-inline-start: 64px;
-      margin-top: -32px;
+      padding-inline-start: 80px;
+      margin-top: -48px;
       p {
         color: ${({ theme }) => theme.palette.text.primary};
         line-height: 1.8;

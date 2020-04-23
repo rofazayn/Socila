@@ -17,7 +17,9 @@ const userReducer = (state, action) => {
     case userTypes.REMOVE_LIKE:
       return {
         ...state,
-        likes: [...state.likes.filter(like => like.likeId !== action.payload)]
+        likes: [
+          ...state.likes.filter((like) => like.likeId !== action.payload),
+        ],
       };
 
     default:

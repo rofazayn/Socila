@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef, useEffect } from 'react';
 import { Styled } from './style';
 import {
   Dialog,
@@ -20,7 +20,10 @@ import { AuthContext } from '../../context/auth-context';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ErrorMessage, Formik } from 'formik';
 import usePosts from '../../hooks/usePosts';
+import { useComments } from '../../hooks/useComments';
 const CommentCreator = (props) => {
+  const { commentsActions } = useComments();
+
   const {
     postId,
     authorId,
@@ -38,7 +41,6 @@ const CommentCreator = (props) => {
   }
 
   const { userDetails } = useContext(AuthContext);
-  const { postsActions } = usePosts();
 
   return (
     <Styled.CommentCreator>
@@ -54,7 +56,14 @@ const CommentCreator = (props) => {
         <Formik
           validateOnMount={true}
           initialValues={{ body: '' }}
-          onSubmit={postsActions.createPost}
+          onSubmit={(values, actions) =>
+            commentsActions.createComment(
+              postId,
+              values,
+              actions,
+              handleCommentClose
+            )
+          }
           // validationSchema={vSchema}
         >
           {({
@@ -136,6 +145,7 @@ const CommentCreator = (props) => {
                               onChange={handleChange}
                               onBlur={handleBlur}
                               placeholder={`Write your comment here`}
+                              autoFocus
                             />
                             <div className='submit-button'>
                               <IconButton

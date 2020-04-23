@@ -37,11 +37,7 @@ const CommentPreview = (props) => {
           <div className='header-section'>
             <div className='avatar'>
               <Link to={isCurrentUser() ? '/profile' : `/users/${authorId}`}>
-                <Avatar
-                  size={'48px'}
-                  imgUrl={authorImage}
-                  alt={authorFullName}
-                />
+                <Avatar imgUrl={authorImage} alt={authorFullName} />
               </Link>
             </div>
 
@@ -76,8 +72,8 @@ const CommentPreview = (props) => {
             {/* </Link> */}
           </div>
         </div>
-        <div className='comment-footer'>
-          {/* <div className='reactions'>
+        {/* <div className='comment-footer'>
+          <div className='reactions'>
             <div className='reactions-group'>
               <div
                 className={`reaction love ${isPostLiked() ? '--liked' : ''}`}
@@ -109,8 +105,8 @@ const CommentPreview = (props) => {
                 <div className='count'>{likeCount}</div>
               </div>
             </div>
-          </div> */}
-        </div>
+          </div>
+        </div> */}
       </div>
     </Styled.CommentPreview>
   );

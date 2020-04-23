@@ -5,6 +5,7 @@ export const userTypes = {
   SET_USER_LIKES: 'SET_USER_LIKES',
   ADD_LIKE: 'ADD_LIKE',
   REMOVE_LIKE: 'REMOVE_LIKE',
+  ADD_COMMENT: 'ADD_COMMENT',
 };
 
 // Posts types
@@ -13,10 +14,12 @@ export const postsTypes = {
   SELECT_POST: 'SELECT_POST',
   CLEAR_POSTS: 'CLEAR_POSTS',
   ADD_POST: 'ADD_POST',
+  UPDATE_POST: 'UPDATE_POST',
 };
 
 // Comments types
 export const commentsTypes = {
   SET_POST_COMMENTS: 'SET_POST_COMMENTS',
   CLEAR_POST_COMMENTS: 'CLEAR_POST_COMMENTS',
+  ADD_COMMENT: 'ADD_COMMENT',
 };

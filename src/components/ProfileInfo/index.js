@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Styled } from './style';
 import { AuthContext } from '../../context/auth-context';
 import { Typography, Button, IconButton } from '@material-ui/core';
@@ -8,6 +8,7 @@ import { ReactComponent as CameraIconSvg } from '../../assets/icons/bx-camera.sv
 import dayjs from '../../helpers/dayjs';
 import Avatar from '../Avatar';
 import CoverImage from '../CoverImage';
+import AvatarChanger from '../AvatarChanger';
 
 const ProfileInfo = ({ user }) => {
   const { userDetails } = useContext(AuthContext);
@@ -20,20 +21,33 @@ const ProfileInfo = ({ user }) => {
     return false;
   };
 
+  const [openAvatarDialog, setOpenAvatarDialog] = useState(false);
+
+  function handleAvatarClickOpen() {
+    setOpenAvatarDialog(true);
+  }
+
   return (
     <Styled.ProfileInfo>
       <div className='profile-images'>
         <div className='cover'>
           <CoverImage imgUrl={user.coverImage || null} />
-          <IconButton className='cover-change-button fancy-button'>
-            <CameraIconSvg />
-          </IconButton>
+          {isCurrentUser() ? (
+            <IconButton className='cover-change-button fancy-button'>
+              <CameraIconSvg />
+            </IconButton>
+          ) : null}
         </div>
         <div className='pic'>
           <Avatar imgUrl={user.profileImage || null} size='96px' />
-          <IconButton className='profile-change-button fancy-button'>
-            <CameraIconSvg />
-          </IconButton>
+          {isCurrentUser() ? (
+            <IconButton
+              className='profile-change-button fancy-button'
+              onClick={handleAvatarClickOpen}
+            >
+              <CameraIconSvg />
+            </IconButton>
+          ) : null}
         </div>
       </div>
       <div className='profile-details'>
@@ -84,6 +98,10 @@ const ProfileInfo = ({ user }) => {
           </div>
         )}
       </div>
+      <AvatarChanger
+        openAvatarDialog={openAvatarDialog}
+        setOpenAvatarDialog={setOpenAvatarDialog}
+      />
     </Styled.ProfileInfo>
   );
 };

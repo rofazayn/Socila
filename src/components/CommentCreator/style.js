@@ -2,24 +2,6 @@ import styled from 'styled-components';
 
 const CommentCreator = styled.div`
   .comment-creator {
-    padding: 0;
-    .title {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      .text {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        svg {
-          margin-inline-end: 8px;
-        }
-        p {
-          font-weight: 700;
-        }
-      }
-    }
-
     .inner {
       background: white;
       max-width: 580px;

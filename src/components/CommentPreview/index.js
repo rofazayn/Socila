@@ -37,7 +37,11 @@ const CommentPreview = (props) => {
           <div className='header-section'>
             <div className='avatar'>
               <Link to={isCurrentUser() ? '/profile' : `/users/${authorId}`}>
-                <Avatar imgUrl={authorImage} alt={authorFullName} />
+                <Avatar
+                  imgUrl={authorImage}
+                  alt={authorFullName}
+                  size={'48px'}
+                />
               </Link>
             </div>
 

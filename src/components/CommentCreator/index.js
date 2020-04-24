@@ -6,10 +6,8 @@ import {
   CircularProgress,
   IconButton,
   DialogContent,
-  DialogActions,
-  Button,
 } from '@material-ui/core';
-import { Typography, Link } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import Avatar from '../Avatar';
 import dayjs from '../../helpers/dayjs';
 import { ReactComponent as PenIconSvg } from '../../assets/icons/bx-pen.svg';
@@ -26,7 +24,6 @@ const CommentCreator = (props) => {
 
   const {
     postId,
-    authorId,
     authorImage,
     authorFullName,
     authorUsername,
@@ -48,7 +45,7 @@ const CommentCreator = (props) => {
         open={openCommentDialog}
         onClose={handleCommentClose}
         disableScrollLock={true}
-        className='comment-creator'
+        className='comment-creator creator'
         disablePortal
         fullWidth
         maxWidth='sm'

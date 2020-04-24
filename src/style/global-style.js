@@ -203,6 +203,27 @@ const GlobalStyle = createGlobalStyle`
   box-sizing: border-box;
   padding: 0;
 }
+
+.creator {
+    padding: 0;
+    .title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .text {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        svg {
+          margin-inline-end: 8px;
+          fill: ${({ theme }) => theme.palette.primary.main};
+        }
+        p {
+          font-weight: 700;
+        }
+      }
+    }
+  }
 `;
 
 export default GlobalStyle;

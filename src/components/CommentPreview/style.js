@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 const CommentPreview = styled.div`
   display: flex;
-  padding: 8px 16px 8px 16px;
+  padding: 16px;
+  padding-inline-start: 32px;
   margin-bottom: 8px;
   /* padding-inline-start: 40px; */
   transition: all 250ms ease-in-out;
@@ -53,8 +54,8 @@ const CommentPreview = styled.div`
       }
     }
     .comment-body {
-      padding-inline-start: 80px;
-      margin-top: -48px;
+      padding-inline-start: 64px;
+      margin-top: -32px;
       p {
         color: ${({ theme }) => theme.palette.text.primary};
         line-height: 1.8;

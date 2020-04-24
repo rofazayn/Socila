@@ -19,16 +19,46 @@ const ProfileInfo = styled.div`
       width: 100%;
       height: 100%;
       overflow: hidden;
+      position: relative;
+
+      .cover-change-button {
+        position: absolute;
+        bottom: 16px;
+        right: 16px;
+        opacity: 0;
+        border-radius: 8px;
+      }
+      &:hover {
+        .cover-change-button {
+          opacity: 100%;
+        }
+      }
     }
 
     .pic {
       display: flex;
       position: absolute;
-      top: 0;
-      bottom: 0;
+      top: 32px;
+      /* bottom: 0; */
       left: 24px;
       margin: auto 0;
-      padding-top: 32px;
+      .profile-change-button {
+        position: absolute;
+        top: 64px;
+        left: 64px;
+        opacity: 0;
+        border-radius: 100%;
+        padding: 8px;
+        svg {
+          margin: 0;
+          padding: 0;
+        }
+      }
+      &:hover {
+        .profile-change-button {
+          opacity: 100%;
+        }
+      }
     }
   }
   .profile-details {
@@ -94,5 +124,5 @@ const ProfileInfo = styled.div`
 `;
 
 export const Styled = {
-  ProfileInfo
+  ProfileInfo,
 };

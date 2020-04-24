@@ -155,7 +155,8 @@ const GlobalStyle = createGlobalStyle`
     }
       &:hover {
         color: ${({ theme }) => theme.palette.primary.main};
-        border-color: ${({ theme }) => theme.palette.primary.main};;
+        border-color: ${({ theme }) => theme.palette.primary.main};
+        background-color: ${({ theme }) => theme.palette.grey[200]};
         svg {
           fill: ${({ theme }) => theme.palette.primary.main};
         }
@@ -164,6 +165,7 @@ const GlobalStyle = createGlobalStyle`
     &.--active {
       color: ${({ theme }) => theme.palette.primary.main};
       border-color: ${({ theme }) => theme.palette.primary.main};
+      background-color: ${({ theme }) => theme.palette.grey[200]};
       svg {
         fill: ${({ theme }) => theme.palette.primary.main};
       }

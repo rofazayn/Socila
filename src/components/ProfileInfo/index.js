@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { Styled } from './style';
 import { AuthContext } from '../../context/auth-context';
-import { Typography, Button } from '@material-ui/core';
+import { Typography, Button, IconButton } from '@material-ui/core';
 import { ReactComponent as EditIcon } from '../../assets/icons/bx-edit.svg';
 import { ReactComponent as FollowIcon } from '../../assets/icons/bx-user-plus.svg';
+import { ReactComponent as CameraIconSvg } from '../../assets/icons/bx-camera.svg';
 import dayjs from '../../helpers/dayjs';
 import Avatar from '../Avatar';
 import CoverImage from '../CoverImage';
@@ -24,9 +25,15 @@ const ProfileInfo = ({ user }) => {
       <div className='profile-images'>
         <div className='cover'>
           <CoverImage imgUrl={user.coverImage || null} />
+          <IconButton className='cover-change-button fancy-button'>
+            <CameraIconSvg />
+          </IconButton>
         </div>
         <div className='pic'>
           <Avatar imgUrl={user.profileImage || null} size='96px' />
+          <IconButton className='profile-change-button fancy-button'>
+            <CameraIconSvg />
+          </IconButton>
         </div>
       </div>
       <div className='profile-details'>

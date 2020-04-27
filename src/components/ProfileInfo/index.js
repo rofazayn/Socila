@@ -9,6 +9,7 @@ import dayjs from '../../helpers/dayjs';
 import Avatar from '../Avatar';
 import CoverImage from '../CoverImage';
 import AvatarChanger from '../AvatarChanger';
+import CoverChanger from '../CoverChanger';
 
 const ProfileInfo = ({ user }) => {
   const { userDetails } = useContext(AuthContext);
@@ -27,13 +28,22 @@ const ProfileInfo = ({ user }) => {
     setOpenAvatarDialog(true);
   }
 
+  const [openCoverDialog, setOpenCoverDialog] = useState(false);
+
+  function handleCoverClickOpen() {
+    setOpenCoverDialog(true);
+  }
+
   return (
     <Styled.ProfileInfo>
       <div className='profile-images'>
         <div className='cover'>
           <CoverImage imgUrl={user.coverImage || null} />
           {isCurrentUser() ? (
-            <IconButton className='cover-change-button fancy-button'>
+            <IconButton
+              className='cover-change-button fancy-button'
+              onClick={handleCoverClickOpen}
+            >
               <CameraIconSvg />
             </IconButton>
           ) : null}
@@ -101,6 +111,10 @@ const ProfileInfo = ({ user }) => {
       <AvatarChanger
         openAvatarDialog={openAvatarDialog}
         setOpenAvatarDialog={setOpenAvatarDialog}
+      />
+      <CoverChanger
+        openCoverDialog={openCoverDialog}
+        setOpenCoverDialog={setOpenCoverDialog}
       />
     </Styled.ProfileInfo>
   );

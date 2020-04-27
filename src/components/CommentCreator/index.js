@@ -17,7 +17,6 @@ import { ReactComponent as SendIconSvg } from '../../assets/icons/bx-send.svg';
 import { AuthContext } from '../../context/auth-context';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ErrorMessage, Formik } from 'formik';
-import usePosts from '../../hooks/usePosts';
 import { useComments } from '../../hooks/useComments';
 const CommentCreator = (props) => {
   const { commentsActions } = useComments();
@@ -40,16 +39,15 @@ const CommentCreator = (props) => {
   const { userDetails } = useContext(AuthContext);
 
   return (
-    <Styled.CommentCreator>
-      <Dialog
-        open={openCommentDialog}
-        onClose={handleCommentClose}
-        disableScrollLock={true}
-        className='comment-creator creator'
-        disablePortal
-        fullWidth
-        maxWidth='sm'
-      >
+    <Dialog
+      open={openCommentDialog}
+      onClose={handleCommentClose}
+      disableScrollLock={true}
+      disablePortal
+      fullWidth
+      maxWidth='sm'
+    >
+      <Styled.CommentCreator className='creator'>
         <Formik
           validateOnMount={true}
           initialValues={{ body: '' }}
@@ -74,7 +72,7 @@ const CommentCreator = (props) => {
             errors,
           }) => (
             <>
-              <DialogTitle className='title' disableTypography>
+              <div className='dialog-header'>
                 <div className='text'>
                   <PenIconSvg />
                   <Typography variant='body2'>
@@ -82,10 +80,10 @@ const CommentCreator = (props) => {
                   </Typography>
                 </div>
                 <IconButton size='medium' onClick={handleCommentClose}>
-                  <CloseIconSvg className='create-post-icon' />
+                  <CloseIconSvg className='close-icon' />
                 </IconButton>
-              </DialogTitle>
-              <DialogContent dividers>
+              </div>
+              <div className='dialog-content'>
                 <div className='inner'>
                   <div className='post-section post'>
                     <div className='post-header'>
@@ -158,7 +156,7 @@ const CommentCreator = (props) => {
                               </IconButton>
                             </div>
                           </form>
-                          <div className='error-area'>
+                          {/* <div className='error-area'>
                             {errors.body && false ? (
                               <AnimatePresence>
                                 <motion.div
@@ -171,18 +169,18 @@ const CommentCreator = (props) => {
                                 </motion.div>
                               </AnimatePresence>
                             ) : null}
-                          </div>
+                          </div> */}
                         </>
                       </div>
                     </div>
                   </div>
                 </div>
-              </DialogContent>
+              </div>
             </>
           )}
         </Formik>
-      </Dialog>
-    </Styled.CommentCreator>
+      </Styled.CommentCreator>
+    </Dialog>
   );
 };
 

@@ -195,6 +195,10 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
+  .--disabled-text {
+    color: ${({ theme }) => theme.palette.text.disabled};
+  }
+
   .mui-fixed {
   /*
    * make sure that added right padding
@@ -205,11 +209,13 @@ const GlobalStyle = createGlobalStyle`
 }
 
 .creator {
-    padding: 0;
-    .title {
+  padding: 16px;
+    .dialog-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      padding-bottom: 8px;
+      border-bottom: 1px solid ${({ theme }) => theme.palette.grey[200]};
       .text {
         display: flex;
         flex-direction: row;
@@ -222,6 +228,15 @@ const GlobalStyle = createGlobalStyle`
           font-weight: 700;
         }
       }
+    }
+    .dialog-content {
+      padding: 16px 0;
+    }
+    .dialog-footer {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 8px;
+      border-top: 1px solid ${({ theme }) => theme.palette.grey[200]};
     }
   }
 `;

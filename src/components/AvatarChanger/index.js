@@ -6,6 +6,8 @@ import {
   Typography,
   IconButton,
   DialogContent,
+  DialogActions,
+  Button,
 } from '@material-ui/core';
 import { AuthContext } from '../../context/auth-context';
 import { ReactComponent as CameraIconSvg } from '../../assets/icons/bx-camera.svg';
@@ -20,17 +22,16 @@ const AvatarChanger = ({ openAvatarDialog, setOpenAvatarDialog }) => {
   const { userDetails } = useContext(AuthContext);
 
   return (
-    <Styled.AvatarChanger>
-      <Dialog
-        open={openAvatarDialog}
-        onClose={handleAvatarClose}
-        disableScrollLock={true}
-        className='avatar-creator creator'
-        disablePortal
-        fullWidth
-        maxWidth='xs'
-      >
-        <DialogTitle className='title' disableTypography>
+    <Dialog
+      open={openAvatarDialog}
+      onClose={handleAvatarClose}
+      disableScrollLock={true}
+      disablePortal
+      fullWidth
+      maxWidth='xs'
+    >
+      <Styled.AvatarChanger className='creator'>
+        <div className='dialog-header'>
           <div className='text'>
             <CameraIconSvg />
             <Typography variant='body2'>
@@ -38,14 +39,22 @@ const AvatarChanger = ({ openAvatarDialog, setOpenAvatarDialog }) => {
             </Typography>
           </div>
           <IconButton size='medium' onClick={handleAvatarClose}>
-            <CloseIconSvg className='create-post-icon' />
+            <CloseIconSvg className='close-icon' />
           </IconButton>
-        </DialogTitle>
-        <DialogContent>
-          <DropzoneInput />
-        </DialogContent>
-      </Dialog>
-    </Styled.AvatarChanger>
+        </div>
+        <div className='dialog-content'>
+          <DropzoneInput text='Click or drag & drop image' />
+        </div>
+        <div className='dialog-footer'>
+          <Button onClick={handleAvatarClose} className='fancy-button'>
+            Cancel
+          </Button>
+          <Button variant='contained' color='primary'>
+            Upload & Change
+          </Button>
+        </div>
+      </Styled.AvatarChanger>
+    </Dialog>
   );
 };
 

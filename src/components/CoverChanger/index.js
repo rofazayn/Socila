@@ -10,30 +10,27 @@ const CoverChanger = ({ openCoverDialog, setOpenCoverDialog }) => {
     setOpenCoverDialog(false);
   }
 
-  const { userDetails } = useContext(AuthContext);
-
   return (
-    <Styled.CoverChanger>
-      <Dialog
-        open={openCoverDialog}
-        onClose={handleCoverClose}
-        disableScrollLock={true}
-        className='Cover-creator creator'
-        disablePortal
-        fullWidth
-        maxWidth='xs'
-      >
-        <DialogTitle className='title' disableTypography>
+    <Dialog
+      open={openCoverDialog}
+      onClose={handleCoverClose}
+      disableScrollLock={true}
+      disablePortal
+      fullWidth
+      maxWidth='xs'
+    >
+      <Styled.CoverChanger className='creator'>
+        <div className='dialog-header'>
           <div className='text'>
             <CameraIconSvg />
             <Typography variant='body2'>Change your cover picture.</Typography>
           </div>
           <IconButton size='medium' onClick={handleCoverClose}>
-            <CloseIconSvg className='create-post-icon' />
+            <CloseIconSvg className='close-icon' />
           </IconButton>
-        </DialogTitle>
-      </Dialog>
-    </Styled.CoverChanger>
+        </div>
+      </Styled.CoverChanger>
+    </Dialog>
   );
 };
 

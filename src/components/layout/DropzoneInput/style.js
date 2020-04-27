@@ -7,6 +7,7 @@ const Dropzone = styled.div`
   }
   .inner {
     display: flex;
+    flex-direction: column;
     width: 100%;
     min-height: 260px;
     align-items: center;
@@ -15,8 +16,10 @@ const Dropzone = styled.div`
     border-radius: 8px;
     transition: all ease-in-out 200ms;
     cursor: pointer;
+    /* margin-bottom: 16px; */
 
     svg {
+      margin-bottom: 16px;
       width: 48px;
       height: 48px;
       fill: ${({ theme }) => theme.palette.grey[500]};

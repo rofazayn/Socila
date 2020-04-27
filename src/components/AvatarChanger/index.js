@@ -1,9 +1,16 @@
 import React, { useContext } from 'react';
 import { Styled } from './style';
-import { Dialog, DialogTitle, Typography, IconButton } from '@material-ui/core';
+import {
+  Dialog,
+  DialogTitle,
+  Typography,
+  IconButton,
+  DialogContent,
+} from '@material-ui/core';
 import { AuthContext } from '../../context/auth-context';
 import { ReactComponent as CameraIconSvg } from '../../assets/icons/bx-camera.svg';
 import { ReactComponent as CloseIconSvg } from '../../assets/icons/bx-x.svg';
+import DropzoneInput from '../layout/DropzoneInput';
 
 const AvatarChanger = ({ openAvatarDialog, setOpenAvatarDialog }) => {
   function handleAvatarClose() {
@@ -34,6 +41,9 @@ const AvatarChanger = ({ openAvatarDialog, setOpenAvatarDialog }) => {
             <CloseIconSvg className='create-post-icon' />
           </IconButton>
         </DialogTitle>
+        <DialogContent>
+          <DropzoneInput />
+        </DialogContent>
       </Dialog>
     </Styled.AvatarChanger>
   );

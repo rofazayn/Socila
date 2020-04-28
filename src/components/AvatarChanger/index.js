@@ -1,18 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Styled } from './style';
-import {
-  Dialog,
-  DialogTitle,
-  Typography,
-  IconButton,
-  DialogContent,
-  DialogActions,
-  Button,
-} from '@material-ui/core';
+import { Dialog, Typography, IconButton, Button } from '@material-ui/core';
 import { AuthContext } from '../../context/auth-context';
 import { ReactComponent as CameraIconSvg } from '../../assets/icons/bx-camera.svg';
 import { ReactComponent as CloseIconSvg } from '../../assets/icons/bx-x.svg';
 import DropzoneInput from '../layout/DropzoneInput';
+import { useEffect } from 'react';
 
 const AvatarChanger = ({ openAvatarDialog, setOpenAvatarDialog }) => {
   function handleAvatarClose() {
@@ -20,6 +13,16 @@ const AvatarChanger = ({ openAvatarDialog, setOpenAvatarDialog }) => {
   }
 
   const { userDetails } = useContext(AuthContext);
+
+  const [files, setFiles] = useState([]);
+
+  // Clean up files memory allocation
+  useEffect(() => {
+    console.log('Hi', files);
+    return () => {
+      files.forEach((file) => URL.revokeObjectURL(file.preview));
+    };
+  }, [files]);
 
   return (
     <Dialog
@@ -43,7 +46,16 @@ const AvatarChanger = ({ openAvatarDialog, setOpenAvatarDialog }) => {
           </IconButton>
         </div>
         <div className='dialog-content'>
-          <DropzoneInput text='Click or drag & drop image' />
+          {files.length > 0 ? (
+            <div className='preview'>
+              <img src={files[0].preview} alt='Cropper' />
+            </div>
+          ) : (
+            <DropzoneInput
+              text='Click or drag & drop image'
+              setFiles={setFiles}
+            />
+          )}
         </div>
         <div className='dialog-footer'>
           <Button onClick={handleAvatarClose} className='fancy-button'>

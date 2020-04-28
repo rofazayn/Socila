@@ -231,6 +231,15 @@ const GlobalStyle = createGlobalStyle`
     }
     .dialog-content {
       padding: 16px 0;
+      display: flex;
+      flex-direction: column;
+      .preview {
+        img {
+          border-radius: 8px;
+          width: 100%;
+          height: auto;
+        }
+      }
     }
     .dialog-footer {
       display: flex;

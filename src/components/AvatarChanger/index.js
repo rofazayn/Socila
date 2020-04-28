@@ -6,6 +6,7 @@ import { ReactComponent as CameraIconSvg } from '../../assets/icons/bx-camera.sv
 import { ReactComponent as CloseIconSvg } from '../../assets/icons/bx-x.svg';
 import DropzoneInput from '../layout/DropzoneInput';
 import { useEffect } from 'react';
+import CropperInput from '../layout/CropperInput';
 
 const AvatarChanger = ({ openAvatarDialog, setOpenAvatarDialog }) => {
   function handleAvatarClose() {
@@ -15,6 +16,7 @@ const AvatarChanger = ({ openAvatarDialog, setOpenAvatarDialog }) => {
   const { userDetails } = useContext(AuthContext);
 
   const [files, setFiles] = useState([]);
+  const [image, setImage] = useState(null);
 
   // Clean up files memory allocation
   useEffect(() => {
@@ -48,7 +50,8 @@ const AvatarChanger = ({ openAvatarDialog, setOpenAvatarDialog }) => {
         <div className='dialog-content'>
           {files.length > 0 ? (
             <div className='preview'>
-              <img src={files[0].preview} alt='Cropper' />
+              <div className='preview-img'></div>
+              <CropperInput setImage={setImage} image={files[0].preview} />
             </div>
           ) : (
             <DropzoneInput

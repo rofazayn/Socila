@@ -14,7 +14,6 @@ const CommentCreator = styled.div`
         display: flex;
         flex-direction: row;
         width: 100%;
-        padding-bottom: 16px;
         .section {
           display: flex;
           &.avatar {
@@ -25,7 +24,6 @@ const CommentCreator = styled.div`
             display: flex;
             .error-area {
               width: 100%;
-              padding-bottom: 16px;
             }
 
             .form-wrapper {

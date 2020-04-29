@@ -6,6 +6,7 @@ export const userTypes = {
   ADD_LIKE: 'ADD_LIKE',
   REMOVE_LIKE: 'REMOVE_LIKE',
   ADD_COMMENT: 'ADD_COMMENT',
+  UPDATE_PROFILE_PICTURE: 'UPDATE_PROFILE_PICTURE',
 };
 
 // Posts types

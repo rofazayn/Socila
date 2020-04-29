@@ -22,6 +22,9 @@ const userReducer = (state, action) => {
         ],
       };
 
+    case userTypes.UPDATE_PROFILE_PICTURE:
+      return { ...state, profileImage: action.payload };
+
     default:
       throw new Error();
   }

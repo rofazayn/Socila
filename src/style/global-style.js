@@ -142,6 +142,13 @@ const GlobalStyle = createGlobalStyle`
     transition: all ease-in-out 200ms;
     font-size: 14px;
 
+    &[disabled], &:disabled {
+      svg {
+        fill: ${({ theme }) => theme.palette.grey[400]};
+      }
+    }
+    
+
     .count {
       font-weight: bold;
       padding-inline-end: 8px;
@@ -170,6 +177,18 @@ const GlobalStyle = createGlobalStyle`
         fill: ${({ theme }) => theme.palette.primary.main};
       }
     }
+
+    .--contained {
+      background-color: ${({ theme }) => theme.palette.primary.main};
+      color: white;
+      svg {
+        fill: white;
+      }
+      &:hover {
+        background-color: ${({ theme }) => theme.palette.primary.dark}
+      }
+    }
+    
 
     .posts-fallback {
     width: 100%;

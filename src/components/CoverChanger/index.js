@@ -73,7 +73,11 @@ const CoverChanger = ({ openCoverDialog, setOpenCoverDialog }) => {
           {files.length > 0 ? (
             <div className='preview'>
               <div className='preview-img'></div>
-              <CropperInput setImage={setImage} image={files[0].preview} />
+              <CropperInput
+                setImage={setImage}
+                image={files[0].preview}
+                aspectRatio={{ x: 16, y: 9 }}
+              />
             </div>
           ) : (
             <DropzoneInput

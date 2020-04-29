@@ -76,7 +76,7 @@ const CoverChanger = ({ openCoverDialog, setOpenCoverDialog }) => {
               <CropperInput
                 setImage={setImage}
                 image={files[0].preview}
-                aspectRatio={{ x: 16, y: 9 }}
+                aspectRatioType='cover'
               />
             </div>
           ) : (

@@ -18,12 +18,14 @@ class CropperInput extends Component {
   };
 
   render() {
-    const { image, aspectRatio } = this.props;
+    const { image, aspectRatioType } = this.props;
     return (
       <Cropper
         ref={this.cropper}
         src={image}
-        aspectRatio={aspectRatio.x / aspectRatio.y || 1}
+        aspectRatio={
+          aspectRatioType && aspectRatioType === 'cover' ? 16 / 9 : 1
+        }
         viewMode={1}
         dragMode='move'
         scalable={true}

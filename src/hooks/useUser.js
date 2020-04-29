@@ -47,11 +47,52 @@ const useUser = () => {
     }
   }
 
+  async function updateCoverPicture(file, handleAvatarClose, cb) {
+    try {
+      // Generate a unique name for the image
+      let imageName = `cover-${uuid()}`;
+      // Storage reference
+      let uploadRef = storage.ref(`images/${imageName}`);
+      // Uplaod file
+      const uploadTask = uploadRef.put(file);
+      // Get the download link
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => console.log(snapshot),
+        (err) => console.error(err),
+        () => {
+          storage
+            .ref('images')
+            .child(imageName)
+            .getDownloadURL()
+            .then((url) => {
+              firestore.collection('users').doc(userDetails.userId).update({
+                coverImage: url,
+              });
+              userDetailsDispatch({
+                type: userTypes.UPDATE_COVER_PICTURE,
+                payload: url,
+              });
+              cb();
+              handleAvatarClose();
+            })
+            .catch((err) => {
+              console.error(err);
+              cb();
+            });
+        }
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return {
     userDetails,
     userDetailsDispatch,
     userActions: {
       updateProfilePicture,
+      updateCoverPicture,
     },
   };
 };

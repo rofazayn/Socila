@@ -11,18 +11,22 @@ export const AuthProvider = ({ children }) => {
   const [userDetails, userDetailsDispatch] = useReducer(userReducer, null);
 
   useEffect(() => {
-    const unsubscribeFromAuth = fb.auth().onAuthStateChanged(user => {
+    console.log(userDetails);
+  }, [userDetails]);
+
+  useEffect(() => {
+    const unsubscribeFromAuth = fb.auth().onAuthStateChanged((user) => {
       if (user) {
         setCurrentUser(user);
         fb.firestore()
           .collection('users')
           .doc(user.uid)
           .get()
-          .then(doc => {
+          .then((doc) => {
             if (doc.exists) {
               userDetailsDispatch({
                 type: userTypes.SET_USER,
-                payload: doc.data()
+                payload: doc.data(),
               });
             }
           });
@@ -30,14 +34,27 @@ export const AuthProvider = ({ children }) => {
           .collection('likes')
           .where('userId', '==', user.uid)
           .get()
-          .then(likes => {
+          .then((likes) => {
             let userLikes = [];
-            likes.forEach(like =>
+            likes.forEach((like) =>
               userLikes.push({ likeId: like.id, ...like.data() })
             );
             return userDetailsDispatch({
               type: userTypes.SET_USER_LIKES,
-              payload: userLikes
+              payload: userLikes,
+            });
+          });
+        fb.firestore()
+          .collection('users')
+          .doc(user.uid)
+          .collection('following')
+          .get()
+          .then((users) => {
+            let usersFollowing = [];
+            users.forEach((user) => usersFollowing.push(user.data()));
+            return userDetailsDispatch({
+              type: userTypes.SET_USER_FOLLOWING,
+              payload: usersFollowing,
             });
           });
       } else {
@@ -53,7 +70,7 @@ export const AuthProvider = ({ children }) => {
       value={{
         currentUser,
         userDetails,
-        userDetailsDispatch
+        userDetailsDispatch,
       }}
     >
       {children}

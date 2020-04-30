@@ -155,6 +155,67 @@ const useUser = () => {
     }
   }
 
+  async function unfollowUser(follower, following) {
+    try {
+      let followerDoc = firestore.collection('users').doc(follower.userId);
+      let userToFollowDoc = firestore.collection('users').doc(following.userId);
+
+      await followerDoc
+        .collection('following')
+        .doc(following.userId)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            // Remove follower and following dataand increase count.
+            userToFollowDoc
+              .collection('followers')
+              .doc(follower.userId)
+              .get()
+              .then((doc) => {
+                doc.ref.delete();
+
+                // Get the follower data and check if it exists.
+                let userToFollowData = {};
+
+                userToFollowDoc.get().then((doc) => {
+                  if (doc.exists) {
+                    userToFollowData = doc.data();
+                    userToFollowData.userId = doc.id;
+                    userToFollowData.followerCount--;
+                  }
+
+                  userToFollowDoc.update({
+                    followerCount: userToFollowData.followerCount,
+                  });
+                });
+
+                // Get the follower data and check if it exists.
+                let followerData = {};
+
+                followerDoc.get().then((doc) => {
+                  if (doc.exists) {
+                    followerData = doc.data();
+                    followerData.userId = doc.id;
+                    followerData.followingCount--;
+
+                    // Increase count.
+                    followerDoc.update({
+                      followingCount: followerData.followingCount,
+                    });
+                  }
+                });
+              });
+            doc.ref.delete();
+          }
+
+          console.error('Following not found!');
+          return;
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return {
     userDetails,
     userDetailsDispatch,
@@ -162,6 +223,7 @@ const useUser = () => {
       updateProfilePicture,
       updateCoverPicture,
       followUser,
+      unfollowUser,
     },
   };
 };

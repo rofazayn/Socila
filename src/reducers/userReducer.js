@@ -11,6 +11,9 @@ const userReducer = (state, action) => {
     case userTypes.SET_USER_LIKES:
       return { ...state, likes: [...action.payload] };
 
+    case userTypes.SET_USER_FOLLOWING:
+      return { ...state, following: [...action.payload] };
+
     case userTypes.ADD_LIKE:
       return { ...state, likes: [...state.likes, action.payload] };
 

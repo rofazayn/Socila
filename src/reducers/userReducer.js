@@ -14,6 +14,19 @@ const userReducer = (state, action) => {
     case userTypes.SET_USER_FOLLOWING:
       return { ...state, following: [...action.payload] };
 
+    case userTypes.ADD_USER_FOLLOWING:
+      return { ...state, following: [...state.following, action.payload] };
+
+    case userTypes.REMOVE_USER_FOLLOWING:
+      return {
+        ...state,
+        following: [
+          ...state.following.filter(
+            (following) => following.followingId !== action.payload
+          ),
+        ],
+      };
+
     case userTypes.ADD_LIKE:
       return { ...state, likes: [...state.likes, action.payload] };
 

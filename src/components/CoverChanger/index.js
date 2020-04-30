@@ -34,10 +34,6 @@ const CoverChanger = ({ openCoverDialog, setOpenCoverDialog }) => {
     };
   }, [files]);
 
-  useEffect(() => {
-    console.log(image);
-  }, [image]);
-
   const [isUploading, setUploading] = useState(false);
 
   const handleUploadCover = async () => {

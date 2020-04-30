@@ -34,10 +34,6 @@ const AvatarChanger = ({ openAvatarDialog, setOpenAvatarDialog }) => {
     };
   }, [files]);
 
-  useEffect(() => {
-    console.log(image);
-  }, [image]);
-
   const [isUploading, setUploading] = useState(false);
 
   const handleUploadAvatar = async () => {

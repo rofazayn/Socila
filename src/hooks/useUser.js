@@ -101,54 +101,69 @@ const useUser = () => {
             console.error('User already followed!');
             return;
           }
+        });
 
-          // Add follower and following dataand increase count.
-          userToFollowDoc
-            .collection('followers')
-            .doc(follower.userId)
-            .set({
-              followerId: follower.userId,
-              userId: following.userId,
-              createdAt: new Date().toDateString(),
-            })
-            .then(() => {
-              followerDoc.collection('following').doc(following.userId).set({
+      await userToFollowDoc
+        .collection('followers')
+        .doc(follower.userId)
+        .set({
+          followerId: follower.userId,
+          userId: following.userId,
+          createdAt: new Date().toDateString(),
+        })
+        .then(() => {
+          followerDoc
+            .collection('following')
+            .doc(following.userId)
+            .set(
+              {
                 followingId: following.userId,
                 userId: follower.userId,
                 createdAt: new Date().toDateString(),
-              });
+              },
+              (err) => console.error(err)
+            );
 
-              // Get the follower data and check if it exists.
-              let userToFollowData = {};
+          // Get the follower data and check if it exists.
+          let userToFollowData = {};
 
-              userToFollowDoc.get().then((doc) => {
-                if (doc.exists) {
-                  userToFollowData = doc.data();
-                  userToFollowData.userId = doc.id;
-                  userToFollowData.followerCount++;
-                }
+          userToFollowDoc.get().then((doc) => {
+            if (doc.exists) {
+              userToFollowData = doc.data();
+              userToFollowData.userId = doc.id;
+              userToFollowData.followerCount++;
+            }
 
-                userToFollowDoc.update({
-                  followerCount: userToFollowData.followerCount,
-                });
-              });
-
-              // Get the follower data and check if it exists.
-              let followerData = {};
-
-              followerDoc.get().then((doc) => {
-                if (doc.exists) {
-                  followerData = doc.data();
-                  followerData.userId = doc.id;
-                  followerData.followingCount++;
-
-                  // Increase count.
-                  followerDoc.update({
-                    followingCount: followerData.followingCount,
-                  });
-                }
-              });
+            userToFollowDoc.update({
+              followerCount: userToFollowData.followerCount,
             });
+          });
+
+          // Get the follower data and check if it exists.
+          let followerData = {};
+
+          followerDoc.get().then((doc) => {
+            if (doc.exists) {
+              followerData = doc.data();
+              followerData.userId = doc.id;
+              followerData.followingCount++;
+
+              // Increase count.
+              followerDoc.update({
+                followingCount: followerData.followingCount,
+              });
+            }
+          });
+        })
+        .then(() => {
+          userDetailsDispatch({
+            type: userTypes.ADD_USER_FOLLOWING,
+            payload: {
+              followingId: following.userId,
+              userId: follower.userId,
+              createdAt: new Date().toDateString(),
+            },
+          });
         });
     } catch (error) {
       console.error(error);
@@ -167,13 +182,14 @@ const useUser = () => {
         .then((doc) => {
           if (doc.exists) {
             // Remove follower and following dataand increase count.
+            let followObject = {};
+            followObject = doc.data();
+
             userToFollowDoc
               .collection('followers')
               .doc(follower.userId)
               .get()
               .then((doc) => {
-                doc.ref.delete();
-
                 // Get the follower data and check if it exists.
                 let userToFollowData = {};
 
@@ -204,12 +220,15 @@ const useUser = () => {
                     });
                   }
                 });
+
+                doc.ref.delete();
               });
             doc.ref.delete();
+            userDetailsDispatch({
+              type: userTypes.REMOVE_USER_FOLLOWING,
+              payload: followObject.followingId,
+            });
           }
-
-          console.error('Following not found!');
-          return;
         });
     } catch (error) {
       console.error(error);

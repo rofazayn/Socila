@@ -6,6 +6,7 @@ import {
   Button,
   IconButton,
   CircularProgress,
+  Icon,
 } from '@material-ui/core';
 import { ReactComponent as EditIcon } from '../../assets/icons/bx-edit.svg';
 import { ReactComponent as FollowIcon } from '../../assets/icons/bx-user-plus.svg';
@@ -44,31 +45,23 @@ const ProfileInfo = ({ user }) => {
     setOpenCoverDialog(true);
   }
 
-  function handleFollow(values) {
-    return userActions.followUser(values.follower, values.following);
-  }
-
-  function handleUnfollow(values) {
-    return userActions.unfollowUser(values.follower, values.following);
-  }
-
   function isUserFollowed() {
     if (
       userDetails.following &&
       userDetails.following.find((cUser) => cUser.followingId === user.userId)
     ) {
-      console.log('true');
       return true;
     }
-    console.log('false');
     return false;
   }
 
-  const [isFollowHovered, setFollowHovered] = useState(false);
-
-  useEffect(() => {
-    console.log('hover', isFollowHovered);
-  }, [isFollowHovered]);
+  const handleFollow = (values) => {
+    let isFollowing = isUserFollowed();
+    if (!isFollowing) {
+      return userActions.followUser(values.follower, values.following);
+    }
+    return userActions.unfollowUser(values.follower, values.following);
+  };
 
   return (
     <Styled.ProfileInfo>
@@ -138,86 +131,46 @@ const ProfileInfo = ({ user }) => {
           </div>
         ) : (
           <div className='actions edit-profile'>
-            {isUserFollowed() ? (
-              <Formik
-                initialValues={{
-                  follower: userDetails,
-                  following: user,
-                }}
-                enableReinitialize={true}
-                onSubmit={handleUnfollow}
-              >
-                {({ values, handleSubmit, isSubmitting }) => (
-                  <form onSubmit={handleSubmit}>
-                    <input
-                      type='hidden'
-                      name='follower'
-                      value={values.follower}
-                    />
-                    <input
-                      type='hidden'
-                      name='following'
-                      value={values.following}
-                    />
-                    <Button
-                      type='submit'
-                      className={`fancy-button --active ${
-                        isUserFollowed() && '--following'
-                      }`}
-                      disabled={isSubmitting}
-                      startIcon={
-                        isSubmitting ? (
-                          <CircularProgress size={18} />
-                        ) : isFollowHovered ? (
-                          <UserXIconSvg />
-                        ) : (
-                          <UserCheckIconSvg />
-                        )
-                      }
-                    >
-                      {isFollowHovered ? 'Unfollow' : 'Following'}
-                    </Button>
-                  </form>
-                )}
-              </Formik>
-            ) : (
-              <Formik
-                initialValues={{
-                  follower: userDetails,
-                  following: user,
-                }}
-                onSubmit={handleFollow}
-              >
-                {({ values, handleSubmit, isSubmitting }) => (
-                  <form onSubmit={handleSubmit}>
-                    <input
-                      type='hidden'
-                      name='follower'
-                      value={values.follower}
-                    />
-                    <input
-                      type='hidden'
-                      name='following'
-                      value={values.following}
-                    />
-                    <Button
-                      type='submit'
-                      className='fancy-button'
-                      disabled={isSubmitting}
-                      startIcon={
-                        isSubmitting ? (
-                          <CircularProgress size={18} />
-                        ) : (
-                          <FollowIcon />
-                        )
-                      }
-                    >
-                      Follow
-                    </Button>
-                  </form>
-                )}
-              </Formik>
-            )}
+            <Formik
+              initialValues={{
+                follower: userDetails,
+                following: user,
+              }}
+              onSubmit={handleFollow}
+            >
+              {({ values, handleSubmit, isSubmitting }) => (
+                <form onSubmit={handleSubmit}>
+                  <input
+                    type='hidden'
+                    name='follower'
+                    value={values.follower}
+                  />
+                  <input
+                    type='hidden'
+                    name='following'
+                    value={values.following}
+                  />
+                  <Button
+                    type='submit'
+                    className={`fancy-button ${
+                      isUserFollowed() && '--following'
+                    }`}
+                    disabled={isSubmitting}
+                    startIcon={
+                      isSubmitting ? (
+                        <CircularProgress size={18} />
+                      ) : isUserFollowed() ? (
+                        <UserXIconSvg />
+                      ) : (
+                        <FollowIcon />
+                      )
+                    }
+                  >
+                    {isUserFollowed() ? 'Unfollow' : 'Follow'}
+                  </Button>
+                </form>
+              )}
+            </Formik>
           </div>
         )}
       </div>

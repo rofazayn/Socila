@@ -117,11 +117,10 @@ const ProfileInfo = ({ user }) => {
         <div className='actions'>
           <Button className='fancy-button --active'>Posts</Button>
           <Button className='fancy-button'>
-            <span className='count'>{userDetails.followingCount}</span>{' '}
-            Following
+            <span className='count'>{user.followingCount}</span> Following
           </Button>
           <Button className='fancy-button'>
-            <span className='count'>{userDetails.followerCount}</span> Followers
+            <span className='count'>{user.followerCount}</span> Followers
           </Button>
         </div>
         {isCurrentUser() ? (

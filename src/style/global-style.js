@@ -179,12 +179,18 @@ const GlobalStyle = createGlobalStyle`
     }
 
     &.--following {
-     &:hover {
       color: ${({ theme }) => theme.palette.error.main};
       border-color: ${({ theme }) => theme.palette.error.main};
       background-color: ${({ theme }) => theme.palette.grey[200]};
       svg {
         fill: ${({ theme }) => theme.palette.error.main};
+      }
+     &:hover {
+      color: white;
+      border-color: ${({ theme }) => theme.palette.error.main};
+      background-color: ${({ theme }) => theme.palette.error.main};
+      svg {
+        fill: white;
       }
      }
     }

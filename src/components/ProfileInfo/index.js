@@ -1,7 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { Styled } from './style';
 import { AuthContext } from '../../context/auth-context';
-import { Typography, Button, IconButton } from '@material-ui/core';
+import {
+  Typography,
+  Button,
+  IconButton,
+  CircularProgress,
+} from '@material-ui/core';
 import { ReactComponent as EditIcon } from '../../assets/icons/bx-edit.svg';
 import { ReactComponent as FollowIcon } from '../../assets/icons/bx-user-plus.svg';
 import { ReactComponent as CameraIconSvg } from '../../assets/icons/bx-camera.svg';
@@ -10,9 +15,12 @@ import Avatar from '../Avatar';
 import CoverImage from '../CoverImage';
 import AvatarChanger from '../AvatarChanger';
 import CoverChanger from '../CoverChanger';
+import { Formik } from 'formik';
+import useUser from '../../hooks/useUser';
 
 const ProfileInfo = ({ user }) => {
   const { userDetails } = useContext(AuthContext);
+  const { userActions } = useUser();
 
   const isCurrentUser = () => {
     if (user.userId === userDetails.userId) {
@@ -32,6 +40,10 @@ const ProfileInfo = ({ user }) => {
 
   function handleCoverClickOpen() {
     setOpenCoverDialog(true);
+  }
+
+  function handleFollow(values) {
+    return userActions.followUser(values.follower, values.following);
   }
 
   return (
@@ -102,9 +114,42 @@ const ProfileInfo = ({ user }) => {
           </div>
         ) : (
           <div className='actions edit-profile'>
-            <Button className='fancy-button' startIcon={<FollowIcon />}>
-              Follow
-            </Button>
+            <Formik
+              initialValues={{
+                follower: userDetails,
+                following: user,
+              }}
+              onSubmit={handleFollow}
+            >
+              {({ values, handleSubmit, isSubmitting }) => (
+                <form onSubmit={handleSubmit}>
+                  <input
+                    type='hidden'
+                    name='follower'
+                    value={values.follower}
+                  />
+                  <input
+                    type='hidden'
+                    name='following'
+                    value={values.following}
+                  />
+                  <Button
+                    type='submit'
+                    className='fancy-button'
+                    disabled={isSubmitting}
+                    startIcon={
+                      isSubmitting ? (
+                        <CircularProgress size={18} />
+                      ) : (
+                        <FollowIcon />
+                      )
+                    }
+                  >
+                    Follow
+                  </Button>
+                </form>
+              )}
+            </Formik>
           </div>
         )}
       </div>

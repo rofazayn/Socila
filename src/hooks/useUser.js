@@ -87,12 +87,81 @@ const useUser = () => {
     }
   }
 
+  async function followUser(follower, following) {
+    try {
+      let followerDoc = firestore.collection('users').doc(follower.userId);
+      let userToFollowDoc = firestore.collection('users').doc(following.userId);
+
+      await followerDoc
+        .collection('following')
+        .doc(following.userId)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            console.error('User already followed!');
+            return;
+          }
+
+          // Add follower and following dataand increase count.
+          userToFollowDoc
+            .collection('followers')
+            .doc(follower.userId)
+            .set({
+              followerId: follower.userId,
+              userId: following.userId,
+              createdAt: new Date().toDateString(),
+            })
+            .then(() => {
+              followerDoc.collection('following').doc(following.userId).set({
+                followingId: following.userId,
+                userId: follower.userId,
+                createdAt: new Date().toDateString(),
+              });
+
+              // Get the follower data and check if it exists.
+              let userToFollowData = {};
+
+              userToFollowDoc.get().then((doc) => {
+                if (doc.exists) {
+                  userToFollowData = doc.data();
+                  userToFollowData.userId = doc.id;
+                  userToFollowData.followerCount++;
+                }
+
+                userToFollowDoc.update({
+                  followerCount: userToFollowData.followerCount,
+                });
+              });
+
+              // Get the follower data and check if it exists.
+              let followerData = {};
+
+              followerDoc.get().then((doc) => {
+                if (doc.exists) {
+                  followerData = doc.data();
+                  followerData.userId = doc.id;
+                  followerData.followingCount++;
+
+                  // Increase count.
+                  followerDoc.update({
+                    followingCount: followerData.followingCount,
+                  });
+                }
+              });
+            });
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return {
     userDetails,
     userDetailsDispatch,
     userActions: {
       updateProfilePicture,
       updateCoverPicture,
+      followUser,
     },
   };
 };

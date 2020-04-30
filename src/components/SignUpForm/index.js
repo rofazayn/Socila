@@ -7,7 +7,7 @@ import {
   Button,
   Checkbox,
   FormControlLabel,
-  CircularProgress
+  CircularProgress,
 } from '@material-ui/core';
 import TextField from '../layout/TextField';
 import vSchema from './validation';
@@ -24,7 +24,7 @@ const SignUpForm = () => {
           username: '',
           email: '',
           password: '',
-          agreed: false
+          agreed: false,
         }}
         onSubmit={(values, { setSubmitting, setFieldError }) => {
           setSubmitting(true);
@@ -35,7 +35,7 @@ const SignUpForm = () => {
           fb.firestore()
             .doc(`/usernames/${values.username}`)
             .get()
-            .then(doc => {
+            .then((doc) => {
               if (doc.exists) {
                 setFieldError('general', 'Username is taken');
                 setSubmitting(false);
@@ -43,7 +43,7 @@ const SignUpForm = () => {
                 return fb
                   .auth()
                   .createUserWithEmailAndPassword(values.email, values.password)
-                  .then(userCreds => {
+                  .then((userCreds) => {
                     usernamesRef
                       .doc(`${values.username}`)
                       .set({ userId: userCreds.user.uid });
@@ -56,11 +56,13 @@ const SignUpForm = () => {
                       fullName: `${values.firstName} ${values.lastName}`,
                       createdAt: new Date().toISOString(),
                       bio: '',
+                      followerCount: 0,
+                      followingCount: 0,
                       profileImage: null,
-                      coverImage: null
+                      coverImage: null,
                     });
                   })
-                  .catch(err => {
+                  .catch((err) => {
                     setSubmitting(false);
                     console.error(err);
                     setFieldError('general', err.message);
@@ -77,7 +79,7 @@ const SignUpForm = () => {
           handleBlur,
           handleSubmit,
           isSubmitting,
-          isValid
+          isValid,
         }) => (
           <form onSubmit={handleSubmit}>
             <TextField

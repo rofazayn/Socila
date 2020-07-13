@@ -21,6 +21,7 @@ import CoverChanger from "../CoverChanger";
 import { Formik } from "formik";
 import useUser from "../../hooks/useUser";
 import { firestore } from "../../firebase/index";
+import CustomDialog from "../layout/CustomDialog";
 
 const ProfileInfo = ({ user }) => {
   const { userDetails } = useContext(AuthContext);
@@ -39,19 +40,6 @@ const ProfileInfo = ({ user }) => {
   function handleAvatarClickOpen() {
     setOpenAvatarDialog(true);
   }
-
-  // Live followers & following updates
-  const [followers, setFollowers] = useState(0);
-  const [following, setFollowing] = useState(0);
-
-  useEffect(() => {
-    let userRef = firestore.collection("users").doc(user.userId);
-
-    userRef.onSnapshot((doc) => {
-      setFollowers(doc.data().followingCount);
-      setFollowing(doc.data().followerCount);
-    });
-  }, []);
 
   const [openCoverDialog, setOpenCoverDialog] = useState(false);
 
@@ -75,6 +63,53 @@ const ProfileInfo = ({ user }) => {
       return userActions.followUser(values.follower, values.following);
     }
     return userActions.unfollowUser(values.follower, values.following);
+  };
+
+  // Live followers & following updates
+  const [followersCount, setFollowersCount] = useState(0);
+  const [followingCount, setFollowingCount] = useState(0);
+
+  useEffect(() => {
+    let userRef = firestore.collection("users").doc(user.userId);
+
+    let subscribeToUser = null;
+
+    subscribeToUser = userRef.onSnapshot((doc) => {
+      setFollowersCount(doc.data().followingCount);
+      setFollowingCount(doc.data().followerCount);
+    });
+
+    return () => subscribeToUser;
+  }, []);
+
+  const [openFollowersDialog, setOpenFollowerDialog] = useState(false);
+  const [userFollowers, setUserFollowers] = useState([]);
+
+  const fetchUserFollowers = async () => {
+    let userFollowersRef = firestore
+      .collection("users")
+      .doc(user.userId)
+      .collection("followers")
+      .limit(10);
+
+    await userFollowersRef.get().then((snapshot) => {
+      let fetchedFollowers = [];
+      snapshot.docs.map(async (doc) => {
+        let followerDetails = await firestore
+          .collection("users")
+          .doc(doc.data().followerId)
+          .get()
+          .then((doc) => {
+            if (doc.exists) {
+              return doc.data();
+            }
+            return;
+          });
+        fetchedFollowers.push(followerDetails);
+      });
+      setUserFollowers(fetchedFollowers);
+      setOpenFollowerDialog(true);
+    });
   };
 
   return (
@@ -131,10 +166,15 @@ const ProfileInfo = ({ user }) => {
         <div className="actions">
           <Button className="fancy-button --active">Posts</Button>
           <Button className="fancy-button">
-            <span className="count">{followers}</span> Following
+            <span className="count">{followersCount}</span> Following
           </Button>
-          <Button className="fancy-button">
-            <span className="count">{following}</span> Followers
+          <Button
+            className="fancy-button"
+            onClick={() => {
+              fetchUserFollowers();
+            }}
+          >
+            <span className="count">{followingCount}</span> Followers
           </Button>
         </div>
         {isCurrentUser() ? (
@@ -196,6 +236,19 @@ const ProfileInfo = ({ user }) => {
         openCoverDialog={openCoverDialog}
         setOpenCoverDialog={setOpenCoverDialog}
       />
+      <CustomDialog
+        title={`${user.firstName}'s followers.`}
+        open={openFollowersDialog}
+        setOpen={setOpenFollowerDialog}
+      >
+        <div className="dialog-content">
+          {userFollowers.length > 0
+            ? userFollowers.map((follower) => (
+                <li key={follower.userId}>{follower.email}</li>
+              ))
+            : "Nope"}
+        </div>
+      </CustomDialog>
     </Styled.ProfileInfo>
   );
 };

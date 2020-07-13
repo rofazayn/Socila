@@ -1,0 +1,50 @@
+import React, { useState } from "react";
+import { Styled } from "./style";
+import {
+  Dialog,
+  Typography,
+  IconButton,
+  Button,
+  CircularProgress,
+} from "@material-ui/core";
+import { ReactComponent as CloseIconSvg } from "../../../assets/icons/bx-x.svg";
+
+const CustomDialog = ({
+  children,
+  icon,
+  title,
+  open,
+  setOpen,
+  keepMounted,
+}) => {
+  function handleAvatarClose() {
+    setOpen(false);
+  }
+
+  return (
+    <Dialog
+      open={open}
+      onClose={setOpen}
+      keepMounted={keepMounted || false}
+      disableScrollLock={true}
+      disablePortal
+      fullWidth
+      maxWidth="xs"
+    >
+      <Styled.CustomDialog className="creator">
+        <div className="dialog-header">
+          <div className="text">
+            {icon}
+            <Typography variant="body2">{title}</Typography>
+          </div>
+          <IconButton size="medium" onClick={handleAvatarClose}>
+            <CloseIconSvg className="close-icon" />
+          </IconButton>
+        </div>
+        {children}
+      </Styled.CustomDialog>
+    </Dialog>
+  );
+};
+
+export default CustomDialog;

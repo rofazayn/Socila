@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const CommentCreator = styled.div`
   .inner {
+    width: 100%;
     background: white;
     max-width: 580px;
     margin: auto;

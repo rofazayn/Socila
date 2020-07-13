@@ -1,25 +1,26 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { Styled } from './style';
-import { AuthContext } from '../../context/auth-context';
+import React, { useContext, useState, useEffect } from "react";
+import { Styled } from "./style";
+import { AuthContext } from "../../context/auth-context";
 import {
   Typography,
   Button,
   IconButton,
   CircularProgress,
   Icon,
-} from '@material-ui/core';
-import { ReactComponent as EditIcon } from '../../assets/icons/bx-edit.svg';
-import { ReactComponent as FollowIcon } from '../../assets/icons/bx-user-plus.svg';
-import { ReactComponent as CameraIconSvg } from '../../assets/icons/bx-camera.svg';
-import { ReactComponent as UserCheckIconSvg } from '../../assets/icons/bx-user-check.svg';
-import { ReactComponent as UserXIconSvg } from '../../assets/icons/bx-user-x.svg';
-import dayjs from '../../helpers/dayjs';
-import Avatar from '../Avatar';
-import CoverImage from '../CoverImage';
-import AvatarChanger from '../AvatarChanger';
-import CoverChanger from '../CoverChanger';
-import { Formik } from 'formik';
-import useUser from '../../hooks/useUser';
+} from "@material-ui/core";
+import { ReactComponent as EditIcon } from "../../assets/icons/bx-edit.svg";
+import { ReactComponent as FollowIcon } from "../../assets/icons/bx-user-plus.svg";
+import { ReactComponent as CameraIconSvg } from "../../assets/icons/bx-camera.svg";
+import { ReactComponent as UserCheckIconSvg } from "../../assets/icons/bx-user-check.svg";
+import { ReactComponent as UserXIconSvg } from "../../assets/icons/bx-user-x.svg";
+import dayjs from "../../helpers/dayjs";
+import Avatar from "../Avatar";
+import CoverImage from "../CoverImage";
+import AvatarChanger from "../AvatarChanger";
+import CoverChanger from "../CoverChanger";
+import { Formik } from "formik";
+import useUser from "../../hooks/useUser";
+import { firestore } from "../../firebase/index";
 
 const ProfileInfo = ({ user }) => {
   const { userDetails } = useContext(AuthContext);
@@ -38,6 +39,19 @@ const ProfileInfo = ({ user }) => {
   function handleAvatarClickOpen() {
     setOpenAvatarDialog(true);
   }
+
+  // Live followers & following updates
+  const [followers, setFollowers] = useState(0);
+  const [following, setFollowing] = useState(0);
+
+  useEffect(() => {
+    let userRef = firestore.collection("users").doc(user.userId);
+
+    userRef.onSnapshot((doc) => {
+      setFollowers(doc.data().followingCount);
+      setFollowing(doc.data().followerCount);
+    });
+  }, []);
 
   const [openCoverDialog, setOpenCoverDialog] = useState(false);
 
@@ -65,23 +79,23 @@ const ProfileInfo = ({ user }) => {
 
   return (
     <Styled.ProfileInfo>
-      <div className='profile-images'>
-        <div className='cover'>
+      <div className="profile-images">
+        <div className="cover">
           <CoverImage imgUrl={user.coverImage || null} />
           {isCurrentUser() ? (
             <IconButton
-              className='cover-change-button fancy-button'
+              className="cover-change-button fancy-button"
               onClick={handleCoverClickOpen}
             >
               <CameraIconSvg />
             </IconButton>
           ) : null}
         </div>
-        <div className='pic'>
-          <Avatar imgUrl={user.profileImage || null} size='96px' />
+        <div className="pic">
+          <Avatar imgUrl={user.profileImage || null} size="96px" />
           {isCurrentUser() ? (
             <IconButton
-              className='profile-change-button fancy-button'
+              className="profile-change-button fancy-button"
               onClick={handleAvatarClickOpen}
             >
               <CameraIconSvg />
@@ -89,48 +103,48 @@ const ProfileInfo = ({ user }) => {
           ) : null}
         </div>
       </div>
-      <div className='profile-details'>
-        <div className='info'>
-          <div className='name'>
-            <Typography variant='subtitle1' className='full-name'>
+      <div className="profile-details">
+        <div className="info">
+          <div className="name">
+            <Typography variant="subtitle1" className="full-name">
               {user.fullName}
             </Typography>
-            <Typography variant='body2' className='username'>
+            <Typography variant="body2" className="username">
               @{user.username}
             </Typography>
           </div>
-          <div className='rest'>
-            <Typography variant='body2' className='joined'>
-              Joined <span>{dayjs(user.createdAt).format('MMM YYYY')}</span>
+          <div className="rest">
+            <Typography variant="body2" className="joined">
+              Joined <span>{dayjs(user.createdAt).format("MMM YYYY")}</span>
             </Typography>
           </div>
         </div>
         {user.bio && (
-          <div className='bio'>
-            <Typography variant='body1' className='bio'>
+          <div className="bio">
+            <Typography variant="body1" className="bio">
               {user.bio}
             </Typography>
           </div>
         )}
       </div>
-      <div className='profile-actions'>
-        <div className='actions'>
-          <Button className='fancy-button --active'>Posts</Button>
-          <Button className='fancy-button'>
-            <span className='count'>{user.followingCount}</span> Following
+      <div className="profile-actions">
+        <div className="actions">
+          <Button className="fancy-button --active">Posts</Button>
+          <Button className="fancy-button">
+            <span className="count">{followers}</span> Following
           </Button>
-          <Button className='fancy-button'>
-            <span className='count'>{user.followerCount}</span> Followers
+          <Button className="fancy-button">
+            <span className="count">{following}</span> Followers
           </Button>
         </div>
         {isCurrentUser() ? (
-          <div className='actions edit-profile'>
-            <Button className='fancy-button' startIcon={<EditIcon />}>
+          <div className="actions edit-profile">
+            <Button className="fancy-button" startIcon={<EditIcon />}>
               Edit my profile
             </Button>
           </div>
         ) : (
-          <div className='actions edit-profile'>
+          <div className="actions edit-profile">
             <Formik
               initialValues={{
                 follower: userDetails,
@@ -141,19 +155,19 @@ const ProfileInfo = ({ user }) => {
               {({ values, handleSubmit, isSubmitting }) => (
                 <form onSubmit={handleSubmit}>
                   <input
-                    type='hidden'
-                    name='follower'
+                    type="hidden"
+                    name="follower"
                     value={values.follower}
                   />
                   <input
-                    type='hidden'
-                    name='following'
+                    type="hidden"
+                    name="following"
                     value={values.following}
                   />
                   <Button
-                    type='submit'
+                    type="submit"
                     className={`fancy-button ${
-                      isUserFollowed() && '--following'
+                      isUserFollowed() && "--following"
                     }`}
                     disabled={isSubmitting}
                     startIcon={
@@ -166,7 +180,7 @@ const ProfileInfo = ({ user }) => {
                       )
                     }
                   >
-                    {isUserFollowed() ? 'Unfollow' : 'Follow'}
+                    {isUserFollowed() ? "Unfollow" : "Follow"}
                   </Button>
                 </form>
               )}

@@ -11,8 +11,9 @@ import {
 import { ReactComponent as EditIcon } from "../../assets/icons/bx-edit.svg";
 import { ReactComponent as FollowIcon } from "../../assets/icons/bx-user-plus.svg";
 import { ReactComponent as CameraIconSvg } from "../../assets/icons/bx-camera.svg";
-import { ReactComponent as UserCheckIconSvg } from "../../assets/icons/bx-user-check.svg";
 import { ReactComponent as UserXIconSvg } from "../../assets/icons/bx-user-x.svg";
+import { ReactComponent as GroupIconSvg } from "../../assets/icons/bx-group.svg";
+
 import dayjs from "../../helpers/dayjs";
 import Avatar from "../Avatar";
 import CoverImage from "../CoverImage";
@@ -85,31 +86,35 @@ const ProfileInfo = ({ user }) => {
   const [openFollowersDialog, setOpenFollowerDialog] = useState(false);
   const [userFollowers, setUserFollowers] = useState([]);
 
-  const fetchUserFollowers = async () => {
+  const fetchUserFollowers = () => {
     let userFollowersRef = firestore
       .collection("users")
       .doc(user.userId)
       .collection("followers")
       .limit(10);
 
-    await userFollowersRef.get().then((snapshot) => {
-      let fetchedFollowers = [];
-      snapshot.docs.map(async (doc) => {
-        let followerDetails = await firestore
-          .collection("users")
-          .doc(doc.data().followerId)
-          .get()
-          .then((doc) => {
-            if (doc.exists) {
-              return doc.data();
-            }
-            return;
-          });
-        fetchedFollowers.push(followerDetails);
+    userFollowersRef
+      .get()
+      .then((snapshot) => {
+        let fetchedFollowers = [];
+        snapshot.docs.map(async (doc) => {
+          let followerDetails = await firestore
+            .collection("users")
+            .doc(doc.data().followerId)
+            .get()
+            .then((doc) => {
+              if (doc.exists) {
+                return doc.data();
+              }
+              return;
+            });
+          fetchedFollowers.push(followerDetails);
+        });
+        setUserFollowers(fetchedFollowers);
+      })
+      .then(() => {
+        setTimeout(() => setOpenFollowerDialog(true), 300);
       });
-      setUserFollowers(fetchedFollowers);
-      setOpenFollowerDialog(true);
-    });
   };
 
   return (
@@ -237,6 +242,7 @@ const ProfileInfo = ({ user }) => {
         setOpenCoverDialog={setOpenCoverDialog}
       />
       <CustomDialog
+        icon={<GroupIconSvg />}
         title={`${user.firstName}'s followers.`}
         open={openFollowersDialog}
         setOpen={setOpenFollowerDialog}

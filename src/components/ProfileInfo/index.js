@@ -78,14 +78,14 @@ const ProfileInfo = ({ user }) => {
     let subscribeToUser = null;
 
     subscribeToUser = userRef.onSnapshot((doc) => {
-      setFollowersCount(doc.data().followingCount);
-      setFollowingCount(doc.data().followerCount);
+      setFollowersCount(doc.data().followerCount);
+      setFollowingCount(doc.data().followingCount);
     });
 
     return () => subscribeToUser;
   }, []);
 
-  const [openFollowersDialog, setOpenFollowerDialog] = useState(false);
+  const [openFollowersDialog, setOpenFollowersDialog] = useState(false);
   const [userFollowers, setUserFollowers] = useState([]);
 
   const fetchUserFollowers = () => {
@@ -115,7 +115,42 @@ const ProfileInfo = ({ user }) => {
         setUserFollowers(fetchedFollowers);
       })
       .then(() => {
-        setTimeout(() => setOpenFollowerDialog(true), 500);
+        setTimeout(() => setOpenFollowersDialog(true), 500);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const [openFollowingDialog, setOpenFollowingDialog] = useState(false);
+  const [userFollowing, setUserFollowing] = useState([]);
+
+  const fetchUserFollowing = () => {
+    let userFollowingRef = firestore
+      .collection("users")
+      .doc(user.userId)
+      .collection("following")
+      .limit(10);
+
+    userFollowingRef
+      .get()
+      .then((snapshot) => {
+        let fetchedFollowing = [];
+        snapshot.docs.map(async (doc) => {
+          let followingDetails = await firestore
+            .collection("users")
+            .doc(doc.data().followingId)
+            .get()
+            .then((doc) => {
+              if (doc.exists) {
+                return doc.data();
+              }
+              return;
+            });
+          fetchedFollowing.push(followingDetails);
+        });
+        setUserFollowing(fetchedFollowing);
+      })
+      .then(() => {
+        setTimeout(() => setOpenFollowingDialog(true), 500);
       })
       .catch((err) => console.error(err));
   };
@@ -173,8 +208,13 @@ const ProfileInfo = ({ user }) => {
       <div className="profile-actions">
         <div className="actions">
           <Button className="fancy-button --active">Posts</Button>
-          <Button className="fancy-button">
-            <span className="count">{followersCount}</span> Following
+          <Button
+            className="fancy-button"
+            onClick={() => {
+              fetchUserFollowing();
+            }}
+          >
+            <span className="count">{followingCount}</span> Following
           </Button>
           <Button
             className="fancy-button"
@@ -182,7 +222,7 @@ const ProfileInfo = ({ user }) => {
               fetchUserFollowers();
             }}
           >
-            <span className="count">{followingCount}</span> Followers
+            <span className="count">{followersCount}</span> Followers
           </Button>
         </div>
         {isCurrentUser() ? (
@@ -248,7 +288,7 @@ const ProfileInfo = ({ user }) => {
         icon={<GroupIconSvg />}
         title={`${user.firstName}'s followers.`}
         open={openFollowersDialog}
-        setOpen={setOpenFollowerDialog}
+        setOpen={setOpenFollowersDialog}
         className="follow-dialog"
       >
         <div className="dialog-content">
@@ -280,6 +320,45 @@ const ProfileInfo = ({ user }) => {
                 </li>
               ))
             : "No followers at the moment!"}
+        </div>
+      </CustomDialog>
+
+      <CustomDialog
+        icon={<GroupIconSvg />}
+        title={`${user.firstName}'s following.`}
+        open={openFollowingDialog}
+        setOpen={setOpenFollowingDialog}
+        className="follow-dialog"
+      >
+        <div className="dialog-content">
+          {userFollowing.length > 0
+            ? userFollowing.map((following) => (
+                <li className="fancy-li" key={following.userId}>
+                  <div className="li-header">
+                    <Avatar
+                      imgUrl={following.profileImage}
+                      alt={`${following.fullName}`}
+                      size="56px"
+                    />
+                  </div>
+                  <div className="li-content">
+                    <Typography variant="body2" className="full-name">
+                      {following.fullName}
+                    </Typography>
+                    <Typography variant="body2" className="username">
+                      @{following.username}
+                    </Typography>
+                  </div>
+                  <div className="li-footer">
+                    <Link to={`/users/${following.userId}`}>
+                      <IconButton size="medium">
+                        <UserIconSvg />
+                      </IconButton>
+                    </Link>
+                  </div>
+                </li>
+              ))
+            : "No one is following at the moment!"}
         </div>
       </CustomDialog>
     </Styled.ProfileInfo>

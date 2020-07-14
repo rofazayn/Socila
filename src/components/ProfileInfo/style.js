@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const ProfileInfo = styled.div`
   display: flex;
@@ -117,6 +117,24 @@ const ProfileInfo = styled.div`
         margin-inline-end: 16px;
         &:last-of-type {
           margin-inline-end: 0;
+        }
+      }
+    }
+  }
+
+  .follow-dialog {
+    .dialog-content {
+      .fancy-li {
+        display: flex;
+        flex-direction: row;
+        /* justify-content: center; */
+        align-items: center;
+        .li-content {
+          flex-grow: 1;
+          width: 100%;
+          .full-name {
+            font-weight: 700;
+          }
         }
       }
     }

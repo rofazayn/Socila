@@ -10,6 +10,7 @@ const CustomDialog = ({
   open,
   setOpen,
   keepMounted,
+  className,
 }) => {
   function handleClose() {
     setOpen(false);
@@ -24,6 +25,7 @@ const CustomDialog = ({
       disablePortal
       fullWidth
       maxWidth="xs"
+      className={className}
     >
       <Styled.CustomDialog className="creator">
         <div className="dialog-header">

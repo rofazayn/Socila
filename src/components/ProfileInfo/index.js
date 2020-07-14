@@ -13,6 +13,7 @@ import { ReactComponent as FollowIcon } from "../../assets/icons/bx-user-plus.sv
 import { ReactComponent as CameraIconSvg } from "../../assets/icons/bx-camera.svg";
 import { ReactComponent as UserXIconSvg } from "../../assets/icons/bx-user-x.svg";
 import { ReactComponent as GroupIconSvg } from "../../assets/icons/bx-group.svg";
+import { ReactComponent as UserIconSvg } from "../../assets/icons/bx-user.svg";
 
 import dayjs from "../../helpers/dayjs";
 import Avatar from "../Avatar";
@@ -23,6 +24,7 @@ import { Formik } from "formik";
 import useUser from "../../hooks/useUser";
 import { firestore } from "../../firebase/index";
 import CustomDialog from "../layout/CustomDialog";
+import { Link } from "react-router-dom";
 
 const ProfileInfo = ({ user }) => {
   const { userDetails } = useContext(AuthContext);
@@ -113,8 +115,9 @@ const ProfileInfo = ({ user }) => {
         setUserFollowers(fetchedFollowers);
       })
       .then(() => {
-        setTimeout(() => setOpenFollowerDialog(true), 300);
-      });
+        setTimeout(() => setOpenFollowerDialog(true), 500);
+      })
+      .catch((err) => console.error(err));
   };
 
   return (
@@ -246,13 +249,37 @@ const ProfileInfo = ({ user }) => {
         title={`${user.firstName}'s followers.`}
         open={openFollowersDialog}
         setOpen={setOpenFollowerDialog}
+        className="follow-dialog"
       >
         <div className="dialog-content">
           {userFollowers.length > 0
             ? userFollowers.map((follower) => (
-                <li key={follower.userId}>{follower.email}</li>
+                <li className="fancy-li" key={follower.userId}>
+                  <div className="li-header">
+                    <Avatar
+                      imgUrl={follower.profileImage}
+                      alt={`${follower.fullName}`}
+                      size="56px"
+                    />
+                  </div>
+                  <div className="li-content">
+                    <Typography variant="body2" className="full-name">
+                      {follower.fullName}
+                    </Typography>
+                    <Typography variant="body2" className="username">
+                      @{follower.username}
+                    </Typography>
+                  </div>
+                  <div className="li-footer">
+                    <Link to={`/users/${follower.userId}`}>
+                      <IconButton size="medium">
+                        <UserIconSvg />
+                      </IconButton>
+                    </Link>
+                  </div>
+                </li>
               ))
-            : "Nope"}
+            : "No followers at the moment!"}
         </div>
       </CustomDialog>
     </Styled.ProfileInfo>

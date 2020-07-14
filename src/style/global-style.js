@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   *,
@@ -282,6 +282,18 @@ const GlobalStyle = createGlobalStyle`
       border-top: 1px solid ${({ theme }) => theme.palette.grey[200]};
     }
   }
+
+  .fancy-li {
+    display: flex;
+    border-radius: 8px;
+    transition: all ease-in-out 200ms;
+    background: ${({ theme }) => theme.palette.common.white};
+    padding: 8px;
+    &:hover {
+      background-color: ${({ theme }) => theme.palette.action.hover};
+    }
+  }
+  
 `;
 
 export default GlobalStyle;

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const PostPreview = styled.div`
   display: flex;
@@ -125,6 +125,33 @@ const PostPreview = styled.div`
           flex-direction: row;
           justify-content: space-between;
           align-items: center;
+        }
+      }
+    }
+  }
+
+  .dialog-content {
+    .shareable-link {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .link-placeholder {
+        display: flex;
+        /* justify-content: space-between; */
+        align-items: center;
+          flex-grow: 1;
+          width: 100%;
+          margin-inline-end: 8px;
+        input {
+          max-width: auto;
+          width: 100%;
+          color: ${({ theme }) => theme.palette.grey[700]};
+          /* display: flex; */
+          padding: 8px 8px;
+          background-color: ${({ theme }) => theme.palette.grey[200]};
+          border-radius: 8px;
+          border: none;
         }
       }
     }

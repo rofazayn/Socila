@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Sidebar = styled.aside`
   position: sticky;
@@ -8,6 +8,7 @@ const Sidebar = styled.aside`
   /* background: papayawhip; */
   height: 100vh;
   overflow-y: scroll;
+  padding-top: 32px;
   padding-inline-start: 16px;
   /* display: none; */
   &::-webkit-scrollbar {
@@ -16,5 +17,5 @@ const Sidebar = styled.aside`
 `;
 
 export const Styled = {
-  Sidebar
+  Sidebar,
 };

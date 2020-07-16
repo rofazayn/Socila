@@ -1,19 +1,21 @@
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
+import { grey } from '@material-ui/core/colors';
 
 let themeObject = createMuiTheme({
   palette: {
     primary: {
-      main: '#5271ff'
-    }
+      main: '#5271ff',
+    },
   },
   overrides: {
-    // Style sheet name ⚛️
-    MuiButton: {
-      // Name of the rule
+    MuiOutlinedInput: {
       root: {
-        borderRadius: 8
-      }
-    }
+        borderRadius: 8,
+      },
+      adornedEnd: {
+        fill: grey[500],
+      },
+    },
   },
   typography: {
     fontSize: 15,
@@ -29,45 +31,45 @@ let themeObject = createMuiTheme({
       'sans-serif',
       '"Apple Color Emoji"',
       '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"'
+      '"Segoe UI Symbol"',
     ].join(','),
     button: {
       textTransform: 'none',
       fontFamily: 'Montserrat',
-      fontWeight: 700
+      fontWeight: 700,
     },
     h1: {
       fontFamily: 'Montserrat',
-      fontWeight: 700
+      fontWeight: 700,
     },
     h2: {
       fontFamily: 'Montserrat',
-      fontWeight: 700
+      fontWeight: 700,
     },
     h3: {
       fontFamily: 'Montserrat',
-      fontWeight: 700
+      fontWeight: 700,
     },
     h4: {
       fontFamily: 'Montserrat',
-      fontWeight: 700
+      fontWeight: 700,
     },
     h5: {
       fontFamily: 'Montserrat',
-      fontWeight: 700
+      fontWeight: 700,
     },
     h6: {
       fontFamily: 'Montserrat',
-      fontWeight: 700
+      fontWeight: 700,
     },
     subtitle1: {
       fontFamily: 'Montserrat',
-      fontWeight: 700
+      fontWeight: 700,
     },
     body1: {
-      lineHeight: 1.7
-    }
-  }
+      lineHeight: 1.7,
+    },
+  },
 });
 
 // Make fonts responsive

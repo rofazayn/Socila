@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const TextField = styled.div`
   display: flex;
@@ -6,14 +6,14 @@ const TextField = styled.div`
   input {
     width: 100%;
     height: 48px;
-    border-radius: 0.5rem;
+    border-radius: 8px;
     padding: 0 16px;
     box-shadow: none;
     border: none;
     background: ${({ theme }) => theme.palette.grey[200]};
     color: black;
     font-size: 15px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     outline: none;
     border: 3px solid transparent;
     &::placeholder {
@@ -21,9 +21,9 @@ const TextField = styled.div`
     }
     &:focus {
       border: 3px solid ${({ theme }) => theme.palette.primary.main};
-      ${props => props.error && `border-color: red`}
+      ${(props) => props.error && `border-color: red`}
     }
-    ${props => props.error && `border-color: red`}
+    ${(props) => props.error && `border-color: red`}
   }
 `;
 

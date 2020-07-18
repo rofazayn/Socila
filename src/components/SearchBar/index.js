@@ -15,7 +15,6 @@ const SearchBar = () => {
         onChange={(e) => setSearchField(e.target.value)}
         fullWidth
         variant='outlined'
-        label='Search'
         endIcon={<SearchIconSvg />}
       />
     </Styled.SearchBar>

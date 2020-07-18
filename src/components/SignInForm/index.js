@@ -7,7 +7,7 @@ import {
   Button,
   Checkbox,
   FormControlLabel,
-  CircularProgress
+  CircularProgress,
 } from '@material-ui/core';
 import TextField from '../layout/TextField';
 import vSchema from './validation';
@@ -22,14 +22,14 @@ const SignInForm = () => {
         initialValues={{
           email: '',
           password: '',
-          remember: false
+          remember: false,
         }}
         onSubmit={(values, { setSubmitting, setFieldError }) => {
           setSubmitting(true);
 
           fb.auth()
             .signInWithEmailAndPassword(values.email, values.password)
-            .catch(err => {
+            .catch((err) => {
               setSubmitting(false);
               console.error(err);
               setFieldError('general', err.message);
@@ -44,7 +44,7 @@ const SignInForm = () => {
           handleBlur,
           handleSubmit,
           isSubmitting,
-          isValid
+          isValid,
         }) => (
           <form onSubmit={handleSubmit} noValidate>
             <TextField

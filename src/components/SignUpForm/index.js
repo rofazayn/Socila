@@ -139,7 +139,7 @@ const SignUpForm = () => {
               onChange={handleChange}
               onBlur={handleBlur}
               autoComplete='Username'
-              label='username'
+              label='Username'
               error={touched.username && errors.username ? true : false}
             />
             {touched.username && errors.username ? (

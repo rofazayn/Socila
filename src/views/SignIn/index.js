@@ -42,8 +42,9 @@ const SignIn = () => {
                 |
               </Typography>
               <Typography variant='caption' className='helper-text'>
-                Forgot my{' '}
-                <span className='--underlined --clickable-text'>password</span>
+                <span className='--underlined --clickable-text'>
+                  Forgot my password
+                </span>
               </Typography>
             </div>
           </div>

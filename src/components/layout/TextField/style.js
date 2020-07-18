@@ -1,8 +1,9 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const TextField = styled.div`
   display: flex;
   /* background: red; */
+  position: relative;
   input {
     width: 100%;
     height: 48px;
@@ -13,7 +14,7 @@ const TextField = styled.div`
     background: ${({ theme }) => theme.palette.grey[200]};
     color: black;
     font-size: 15px;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     outline: none;
     border: 3px solid transparent;
     &::placeholder {
@@ -24,6 +25,17 @@ const TextField = styled.div`
       ${(props) => props.error && `border-color: red`}
     }
     ${(props) => props.error && `border-color: red`}
+  }
+  .icon-end {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 16px;
+    top: 0;
+    bottom: 0;
+    svg {
+      fill: ${({ theme }) => theme.palette.grey[500]};
+    }
   }
 `;
 

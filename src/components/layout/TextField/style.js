@@ -17,6 +17,7 @@ const TextField = styled.div`
     font-family: 'Open Sans', sans-serif;
     outline: none;
     border: 3px solid transparent;
+    transition: all 200ms ease-in-out;
     &::placeholder {
       color: ${({ theme }) => theme.palette.grey[600]};
     }

@@ -19,7 +19,7 @@ const TextField = styled.div`
     border: 3px solid transparent;
     transition: all 200ms ease-in-out;
     &::placeholder {
-      color: ${({ theme }) => theme.palette.grey[600]};
+      color: ${({ theme }) => theme.palette.grey[400]};
     }
     &:focus {
       border: 3px solid ${({ theme }) => theme.palette.primary.main};

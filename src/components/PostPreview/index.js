@@ -1,18 +1,21 @@
-import React, { useContext, useState, useRef } from "react";
-import { Styled } from "./style";
-import Avatar from "../Avatar";
-import { Typography, Button, CircularProgress } from "@material-ui/core";
-import { ReactComponent as HeartIcon } from "../../assets/icons/bx-heart.svg";
-import { ReactComponent as CommentIcon } from "../../assets/icons/bx-comment.svg";
-import { ReactComponent as ShareIcon } from "../../assets/icons/bx-share.svg";
-import { motion } from "framer-motion";
-import usePosts from "../../hooks/usePosts";
-import { AuthContext } from "../../context/auth-context";
-import { Formik } from "formik";
-import dayjs from "../../helpers/dayjs";
-import { Link } from "react-router-dom";
-import CommentCreator from "../CommentCreator";
-import CustomDialog from "../layout/CustomDialog";
+import React, { useContext, useState, useRef, useEffect } from 'react';
+import { Styled } from './style';
+import Avatar from '../Avatar';
+import { Typography, Button, CircularProgress } from '@material-ui/core';
+import { ReactComponent as HeartIcon } from '../../assets/icons/bx-heart.svg';
+import { ReactComponent as CommentIcon } from '../../assets/icons/bx-comment.svg';
+import { ReactComponent as ShareIcon } from '../../assets/icons/bx-share.svg';
+import { motion } from 'framer-motion';
+import usePosts from '../../hooks/usePosts';
+import { AuthContext } from '../../context/auth-context';
+import { Formik } from 'formik';
+import dayjs from '../../helpers/dayjs';
+import { Link } from 'react-router-dom';
+import CommentCreator from '../CommentCreator';
+import CustomDialog from '../layout/CustomDialog';
+import findHashtags from '../../helpers/findHashtags';
+import reactStringReplace from 'react-string-replace';
+import Hashtag from '../Hashtag';
 
 const PostPreview = (props) => {
   const {
@@ -25,10 +28,28 @@ const PostPreview = (props) => {
     body,
     likeCount,
     commentCount,
-    shareCount,
   } = props;
   const { postsActions } = usePosts();
   const { userDetails } = useContext(AuthContext);
+
+  const [hashtags, setHashtags] = useState([]);
+
+  // Detect hastags
+  useEffect(() => {
+    let foundHashtags = findHashtags(body);
+    setHashtags(foundHashtags);
+  }, [body]);
+
+  // Replace hastags in body
+  let replacedText;
+
+  replacedText = reactStringReplace(body, /#(\w+)/g, (match, i) => (
+    <Hashtag value={match} />
+  ));
+
+  useEffect(() => {
+    console.log(hashtags);
+  }, [hashtags]);
 
   const isCurrentUser = () => {
     if (authorId === userDetails.userId) {
@@ -74,7 +95,7 @@ const PostPreview = (props) => {
   // Copy url
   const copyShareUrl = () => {
     shareUrlInputRef.current.select();
-    document.execCommand("copy");
+    document.execCommand('copy');
   };
 
   return (
@@ -84,55 +105,55 @@ const PostPreview = (props) => {
       animate={{ opacity: 1 }}
     >
       <Styled.PostPreview>
-        <div className="post-section details">
-          <div className="post-header">
-            <div className="header-section">
-              <div className="avatar">
-                <Link to={isCurrentUser() ? "/profile" : `/users/${authorId}`}>
+        <div className='post-section details'>
+          <div className='post-header'>
+            <div className='header-section'>
+              <div className='avatar'>
+                <Link to={isCurrentUser() ? '/profile' : `/users/${authorId}`}>
                   <Avatar imgUrl={authorImage} alt={authorFullName} />
                 </Link>
               </div>
 
-              <div className="author-name spaced">
-                <Typography variant="body2">
+              <div className='author-name spaced'>
+                <Typography variant='body2'>
                   <Link
-                    to={isCurrentUser() ? "/profile" : `/users/${authorId}`}
+                    to={isCurrentUser() ? '/profile' : `/users/${authorId}`}
                   >
                     {authorFullName}
                   </Link>
                 </Typography>
               </div>
 
-              <div className="header-section">
-                <div className="author-username spaced">
+              <div className='header-section'>
+                <div className='author-username spaced'>
                   <Link
-                    to={isCurrentUser() ? "/profile" : `/users/${authorId}`}
+                    to={isCurrentUser() ? '/profile' : `/users/${authorId}`}
                   >
-                    <Typography variant="body2">@{authorUsername}</Typography>
+                    <Typography variant='body2'>@{authorUsername}</Typography>
                   </Link>
                 </div>
               </div>
             </div>
 
-            <div className="time-posted spaced">
-              <Typography variant="body2">
+            <div className='time-posted spaced'>
+              <Typography variant='body2'>
                 {dayjs(createdAt).fromNow()}
               </Typography>
             </div>
           </div>
 
-          <div className="post-main">
-            <div className="post-body">
+          <div className='post-main'>
+            <div className='post-body'>
               <Link to={`/posts/${postId}`}>
-                <Typography variant="body1">{body}</Typography>
+                <Typography variant='body1'>{replacedText}</Typography>
               </Link>
             </div>
           </div>
-          <div className="post-footer">
-            <div className="reactions">
-              <div className="reactions-group">
+          <div className='post-footer'>
+            <div className='reactions'>
+              <div className='reactions-group'>
                 <div
-                  className={`reaction love ${isPostLiked() ? "--liked" : ""}`}
+                  className={`reaction love ${isPostLiked() ? '--liked' : ''}`}
                 >
                   <Formik
                     initialValues={{ postId: postId }}
@@ -140,7 +161,7 @@ const PostPreview = (props) => {
                   >
                     {({ values, handleSubmit, isSubmitting }) => (
                       <form onSubmit={handleSubmit}>
-                        <input type="hidden" value={values.postId} />
+                        <input type='hidden' value={values.postId} />
                         <Button
                           startIcon={
                             isSubmitting ? (
@@ -149,34 +170,34 @@ const PostPreview = (props) => {
                               <HeartIcon />
                             )
                           }
-                          type="submit"
-                          className="fancy-button"
+                          type='submit'
+                          className='fancy-button'
                           disabled={isSubmitting}
                         >
-                          {isPostLiked() ? "Liked" : "Like"}
+                          {isPostLiked() ? 'Liked' : 'Like'}
                         </Button>
                       </form>
                     )}
                   </Formik>
-                  <div className="count">{likeCount}</div>
+                  <div className='count'>{likeCount}</div>
                 </div>
-                <div className="reaction comment">
+                <div className='reaction comment'>
                   <Button
                     startIcon={<CommentIcon />}
-                    className="fancy-button"
+                    className='fancy-button'
                     onClick={handleCommentClickOpen}
                   >
                     Comment
                   </Button>
-                  <div className="count">{commentCount}</div>
+                  <div className='count'>{commentCount}</div>
                 </div>
               </div>
-              <div className="reaction share">
+              <div className='reaction share'>
                 {/* <div className="count">{shareCount}</div> */}
                 <Button
                   onClick={() => setOpenShareDialog(true)}
                   startIcon={<ShareIcon />}
-                  className="fancy-button"
+                  className='fancy-button'
                 >
                   Share
                 </Button>
@@ -193,16 +214,16 @@ const PostPreview = (props) => {
         <CustomDialog
           open={openShareDialog}
           setOpen={setOpenShareDialog}
-          title="Copy the link and share."
+          title='Copy the link and share.'
           icon={<ShareIcon />}
         >
-          <div className="dialog-content">
-            <div className="shareable-link">
-              <div className="link-placeholder">
+          <div className='dialog-content'>
+            <div className='shareable-link'>
+              <div className='link-placeholder'>
                 {/* <Typography variant="body2">{shareUrl}</Typography> */}
                 <input defaultValue={shareUrl} ref={shareUrlInputRef} />
               </div>
-              <Button className="fancy-button" onClick={copyShareUrl}>
+              <Button className='fancy-button' onClick={copyShareUrl}>
                 Copy
               </Button>
             </div>

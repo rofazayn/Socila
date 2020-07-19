@@ -13,7 +13,7 @@ const SearchBar = () => {
         placeholder='Search...'
         value={searchField}
         onChange={(e) => setSearchField(e.target.value)}
-        fullWidth
+        fullWidth={true}
         variant='outlined'
         endIcon={<SearchIconSvg />}
       />

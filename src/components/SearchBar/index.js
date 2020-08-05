@@ -16,6 +16,7 @@ const SearchBar = () => {
         fullWidth={true}
         variant='outlined'
         endIcon={<SearchIconSvg />}
+        fat={true}
       />
     </Styled.SearchBar>
   );

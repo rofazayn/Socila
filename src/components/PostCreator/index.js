@@ -31,7 +31,7 @@ const PostCreator = () => {
           isSubmitting,
           isValid,
           touched,
-          errors
+          errors,
         }) => (
           <>
             <div className='form-wrapper'>
@@ -44,8 +44,9 @@ const PostCreator = () => {
                   autoComplete='false'
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  placeholder={`What's on your mind, ${userDetails &&
-                    userDetails.firstName}`}
+                  placeholder={`What's on your mind, ${
+                    userDetails && userDetails.firstName
+                  }`}
                 />
                 <div className='submit-button'>
                   <IconButton

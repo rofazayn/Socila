@@ -27,6 +27,7 @@ const TextField = styled.div`
       outline: none;
       border: 3px solid transparent;
       transition: all 200ms ease-in-out;
+
       &::placeholder {
         color: ${({ theme }) => theme.palette.grey[400]};
       }
@@ -45,6 +46,11 @@ const TextField = styled.div`
       bottom: 0;
       svg {
         fill: ${({ theme }) => theme.palette.grey[500]};
+      }
+    }
+    &.fat {
+      input {
+        height: 56px;
       }
     }
   }

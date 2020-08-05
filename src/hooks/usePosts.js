@@ -3,6 +3,8 @@ import { PostsContext } from '../context/posts-context';
 import { AuthContext } from '../context/auth-context';
 import fb from '../firebase';
 import { postsTypes, userTypes } from '../constants';
+import findHashtags from '../helpers/findHashtags';
+import { sha256 } from '../helpers/crypto';
 
 export function usePosts() {
   const { posts, postsDispatch } = useContext(PostsContext);
@@ -10,6 +12,10 @@ export function usePosts() {
 
   async function createPost(values, actions) {
     let postsRef = fb.firestore().collection('posts');
+    let hashtagsRef = fb.firestore().collection('hashtags');
+
+    const hashtags = findHashtags(values.body);
+    let hash = await sha256(hashtags[0]);
 
     let newPost = {
       authorId: userDetails.userId,
@@ -21,6 +27,7 @@ export function usePosts() {
       likeCount: 0,
       shareCount: 0,
       createdAt: new Date().toISOString(),
+      hashtags: [...hashtags],
     };
 
     try {
@@ -29,6 +36,27 @@ export function usePosts() {
         .then((doc) => {
           newPost.postId = doc.id;
           actions.resetForm();
+
+          if (hashtags.length > 0) {
+            let postsWithHashTag = [];
+            const hashtagExist = hashtagsRef
+              .doc(hash)
+              .get()
+              .then((doc) => {
+                if (doc.exists) {
+                  postsWithHashTag = doc.data;
+                  return true;
+                }
+                return false;
+              });
+
+            if (hashtagExist) {
+              hashtagsRef
+                .doc(hash)
+                .set({ postsIds: [...postsWithHashTag, doc.id] });
+            }
+          }
+
           return postsDispatch({ type: postsTypes.ADD_POST, payload: newPost });
         })
         .catch((err) => console.error(err));

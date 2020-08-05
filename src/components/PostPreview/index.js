@@ -47,10 +47,6 @@ const PostPreview = (props) => {
     <Hashtag value={match} />
   ));
 
-  useEffect(() => {
-    console.log(hashtags);
-  }, [hashtags]);
-
   const isCurrentUser = () => {
     if (authorId === userDetails.userId) {
       return true;

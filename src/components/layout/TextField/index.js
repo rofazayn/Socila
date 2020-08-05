@@ -3,7 +3,7 @@ import { Styled } from './style';
 import { Typography } from '@material-ui/core';
 
 const TextField = forwardRef((props, ref) => {
-  let { fullWidth, label, error, endIcon, ...rest } = props;
+  let { fullWidth, fat, label, error, endIcon, ...rest } = props;
   return (
     <Styled.TextField {...props}>
       {label && (
@@ -13,7 +13,7 @@ const TextField = forwardRef((props, ref) => {
           </Typography>
         </label>
       )}
-      <div className={`input ${fullWidth && 'full-width'}`}>
+      <div className={`input ${fullWidth && 'full-width'} ${fat && 'fat'} `}>
         <input {...rest} ref={ref} id={label} />
         <div className='icon-end'>{endIcon}</div>
       </div>

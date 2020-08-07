@@ -38,13 +38,14 @@ export function usePosts() {
           actions.resetForm();
 
           if (hashtags.length > 0) {
-            let postsWithHashTag = [];
+            let postsWithHashtag = [];
             const hashtagExist = hashtagsRef
               .doc(hash)
               .get()
               .then((doc) => {
                 if (doc.exists) {
-                  postsWithHashTag = doc.data;
+                  postsWithHashtag = doc.data().postsIds;
+                  console.log(postsWithHashtag);
                   return true;
                 }
                 return false;
@@ -53,7 +54,9 @@ export function usePosts() {
             if (hashtagExist) {
               hashtagsRef
                 .doc(hash)
-                .set({ postsIds: [...postsWithHashTag, doc.id] });
+                .collection('posts')
+                .doc(doc.id)
+                .set({ id: doc.id, createdAt: new Date() });
             }
           }
 

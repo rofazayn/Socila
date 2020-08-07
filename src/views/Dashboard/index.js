@@ -5,6 +5,7 @@ import { Styled } from './style';
 import Navbar from '../../components/Navbar';
 import Main from '../../components/Main';
 import { PostsProvider } from '../../context/posts-context';
+import { HashtagsProvider } from '../../context/hashtags-context';
 
 const Dashboard = () => {
   return (
@@ -15,12 +16,14 @@ const Dashboard = () => {
       transition={{ duration: 0.5 }}
     >
       <PostsProvider>
-        <Container>
-          <Styled.Dashboard>
-            <Navbar />
-            <Main />
-          </Styled.Dashboard>
-        </Container>
+        <HashtagsProvider>
+          <Container>
+            <Styled.Dashboard>
+              <Navbar />
+              <Main />
+            </Styled.Dashboard>
+          </Container>
+        </HashtagsProvider>
       </PostsProvider>
     </motion.div>
   );

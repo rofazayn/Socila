@@ -28,3 +28,9 @@ export const commentsTypes = {
   CLEAR_POST_COMMENTS: 'CLEAR_POST_COMMENTS',
   ADD_COMMENT: 'ADD_COMMENT',
 };
+
+// Hashtag types
+export const hashtagsTypes = {
+  SET_TRENDING: 'SET_TRENDING',
+  CLEAR_TRENDING: 'CLEAR_TRENDING',
+};

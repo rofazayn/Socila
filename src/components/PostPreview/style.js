@@ -1,17 +1,33 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const PostPreview = styled.div`
   display: flex;
   padding: 24px 16px 16px 16px;
   margin-bottom: 8px;
   transition: all 250ms ease-in-out;
+  /* cursor: pointer; */
   /* border-inline-start: 2px solid transparent; */
   /* cursor: pointer; */
+  position: relative;
   &:hover {
     /* cursor: pointer; */
     background: ${({ theme }) => theme.palette.grey[50]};
     /* border-inline-start: 2px solid ${({ theme }) =>
       theme.palette.primary.light}; */
+  }
+  .post-link {
+    &::after {
+      position: absolute;
+      content: '';
+      top: 0;
+      left: 0;
+      right: 0%;
+      bottom: 0;    
+      width: 100%;
+      height: 100%;
+      /* background-color: red; */
+      /* z-index: -1; */
+    }
   }
   .post-section {
     display: flex;
@@ -60,9 +76,9 @@ const PostPreview = styled.div`
       }
     }
     .post-footer {
-      padding-top: 16px;
+      margin-top: 16px;
       transform: translateX(-8px);
-      padding-inline-start: 80px;
+      margin-inline-start: 80px;
       .reactions {
         display: flex;
         flex-direction: row;

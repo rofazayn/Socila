@@ -101,6 +101,7 @@ const PostPreview = (props) => {
       animate={{ opacity: 1 }}
     >
       <Styled.PostPreview>
+        <Link as='div' to={`/posts/${postId}`} className='post-link'></Link>
         <div className='post-section details'>
           <div className='post-header'>
             <div className='header-section'>
@@ -140,9 +141,7 @@ const PostPreview = (props) => {
 
           <div className='post-main'>
             <div className='post-body'>
-              <Link to={`/posts/${postId}`}>
-                <Typography variant='body1'>{replacedText}</Typography>
-              </Link>
+              <Typography variant='body1'>{replacedText}</Typography>
             </div>
           </div>
           <div className='post-footer'>

@@ -72,7 +72,7 @@ export function usePosts() {
               } else {
                 hashtagsRef.doc(hash).set(
                   {
-                    points: 0,
+                    points: 1,
                     name: hashtag,
                   },
                   { merge: true }

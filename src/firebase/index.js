@@ -17,4 +17,4 @@ const fb = firebase.initializeApp(firebaseConfig);
 const firestore = fb.firestore();
 const storage = fb.storage();
 
-export { firestore, storage, fb as default };
+export { firebase, firestore, storage, fb as default };

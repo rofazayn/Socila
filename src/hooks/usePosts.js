@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { PostsContext } from '../context/posts-context';
 import { AuthContext } from '../context/auth-context';
-import fb from '../firebase';
+import fb, { firebase } from '../firebase';
 import { postsTypes, userTypes } from '../constants';
 import findHashtags from '../helpers/findHashtags';
 import { sha256 } from '../helpers/crypto';
@@ -15,7 +15,6 @@ export function usePosts() {
     let hashtagsRef = fb.firestore().collection('hashtags');
 
     const hashtags = findHashtags(values.body);
-    let hash = await sha256(hashtags[0]);
 
     let newPost = {
       authorId: userDetails.userId,
@@ -38,26 +37,53 @@ export function usePosts() {
           actions.resetForm();
 
           if (hashtags.length > 0) {
-            let postsWithHashtag = [];
-            const hashtagExist = hashtagsRef
-              .doc(hash)
-              .get()
-              .then((doc) => {
-                if (doc.exists) {
-                  postsWithHashtag = doc.data().postsIds;
-                  console.log(postsWithHashtag);
-                  return true;
-                }
-                return false;
-              });
+            hashtags.forEach(async (hashtag) => {
+              console.log(hashtag);
 
-            if (hashtagExist) {
-              hashtagsRef
+              let hash = await sha256(hashtag);
+              // let postsWithHashtag = [];
+              let hashtagExist = await hashtagsRef
                 .doc(hash)
-                .collection('posts')
-                .doc(doc.id)
-                .set({ id: doc.id, createdAt: new Date() });
-            }
+                .get()
+                .then((doc) => {
+                  if (doc.exists) {
+                    // postsWithHashtag = doc.data().postsIds;
+                    // console.log(postsWithHashtag);
+                    return true;
+                  }
+                  return false;
+                });
+
+              console.log(hashtagExist);
+
+              if (hashtagExist) {
+                hashtagsRef.doc(hash).set(
+                  {
+                    points: firebase.firestore.FieldValue.increment(1),
+                    name: hashtag,
+                  },
+                  { merge: true }
+                );
+                hashtagsRef
+                  .doc(hash)
+                  .collection('posts')
+                  .doc(doc.id)
+                  .set({ id: doc.id, createdAt: new Date() });
+              } else {
+                hashtagsRef.doc(hash).set(
+                  {
+                    points: 0,
+                    name: hashtag,
+                  },
+                  { merge: true }
+                );
+                hashtagsRef
+                  .doc(hash)
+                  .collection('posts')
+                  .doc(doc.id)
+                  .set({ id: doc.id, createdAt: new Date() });
+              }
+            });
           }
 
           return postsDispatch({ type: postsTypes.ADD_POST, payload: newPost });

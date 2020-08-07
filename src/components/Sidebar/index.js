@@ -4,6 +4,7 @@ import Wrapper from '../Wrapper';
 // import { Switch } from "react-router-dom";
 import SearchBar from '../SearchBar';
 import TrendingList from '../TrendingList';
+import SideFooter from '../SideFooter';
 
 const Sidebar = () => {
   return (
@@ -12,6 +13,7 @@ const Sidebar = () => {
         <SearchBar />
         {/* <Switch><Route path="/" component={} /></Switch> */}
         <TrendingList />
+        <SideFooter />
       </Wrapper>
     </Styled.Sidebar>
   );

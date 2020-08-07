@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   *,
@@ -131,6 +131,10 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     height: 640px;
     border-radius: 16px;
+  }
+
+  .page-title {    
+    font-size: 20px;
   }
 
   .fancy-button {

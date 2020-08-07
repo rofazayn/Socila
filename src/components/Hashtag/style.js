@@ -6,6 +6,10 @@ const Hashtag = styled(Link)`
   font-weight: 700;
 
   position: relative;
+
+  &.--uncolored {
+    color: ${({ theme }) => theme.palette.text.primary};
+  }
 `;
 
 export const Styled = {

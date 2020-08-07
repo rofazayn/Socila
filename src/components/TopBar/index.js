@@ -18,8 +18,9 @@ const TopBar = ({ title, icon, border }) => {
 
   return (
     <Styled.TopBar
-      className={`content-top ${moving && '--moved'} ${border &&
-        '--initial-bordered'}`}
+      className={`content-top ${moving && '--moved'} ${
+        border && '--initial-bordered'
+      }`}
     >
       <Typography variant='h6' className='page-title'>
         {title}

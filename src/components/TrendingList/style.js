@@ -6,18 +6,18 @@ const TrendingList = styled.div`
   list-style: none;
   padding: 0 16px;
   border-radius: 16px;
-  background-color: ${({ theme }) => theme.palette.grey[200]};
+  background-color: ${({ theme }) => theme.palette.grey[100]};
   margin-top: 24px;
   .trending-header {
     padding: 16px 0;
-    border-bottom: 1px solid ${({ theme }) => theme.palette.grey[300]};
+    border-bottom: 1px solid ${({ theme }) => theme.palette.grey[200]};
   }
   .trending-item {
     display: flex;
     flex-direction: row;
     align-items: center;
     padding: 16px 0;
-    border-bottom: 1px solid ${({ theme }) => theme.palette.grey[300]};
+    border-bottom: 1px solid ${({ theme }) => theme.palette.grey[200]};
     &:last-of-type {
       border-bottom: none;
     }

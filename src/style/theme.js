@@ -18,7 +18,7 @@ let themeObject = createMuiTheme({
     },
   },
   typography: {
-    fontSize: 15,
+    fontSize: 14,
     fontFamily: [
       '"Open Sans"',
       '"Montserrat"',

@@ -20,7 +20,7 @@ const TextField = styled.div`
       padding: 0 16px;
       box-shadow: none;
       border: none;
-      background: ${({ theme }) => theme.palette.grey[200]};
+      background: ${({ theme }) => theme.palette.grey[100]};
       color: black;
       font-size: 15px;
       font-family: 'Open Sans', sans-serif;
@@ -31,6 +31,15 @@ const TextField = styled.div`
       &::placeholder {
         color: ${({ theme }) => theme.palette.grey[400]};
       }
+
+      &:hover {
+        background-color: ${({ theme }) => theme.palette.grey[200]};
+        border-color: ${({ theme }) => theme.palette.grey[200]};
+        &::placeholder {
+          border-color: ${({ theme }) => theme.palette.grey[500]};
+        }
+      }
+
       &:focus {
         border: 3px solid ${({ theme }) => theme.palette.primary.main};
         ${(props) => props.error && `border-color: red`}

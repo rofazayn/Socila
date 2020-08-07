@@ -41,8 +41,8 @@ const CommentCreator = styled.div`
                   height: 100%;
                   padding: 16px;
                   padding-inline-end: 64px;
-                  background-color: ${({ theme }) => theme.palette.grey[200]};
-                  border: 3px solid ${({ theme }) => theme.palette.grey[200]};
+                  background-color: ${({ theme }) => theme.palette.grey[100]};
+                  border: 3px solid ${({ theme }) => theme.palette.grey[100]};
                   color: ${({ theme }) => theme.palette.text.primary};
                   border-radius: 16px;
                   justify-content: flex-start;

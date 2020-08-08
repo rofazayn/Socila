@@ -46,7 +46,7 @@ const PostCreator = () => {
                   onBlur={handleBlur}
                   placeholder={`What's on your mind, ${
                     userDetails && userDetails.firstName
-                  }`}
+                  }?`}
                 />
                 <div className='submit-button'>
                   <IconButton

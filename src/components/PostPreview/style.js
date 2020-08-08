@@ -79,11 +79,10 @@ const PostPreview = styled.div`
       margin-top: 16px;
       transform: translateX(-8px);
       margin-inline-start: 80px;
+      
       .reactions {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
+       
         .reaction {
           display: flex;
           flex-direction: row;
@@ -94,6 +93,23 @@ const PostPreview = styled.div`
             margin-inline-start: 8px;
             font-weight: bold;
             color: ${({ theme }) => theme.palette.text.secondary};
+          }
+          &.filler {
+            display: flex;
+            flex-grow: 1;
+            position: relative;
+            .footer-post-link {
+              &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0%;
+                bottom: 0;    
+                width: 100%;
+                height: 100%;
+              }
+            }
           }
           &.love {
             &.--liked {
@@ -124,7 +140,7 @@ const PostPreview = styled.div`
             }
           }
           &.share {
-            margin-inline-end: 16px;
+            /* padding-inline-end: 16px; */
             .count {
               margin-inline-end: 8px;
             }
@@ -138,9 +154,6 @@ const PostPreview = styled.div`
         }
         .reactions-group {
           display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          align-items: center;
         }
       }
     }

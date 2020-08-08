@@ -144,48 +144,54 @@ const PostPreview = (props) => {
               <Typography variant='body1'>{replacedText}</Typography>
             </div>
           </div>
+
           <div className='post-footer'>
             <div className='reactions'>
-              <div className='reactions-group'>
-                <div
-                  className={`reaction love ${isPostLiked() ? '--liked' : ''}`}
+              <div
+                className={`reaction love ${isPostLiked() ? '--liked' : ''}`}
+              >
+                <Formik
+                  initialValues={{ postId: postId }}
+                  onSubmit={handleLike}
                 >
-                  <Formik
-                    initialValues={{ postId: postId }}
-                    onSubmit={handleLike}
-                  >
-                    {({ values, handleSubmit, isSubmitting }) => (
-                      <form onSubmit={handleSubmit}>
-                        <input type='hidden' value={values.postId} />
-                        <Button
-                          startIcon={
-                            isSubmitting ? (
-                              <CircularProgress size={18} />
-                            ) : (
-                              <HeartIcon />
-                            )
-                          }
-                          type='submit'
-                          className='fancy-button'
-                          disabled={isSubmitting}
-                        >
-                          {isPostLiked() ? 'Liked' : 'Like'}
-                        </Button>
-                      </form>
-                    )}
-                  </Formik>
-                  <div className='count'>{likeCount}</div>
-                </div>
-                <div className='reaction comment'>
-                  <Button
-                    startIcon={<CommentIcon />}
-                    className='fancy-button'
-                    onClick={handleCommentClickOpen}
-                  >
-                    Comment
-                  </Button>
-                  <div className='count'>{commentCount}</div>
-                </div>
+                  {({ values, handleSubmit, isSubmitting }) => (
+                    <form onSubmit={handleSubmit}>
+                      <input type='hidden' value={values.postId} />
+                      <Button
+                        startIcon={
+                          isSubmitting ? (
+                            <CircularProgress size={18} />
+                          ) : (
+                            <HeartIcon />
+                          )
+                        }
+                        type='submit'
+                        className='fancy-button'
+                        disabled={isSubmitting}
+                      >
+                        {isPostLiked() ? 'Liked' : 'Like'}
+                      </Button>
+                    </form>
+                  )}
+                </Formik>
+                <div className='count'>{likeCount}</div>
+              </div>
+              <div className='reaction comment'>
+                <Button
+                  startIcon={<CommentIcon />}
+                  className='fancy-button'
+                  onClick={handleCommentClickOpen}
+                >
+                  Comment
+                </Button>
+                <div className='count'>{commentCount}</div>
+              </div>
+              <div className='reaction filler'>
+                <Link
+                  as='div'
+                  to={`/posts/${postId}`}
+                  className='footer-post-link'
+                ></Link>
               </div>
               <div className='reaction share'>
                 {/* <div className="count">{shareCount}</div> */}

@@ -44,7 +44,7 @@ const PostPreview = (props) => {
   let replacedText;
 
   replacedText = reactStringReplace(body, /#(\w+)/g, (match, i) => (
-    <Hashtag value={match} />
+    <Hashtag key={i} value={match} />
   ));
 
   const isCurrentUser = () => {

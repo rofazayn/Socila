@@ -31,7 +31,7 @@ const PostsList = ({ userId }) => {
         <div className='posts-fallback no-posts'>
           <NoPostsSvg />
           <Typography variant='body2'>
-            There are no posts available at the moment.
+            There are no posts available at the moment!
           </Typography>
         </div>
       )}

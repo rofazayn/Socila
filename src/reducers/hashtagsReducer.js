@@ -9,7 +9,7 @@ const hashtagsReducer = (state, action) => {
 
     case hashtagsTypes.CLEAR_TRENDING:
       return {
-        hashtags: null,
+        hashtags: [],
       };
 
     default:

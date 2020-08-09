@@ -209,6 +209,32 @@ const GlobalStyle = createGlobalStyle`
         background-color: ${({ theme }) => theme.palette.primary.dark}
       }
     }
+
+    .trending-fallback {
+    width: 100%;
+    padding: 16px 0 24px 0;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    flex-direction: column;
+    &.no-hashtags {
+      &.--end {
+        margin-top: 36px;
+      }
+      p {
+        color: ${({ theme }) => theme.palette.text.disabled};
+        /* text-align: center; */
+        max-width: 260px;
+      }
+      svg {
+        opacity: 50%;
+        filter: grayscale(100%);
+        width: 180px;
+        height: auto;
+        margin-bottom: 24px;
+      }
+    }
+  }
     
 
     .posts-fallback {

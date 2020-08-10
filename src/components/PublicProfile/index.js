@@ -8,11 +8,14 @@ import PostsList from '../PostsList';
 import { useFetchUser } from '../../hooks/useUser';
 import { useParams, Redirect } from 'react-router-dom';
 import { AuthContext } from '../../context/auth-context';
+import { useFetchPosts } from '../../hooks/usePosts';
 
 const PublicProfile = () => {
   const { userDetails } = useContext(AuthContext);
   const { userId } = useParams();
   const fetchedUser = useFetchUser(userId);
+
+  const { posts } = useFetchPosts(userId);
 
   if (userDetails.userId === userId) {
     return <Redirect to='/profile' />;
@@ -29,7 +32,7 @@ const PublicProfile = () => {
           <>
             <TopBar title='Explore' icon={<UserIconSvg />} />
             <ProfileInfo user={fetchedUser} />
-            <PostsList userId={fetchedUser.userId} />{' '}
+            <PostsList posts={posts} />
           </>
         ) : null}
       </Styled.PublicProfile>

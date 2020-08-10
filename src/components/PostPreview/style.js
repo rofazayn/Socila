@@ -50,11 +50,13 @@ const PostPreview = styled.div`
         padding-inline-end: 8px;
       }
       .author-name {
+        position: relative;
         p {
           font-weight: bold;
         }
       }
       .author-username {
+        position: relative;
         p {
           color: ${({ theme }) => theme.palette.text.disabled};
           text-decoration: underline;

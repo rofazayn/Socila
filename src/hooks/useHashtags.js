@@ -78,7 +78,7 @@ export const useFetchHashtagPosts = (hashtag) => {
           const fetchedPost = await postsRef
             .doc(postId)
             .get()
-            .then((doc) => doc.data());
+            .then((doc) => ({ postId: doc.id, ...doc.data() }));
 
           return fetchedPost;
         };

@@ -6,9 +6,11 @@ import { motion } from 'framer-motion';
 import ProfileInfo from '../ProfileInfo';
 import PostsList from '../PostsList';
 import { AuthContext } from '../../context/auth-context';
+import { useFetchPosts } from '../../hooks/usePosts';
 
 const Profile = () => {
   const { userDetails } = useContext(AuthContext);
+  const { posts } = useFetchPosts(userDetails.userId);
 
   return (
     <motion.div
@@ -19,7 +21,7 @@ const Profile = () => {
       <Styled.Profile className='profile-page'>
         <TopBar title={'Profile'} icon={<UserIconSvg />} />
         <ProfileInfo user={userDetails} />
-        <PostsList userId={userDetails.userId} />
+        <PostsList posts={posts} />
         {/* <ProfileActions />
         <ProfileContent /> */}
       </Styled.Profile>

@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useReducer, useEffect } from 'react';
 import postsReducer from '../reducers/postsReducer';
 
 export const PostsContext = createContext();
@@ -10,6 +10,10 @@ export const PostsProvider = ({ children }) => {
       comments: null,
     },
   });
+
+  useEffect(() => {
+    console.log(state);
+  }, [state, dispatch]);
 
   return (
     <PostsContext.Provider

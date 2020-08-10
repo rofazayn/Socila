@@ -4,11 +4,8 @@ import PostPreview from '../PostPreview';
 import { CircularProgress, Typography } from '@material-ui/core';
 import { ReactComponent as NoPostsSvg } from '../../assets/svg/TreeSwing.svg';
 // import { ReactComponent as NoPostsEndSvg } from '../../assets/svg/FinishLine.svg';
-import { useFetchPosts } from '../../hooks/usePosts';
 
-const PostsList = ({ userId }) => {
-  const { posts } = useFetchPosts(userId);
-
+const PostsList = ({ posts }) => {
   return (
     <Styled.PostsList>
       {posts === null ? (

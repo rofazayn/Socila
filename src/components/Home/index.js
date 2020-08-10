@@ -6,8 +6,11 @@ import { ReactComponent as HomeIconSvg } from '../../assets/icons/bx-home.svg';
 import { motion } from 'framer-motion';
 import PostsList from '../PostsList';
 import PostCreator from '../PostCreator';
+import { useFetchPosts } from '../../hooks/usePosts';
 
 const Home = () => {
+  const { posts } = useFetchPosts();
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -17,7 +20,7 @@ const Home = () => {
       <Styled.Home className='home-page'>
         <TopBar title={`Home`} icon={<HomeIconSvg />} />
         <PostCreator />
-        <PostsList />
+        <PostsList posts={posts} />
       </Styled.Home>
     </motion.div>
   );

@@ -20,7 +20,7 @@ const Content = () => {
         <Route exact path='/messages' component={Messages} />
         <Route exact path='/profile' component={Profile} />
         <Route exact path='/users/:userId' component={PublicProfile} />
-        <Route exact path='/settings' component={Settings} />
+        <Route path='/settings' component={Settings} />
         <Route exact path='/hashtag/:hashtag' component={HashtagResults} />
         <Redirect to='/' />
       </Switch>

@@ -5,6 +5,7 @@ let themeObject = createMuiTheme({
   palette: {
     primary: {
       main: '#5271ff',
+      background: '#eaeeff',
     },
   },
   overrides: {

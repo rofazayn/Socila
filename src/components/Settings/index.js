@@ -1,9 +1,10 @@
 import React from 'react';
 import { Styled } from './style';
-import Wrapper from '../Wrapper';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import TopBar from '../TopBar';
 import { ReactComponent as CogIconSvg } from '../../assets/icons/bx-cog.svg';
 import { motion } from 'framer-motion';
+import EmailSettings from '../EmailSettings';
 
 const Settings = () => {
   return (
@@ -15,16 +16,10 @@ const Settings = () => {
     >
       <Styled.Settings className='settings-page'>
         <TopBar title={'Settings'} icon={<CogIconSvg />} />
-        <Wrapper>
-          <div className='placeholder'></div>
-          <div className='placeholder'></div>
-          <div className='placeholder'></div>
-          <div className='placeholder'></div>
-          <div className='placeholder'></div>
-          <div className='placeholder'></div>
-          <div className='placeholder'></div>
-          <div className='placeholder'></div>
-        </Wrapper>
+        <Switch>
+          <Route exact path='/settings/email' component={EmailSettings} />
+          <Redirect to='/settings/email' />
+        </Switch>
       </Styled.Settings>
     </motion.div>
   );

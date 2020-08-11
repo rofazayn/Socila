@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Styled } from './style';
 import { Typography, IconButton } from '@material-ui/core';
 import { AuthContext } from '../../context/auth-context';
-import { ReactComponent as LeftArrowIconSvg } from '../../assets/icons/bx-left-arrow-alt.svg';
+import { ReactComponent as WrenchIconSvg } from '../../assets/icons/bx-wrench.svg';
 import { ReactComponent as TrashIconSvg } from '../../assets/icons/bx-trash.svg';
 
 const SettingsMenu = () => {
@@ -24,7 +24,7 @@ const SettingsMenu = () => {
           </div>
           <div className='action'>
             <IconButton>
-              <LeftArrowIconSvg />
+              <WrenchIconSvg />
             </IconButton>
           </div>
         </Styled.SettingsMenuItem>
@@ -39,7 +39,7 @@ const SettingsMenu = () => {
           </div>
           <div className='action'>
             <IconButton>
-              <LeftArrowIconSvg />
+              <WrenchIconSvg />
             </IconButton>
           </div>
         </Styled.SettingsMenuItem>
@@ -54,7 +54,7 @@ const SettingsMenu = () => {
           </div>
           <div className='action'>
             <IconButton>
-              <LeftArrowIconSvg />
+              <WrenchIconSvg />
             </IconButton>
           </div>
         </Styled.SettingsMenuItem>
@@ -69,7 +69,7 @@ const SettingsMenu = () => {
           </div>
           <div className='action'>
             <IconButton>
-              <LeftArrowIconSvg />
+              <WrenchIconSvg />
             </IconButton>
           </div>
         </Styled.SettingsMenuItem>
@@ -84,7 +84,7 @@ const SettingsMenu = () => {
           </div>
           <div className='action'>
             <IconButton>
-              <LeftArrowIconSvg />
+              <WrenchIconSvg />
             </IconButton>
           </div>
         </Styled.SettingsMenuItem>
@@ -99,7 +99,7 @@ const SettingsMenu = () => {
           </div>
           <div className='action'>
             <IconButton>
-              <LeftArrowIconSvg />
+              <WrenchIconSvg />
             </IconButton>
           </div>
         </Styled.SettingsMenuItem>{' '}

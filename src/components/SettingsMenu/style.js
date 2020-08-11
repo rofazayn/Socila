@@ -36,6 +36,14 @@ const SettingsMenuItem = styled(NavLink)`
   transition: all ease-in-out 200ms;
   &:hover {
     background-color: ${({ theme }) => theme.palette.action.hover};
+    .action {
+      button {
+        svg {
+          fill: ${({ theme }) => theme.palette.grey[600]};
+          opacity: 100%;
+        }
+      }
+    }
   }
   &:first-of-type {
     border-top-right-radius: 8px;
@@ -77,6 +85,13 @@ const SettingsMenuItem = styled(NavLink)`
     }
   }
   .action {
+    button {
+      svg {
+        transition: all ease-in-out 200ms;
+        fill: ${({ theme }) => theme.palette.grey[400]};
+        /* opacity: 0; */
+      }
+    }
     &.--danger {
       button {
         svg {

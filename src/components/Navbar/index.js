@@ -60,7 +60,7 @@ const Navbar = () => {
             </li>
             <li>
               <Typography variant='button'>
-                <NavLink to='/settings' exact>
+                <NavLink to='/settings'>
                   <div className='icon'>
                     <CogIconSvg />
                   </div>

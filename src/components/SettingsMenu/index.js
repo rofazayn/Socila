@@ -3,7 +3,13 @@ import { Styled } from './style';
 import { Typography, IconButton } from '@material-ui/core';
 import { AuthContext } from '../../context/auth-context';
 import { ReactComponent as WrenchIconSvg } from '../../assets/icons/bx-wrench.svg';
+import { ReactComponent as EnvelopeIconSvg } from '../../assets/icons/bx-envelope.svg';
 import { ReactComponent as TrashIconSvg } from '../../assets/icons/bx-trash.svg';
+import { ReactComponent as UserIconSvg } from '../../assets/icons/bx-user.svg';
+import { ReactComponent as PhoneIconSvg } from '../../assets/icons/bx-phone.svg';
+import { ReactComponent as LockIconSvg } from '../../assets/icons/bx-lock-alt.svg';
+import { ReactComponent as FontIconSvg } from '../../assets/icons/bx-font.svg';
+import { ReactComponent as PlanetIconSvg } from '../../assets/icons/bx-planet.svg';
 
 const SettingsMenu = () => {
   const { userDetails } = useContext(AuthContext);
@@ -24,7 +30,7 @@ const SettingsMenu = () => {
           </div>
           <div className='action'>
             <IconButton>
-              <WrenchIconSvg />
+              <EnvelopeIconSvg />
             </IconButton>
           </div>
         </Styled.SettingsMenuItem>
@@ -39,7 +45,7 @@ const SettingsMenu = () => {
           </div>
           <div className='action'>
             <IconButton>
-              <WrenchIconSvg />
+              <UserIconSvg />
             </IconButton>
           </div>
         </Styled.SettingsMenuItem>
@@ -54,7 +60,7 @@ const SettingsMenu = () => {
           </div>
           <div className='action'>
             <IconButton>
-              <WrenchIconSvg />
+              <PhoneIconSvg />
             </IconButton>
           </div>
         </Styled.SettingsMenuItem>
@@ -69,7 +75,7 @@ const SettingsMenu = () => {
           </div>
           <div className='action'>
             <IconButton>
-              <WrenchIconSvg />
+              <LockIconSvg />
             </IconButton>
           </div>
         </Styled.SettingsMenuItem>
@@ -84,7 +90,7 @@ const SettingsMenu = () => {
           </div>
           <div className='action'>
             <IconButton>
-              <WrenchIconSvg />
+              <FontIconSvg />
             </IconButton>
           </div>
         </Styled.SettingsMenuItem>
@@ -99,7 +105,7 @@ const SettingsMenu = () => {
           </div>
           <div className='action'>
             <IconButton>
-              <WrenchIconSvg />
+              <PlanetIconSvg />
             </IconButton>
           </div>
         </Styled.SettingsMenuItem>{' '}

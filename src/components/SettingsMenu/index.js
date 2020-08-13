@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { Styled } from './style';
 import { Typography, IconButton } from '@material-ui/core';
 import { AuthContext } from '../../context/auth-context';
-import { ReactComponent as WrenchIconSvg } from '../../assets/icons/bx-wrench.svg';
 import { ReactComponent as EnvelopeIconSvg } from '../../assets/icons/bx-envelope.svg';
 import { ReactComponent as TrashIconSvg } from '../../assets/icons/bx-trash.svg';
 import { ReactComponent as UserIconSvg } from '../../assets/icons/bx-user.svg';

@@ -14,13 +14,11 @@ export const useFetchTrending = () => {
 
     const fetchHashtags = async () => {
       try {
-        let fetchedHashtags = [];
-
         await hashtagsRef
           .orderBy('points', 'desc')
           .limit(5)
-          .get()
-          .then((data) => {
+          .onSnapshot((data) => {
+            let fetchedHashtags = [];
             data.forEach((doc) => {
               fetchedHashtags.push({ hashtagId: doc.id, ...doc.data() });
             });

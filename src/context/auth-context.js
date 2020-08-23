@@ -32,8 +32,7 @@ export const AuthProvider = ({ children }) => {
         fb.firestore()
           .collection('likes')
           .where('userId', '==', user.uid)
-          .get()
-          .then((likes) => {
+          .onSnapshot((likes) => {
             let userLikes = [];
             likes.forEach((like) =>
               userLikes.push({ likeId: like.id, ...like.data() })
@@ -47,8 +46,7 @@ export const AuthProvider = ({ children }) => {
           .collection('users')
           .doc(user.uid)
           .collection('following')
-          .get()
-          .then((users) => {
+          .onSnapshot((users) => {
             let usersFollowing = [];
             users.forEach((user) => usersFollowing.push(user.data()));
             return userDetailsDispatch({

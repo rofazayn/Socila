@@ -5,6 +5,7 @@ import TopBar from '../TopBar';
 import { ReactComponent as CogIconSvg } from '../../assets/icons/bx-cog.svg';
 import { motion } from 'framer-motion';
 import EmailSettings from '../EmailSettings';
+import { ReactComponent as SettingsIllustrationSvg } from '../../assets/svg/MeditatingDoodle.svg';
 
 const Settings = () => {
   return (
@@ -16,6 +17,9 @@ const Settings = () => {
     >
       <Styled.Settings className='settings-page'>
         <TopBar title={'Settings'} icon={<CogIconSvg />} />
+        <div className='page-illustration'>
+          <SettingsIllustrationSvg />
+        </div>
         <Switch>
           <Route exact path='/settings/email' component={EmailSettings} />
           <Redirect to='/settings/email' />

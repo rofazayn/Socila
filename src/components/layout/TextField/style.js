@@ -5,10 +5,11 @@ const TextField = styled.div`
   /* background: red; */
   flex-direction: column;
   .label {
-    padding: 8px;
+    padding-bottom: 8px;
     .label-text {
       font-weight: 700;
       color: ${({ theme }) => theme.palette.grey[800]};
+      font-family: 'Montserrat';
     }
   }
   .input {

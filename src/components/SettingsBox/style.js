@@ -7,14 +7,15 @@ const SettingsBox = styled.div`
   flex-direction: column;
   margin-top: 24px;
   padding-bottom: 8px;
-  background-color: ${({ theme }) => theme.palette.background.default};
+  background-color: ${({ theme }) => theme.palette.grey[50]};
+  border: 2px solid ${({ theme }) => theme.palette.grey[100]};
   max-width: 480px;
   margin: 0 auto;
   /* margin: 0 16px; */
-  padding: 16px;
+  padding: 24px;
   .box-header,
   .box-body {
-    margin-bottom: 16px;
+    margin-bottom: 24px;
   }
 
   .box-header {

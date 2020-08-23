@@ -1,8 +1,8 @@
-import React, { createContext, useState, useReducer } from "react";
-import { useEffect } from "react";
-import fb from "../firebase";
-import userReducer from "../reducers/userReducer";
-import { userTypes } from "../constants";
+import React, { createContext, useState, useReducer } from 'react';
+import { useEffect } from 'react';
+import fb from '../firebase';
+import userReducer from '../reducers/userReducer';
+import { userTypes } from '../constants';
 
 export const AuthContext = createContext();
 
@@ -19,10 +19,9 @@ export const AuthProvider = ({ children }) => {
       if (user) {
         setCurrentUser(user);
         fb.firestore()
-          .collection("users")
+          .collection('users')
           .doc(user.uid)
-          .get()
-          .then((doc) => {
+          .onSnapshot((doc) => {
             if (doc.exists) {
               userDetailsDispatch({
                 type: userTypes.SET_USER,
@@ -31,8 +30,8 @@ export const AuthProvider = ({ children }) => {
             }
           });
         fb.firestore()
-          .collection("likes")
-          .where("userId", "==", user.uid)
+          .collection('likes')
+          .where('userId', '==', user.uid)
           .get()
           .then((likes) => {
             let userLikes = [];
@@ -45,9 +44,9 @@ export const AuthProvider = ({ children }) => {
             });
           });
         fb.firestore()
-          .collection("users")
+          .collection('users')
           .doc(user.uid)
-          .collection("following")
+          .collection('following')
           .get()
           .then((users) => {
             let usersFollowing = [];

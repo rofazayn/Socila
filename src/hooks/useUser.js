@@ -256,8 +256,7 @@ export const useFetchUser = (userId) => {
         fb.firestore()
           .collection('users')
           .doc(userId)
-          .get()
-          .then((doc) => {
+          .onSnapshot((doc) => {
             if (doc.exists) {
               return setFetchedUser(doc.data());
             } else {

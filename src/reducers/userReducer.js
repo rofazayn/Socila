@@ -5,6 +5,9 @@ const userReducer = (state, action) => {
     case userTypes.SET_USER:
       return { ...action.payload };
 
+    case userTypes.RELOAD_USER:
+      return { ...action.paylaod };
+
     case userTypes.CLEAR_USER:
       return action.payload;
 

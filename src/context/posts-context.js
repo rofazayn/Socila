@@ -11,9 +11,9 @@ export const PostsProvider = ({ children }) => {
     },
   });
 
-  useEffect(() => {
-    console.log(state);
-  }, [state, dispatch]);
+  // useEffect(() => {
+  //   console.log(state);
+  // }, [state, dispatch]);
 
   return (
     <PostsContext.Provider

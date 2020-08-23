@@ -252,7 +252,8 @@ export function useFetchPosts(userId) {
             .collection('posts')
             .orderBy('createdAt', 'desc')
             .limit(10)
-            .onSnapshot((data) => {
+            .get()
+            .then((data) => {
               let newPosts = [];
               data.forEach((doc) =>
                 newPosts.push({ postId: doc.id, ...doc.data() })

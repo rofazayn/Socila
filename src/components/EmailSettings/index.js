@@ -107,26 +107,27 @@ const EmailSettings = () => {
 
             <div className='box-footer'>
               <div className='status'>
-                <Typography variant='body2'>
+                <Typography variant='body2' className='info-text'>
                   Status{' '}
-                  <span
-                    className={`status-state ${
-                      isSubmitting ? '--submitting' : ''
-                    }`}
-                  >
-                    {isSubmitting ? (
-                      <CircularProgress
-                        size={14}
-                        style={{ marginInlineEnd: 8 }}
-                        color='orange'
-                      />
-                    ) : (
-                      <CheckIconSvg />
-                    )}
-
-                    {isSubmitting ? 'Saving changes..' : 'Saved'}
-                  </span>
                 </Typography>
+                <div
+                  className={`status-state ${
+                    isSubmitting ? '--submitting' : ''
+                  }`}
+                >
+                  {isSubmitting ? (
+                    <CircularProgress
+                      size={14}
+                      style={{ marginInlineEnd: 8 }}
+                    />
+                  ) : (
+                    <CheckIconSvg />
+                  )}
+
+                  <Typography variant='body2' className='info-value'>
+                    {isSubmitting ? 'Saving changes..' : 'Saved'}
+                  </Typography>
+                </div>
               </div>
               <div className='actions'>
                 <Button

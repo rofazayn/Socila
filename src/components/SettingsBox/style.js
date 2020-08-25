@@ -53,19 +53,25 @@ const SettingsBox = styled.div`
         color: ${({ theme }) => theme.palette.text.disabled};
       }
       .status-state {
-        margin-inline-start: 8px;
         display: flex;
         justify-content: center;
         align-items: center;
-        color: green;
-        font-weight: 700;
+        .info-value {
+          color: green;
+          font-weight: 700;
+        }
+
+        margin-inline-start: 8px;
         svg {
           fill: green;
         }
         &.--submitting {
-          color: orange;
-          svg {
+          .info-value {
+            color: orange;
+          }
+          .MuiCircularProgress-svg {
             fill: orange;
+            color: orange;
           }
         }
       }

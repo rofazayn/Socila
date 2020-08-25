@@ -5,7 +5,7 @@ const SignUpForm = styled.div`
   form {
     display: grid;
     grid-column: 1fr;
-    grid-row-gap: 1rem;
+    /* grid-row-gap: 1rem; */
     /* max-width: ${({ theme }) => `${theme.spacing(40)}px`}; */
     .form-controlers {
       display: flex;
@@ -26,5 +26,5 @@ const SignUpForm = styled.div`
 `;
 
 export const Styled = {
-  SignUpForm
+  SignUpForm,
 };

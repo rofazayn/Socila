@@ -62,6 +62,12 @@ const SettingsBox = styled.div`
         svg {
           fill: green;
         }
+        &.--submitting {
+          color: orange;
+          svg {
+            fill: orange;
+          }
+        }
       }
     }
     .actions {

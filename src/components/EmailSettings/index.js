@@ -53,6 +53,7 @@ const EmailSettings = () => {
           newEmail: '',
         }}
         validationSchema={vSchema}
+        validateOnMount
         onSubmit={updateEmail}
       >
         {({
@@ -108,9 +109,22 @@ const EmailSettings = () => {
               <div className='status'>
                 <Typography variant='body2'>
                   Status{' '}
-                  <span className='status-state'>
-                    <CheckIconSvg />
-                    Saved
+                  <span
+                    className={`status-state ${
+                      isSubmitting ? '--submitting' : ''
+                    }`}
+                  >
+                    {isSubmitting ? (
+                      <CircularProgress
+                        size={14}
+                        style={{ marginInlineEnd: 8 }}
+                        color='orange'
+                      />
+                    ) : (
+                      <CheckIconSvg />
+                    )}
+
+                    {isSubmitting ? 'Saving changes..' : 'Saved'}
                   </span>
                 </Typography>
               </div>

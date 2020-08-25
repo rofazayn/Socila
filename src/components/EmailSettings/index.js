@@ -49,7 +49,7 @@ const EmailSettings = () => {
     <SettingsBox>
       <Formik
         initialValues={{
-          currentEmail: user.email,
+          currentEmail: userDetails.email,
           newEmail: '',
         }}
         validationSchema={vSchema}

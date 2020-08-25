@@ -76,9 +76,13 @@ const GlobalStyle = createGlobalStyle`
 
   .--error {
     color: red;
+    padding-bottom: 8px;
+    padding-inline-start: 8px;
+    
   }
 
   .--center-text {
+    padding-inline-start: 0px;
     display: flex;
     align-items: center;
     justify-content: center;

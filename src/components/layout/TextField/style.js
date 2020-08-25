@@ -28,6 +28,7 @@ const TextField = styled.div`
       outline: none;
       border: 3px solid transparent;
       transition: all 200ms ease-in-out;
+      margin-bottom: 8px;
 
       &::placeholder {
         color: ${({ theme }) => theme.palette.grey[400]};

@@ -4,9 +4,11 @@ import { Typography, Button, CircularProgress } from '@material-ui/core';
 import TextField from '../layout/TextField';
 import { ReactComponent as CheckIconSvg } from '../../assets/icons/bx-check.svg';
 import { ReactComponent as SaveIconSvg } from '../../assets/icons/bx-save.svg';
-import { Formik } from 'formik';
+import { Formik, ErrorMessage } from 'formik';
 import { AuthContext } from '../../context/auth-context';
 import fb, { firestore } from '../../firebase';
+import vSchema from './validation';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const EmailSettings = () => {
   const { userDetails } = useContext(AuthContext);
@@ -50,9 +52,18 @@ const EmailSettings = () => {
           currentEmail: user.email,
           newEmail: '',
         }}
+        validationSchema={vSchema}
         onSubmit={updateEmail}
       >
-        {({ values, handleSubmit, handleChange, isSubmitting, isValid }) => (
+        {({
+          values,
+          handleSubmit,
+          handleChange,
+          isSubmitting,
+          isValid,
+          touched,
+          errors,
+        }) => (
           <form onSubmit={handleSubmit}>
             <div className='box-header'>
               <Typography variant='h6'>Email settings</Typography>
@@ -79,7 +90,20 @@ const EmailSettings = () => {
                 value={values.newEmail}
                 onChange={handleChange}
               />
+              {touched.newEmail && errors.newEmail ? (
+                <AnimatePresence>
+                  <motion.div
+                    initial={{ opacity: 0, y: -20, height: 0 }}
+                    exit={{ opacity: 0, y: 20, height: 0 }}
+                    animate={{ opacity: 1, y: 0, height: '100%' }}
+                    className='--error'
+                  >
+                    <ErrorMessage name='newEmail' />
+                  </motion.div>
+                </AnimatePresence>
+              ) : null}
             </div>
+
             <div className='box-footer'>
               <div className='status'>
                 <Typography variant='body2'>

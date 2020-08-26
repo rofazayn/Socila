@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import { ReactComponent as SettingsIllustrationSvg } from '../../assets/svg/MeditatingDoodle.svg';
 import EmailSettings from '../EmailSettings';
 import UsernameSettings from '../UsernameSettings';
+import PhoneSettings from '../PhoneSettings';
 
 const Settings = () => {
   return (
@@ -24,6 +25,7 @@ const Settings = () => {
         <Switch>
           <Route exact path='/settings/email' component={EmailSettings} />
           <Route exact path='/settings/username' component={UsernameSettings} />
+          <Route exact path='/settings/phone' component={PhoneSettings} />
           <Redirect to='/settings/email' />
         </Switch>
       </Styled.Settings>

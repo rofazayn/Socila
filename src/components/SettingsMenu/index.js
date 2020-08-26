@@ -54,7 +54,7 @@ const SettingsMenu = () => {
               Phone
             </Typography>
             <Typography className='data' variant='body2'>
-              {userDetails.phone || 'No phone number'}
+              {userDetails.phoneNumber || 'No phone number'}
             </Typography>
           </div>
           <div className='action'>

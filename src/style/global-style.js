@@ -328,6 +328,11 @@ const GlobalStyle = createGlobalStyle`
       background-color: ${({ theme }) => theme.palette.action.hover};
     }
   }
+
+  .hint {
+    color: ${({ theme }) => theme.palette.text.disabled};
+    margin-bottom: 16px;
+  }
   
 `;
 

@@ -8,6 +8,7 @@ import {
   Checkbox,
   FormControlLabel,
   CircularProgress,
+  Typography,
 } from '@material-ui/core';
 import TextField from '../layout/TextField';
 import vSchema from './validation';
@@ -109,6 +110,10 @@ const SignInForm = () => {
                 </motion.div>
               </AnimatePresence>
             ) : null}
+
+            <Typography variant='body2' className='hint'>
+              Pssttt! use this: matt@example.com | secret123
+            </Typography>
 
             <div className='form-controlers'>
               <FormControlLabel

@@ -4,8 +4,9 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import TopBar from '../TopBar';
 import { ReactComponent as CogIconSvg } from '../../assets/icons/bx-cog.svg';
 import { motion } from 'framer-motion';
-import EmailSettings from '../EmailSettings';
 import { ReactComponent as SettingsIllustrationSvg } from '../../assets/svg/MeditatingDoodle.svg';
+import EmailSettings from '../EmailSettings';
+import UsernameSettings from '../UsernameSettings';
 
 const Settings = () => {
   return (
@@ -22,6 +23,7 @@ const Settings = () => {
         </div>
         <Switch>
           <Route exact path='/settings/email' component={EmailSettings} />
+          <Route exact path='/settings/username' component={UsernameSettings} />
           <Redirect to='/settings/email' />
         </Switch>
       </Styled.Settings>

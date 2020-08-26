@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import fb from '../firebase';
 import userReducer from '../reducers/userReducer';
 import { userTypes } from '../constants';
+import { auth } from 'firebase';
 
 export const AuthContext = createContext();
 
@@ -10,9 +11,21 @@ export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [userDetails, userDetailsDispatch] = useReducer(userReducer, null);
 
-  // useEffect(() => {
-  //   console.log(userDetails);
-  // }, [userDetails]);
+  useEffect(() => {
+    console.log(userDetails);
+  }, [userDetails]);
+
+  useEffect(() => {
+    let unsubscribe;
+
+    unsubscribe = auth().onAuthStateChanged((user) => {
+      console.log(user);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  });
 
   useEffect(() => {
     const unsubscribeFromAuth = fb.auth().onAuthStateChanged((user) => {

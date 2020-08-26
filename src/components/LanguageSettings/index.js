@@ -78,7 +78,7 @@ const LanguageSettings = () => {
             <div className='box-header'>
               <Typography variant='h6'>Language settings</Typography>
               <Typography variant='body2'>
-                Socila is only supporting english (EN-US) for the moment, we all
+                Socila is only supporting english (EN-US) at the moment, we all
                 add more in the future.
               </Typography>
             </div>
@@ -92,6 +92,12 @@ const LanguageSettings = () => {
                 onChange={handleChange}
                 disabled
               />
+              <div className='soon'>
+                <InfoIconSvg />
+                <Typography variant='body2' className='soon'>
+                  This feature is coming soon!
+                </Typography>
+              </div>
               {/* <TextField
                 label='New email'
                 fullWidth

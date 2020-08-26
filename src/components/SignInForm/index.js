@@ -18,7 +18,7 @@ const SignInForm = () => {
     <Styled.SignInForm>
       <Formik
         validationSchema={vSchema}
-        validateOnMount={true}
+        validateOnMount
         initialValues={{
           email: '',
           password: '',

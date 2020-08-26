@@ -17,7 +17,7 @@ const SignUpForm = () => {
   return (
     <Styled.SignUpForm>
       <Formik
-        validateOnMount={true}
+        validateOnMount
         validationSchema={vSchema}
         initialValues={{
           name: '',
@@ -259,7 +259,7 @@ const SignUpForm = () => {
                   initial={{ opacity: 0, y: -20 }}
                   exit={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className='--error --center-text'
+                  className='--error'
                 >
                   <ErrorMessage name='agreed' />
                 </motion.div>

@@ -75,7 +75,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .--error {
-    color: red;
+    color: ${({ theme }) => theme.palette.error.main};;
     /* padding-inline-start: 8px; */
     
   }

@@ -6,13 +6,12 @@ import { ReactComponent as InfoIconSvg } from '../../assets/icons/bx-info-circle
 import { ReactComponent as SaveIconSvg } from '../../assets/icons/bx-save.svg';
 import { Formik, ErrorMessage } from 'formik';
 import { AuthContext } from '../../context/auth-context';
-import fb, { firestore } from '../../firebase';
+import { firestore } from '../../firebase';
 import vSchema from './validation';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const UsernameSettings = () => {
   const { userDetails } = useContext(AuthContext);
-  const user = fb.auth().currentUser;
   const [isSaved, setSaved] = useState(false);
 
   useEffect(() => {
@@ -158,7 +157,7 @@ const UsernameSettings = () => {
                 <Button
                   type='submit'
                   className='fancy-button'
-                  disabled={isSubmitting || !isValid}
+                  disabled={isSubmitting}
                   endIcon={
                     isSubmitting ? (
                       <CircularProgress size={20} />

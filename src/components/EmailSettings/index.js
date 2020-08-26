@@ -164,7 +164,7 @@ const EmailSettings = () => {
                 <Button
                   type='submit'
                   className='fancy-button'
-                  disabled={isSubmitting || !isValid}
+                  disabled={isSubmitting}
                   endIcon={
                     isSubmitting ? (
                       <CircularProgress size={20} />

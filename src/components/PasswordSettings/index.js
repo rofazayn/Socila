@@ -6,19 +6,20 @@ import { ReactComponent as InfoIconSvg } from '../../assets/icons/bx-info-circle
 import { ReactComponent as SaveIconSvg } from '../../assets/icons/bx-save.svg';
 import { Formik, ErrorMessage } from 'formik';
 import { AuthContext } from '../../context/auth-context';
-import { firestore } from '../../firebase';
+import fb, { firestore } from '../../firebase';
 import vSchema from './validation';
 import { AnimatePresence, motion } from 'framer-motion';
 
-const PhoneSettings = () => {
+const PasswordSettings = () => {
   const { userDetails } = useContext(AuthContext);
+  const user = fb.auth().currentUser;
   const [isSaved, setSaved] = useState(false);
 
   useEffect(() => {
     setSaved(false);
   }, []);
 
-  async function updatePhone(
+  async function updatePassword(
     values,
     { setSubmitting, resetForm, setFieldError }
   ) {
@@ -26,18 +27,19 @@ const PhoneSettings = () => {
 
     try {
       setSubmitting(true);
-      await userRef
-        .update({ phoneNumber: values.newPhone })
+      await user
+        .updatePassword(values.newPassword)
         .then(() => {
           setSubmitting(false);
           resetForm({
-            values: { currentPhone: values.newPhone || '', newPhone: '' },
+            values: { currentPassword: '********', newPassword: '' },
           });
           setSaved(true);
         })
         .catch((err) => {
           setSubmitting(false);
           setFieldError('general', err.message);
+          console.error(err);
         });
     } catch (error) {
       setSubmitting(false);
@@ -49,12 +51,12 @@ const PhoneSettings = () => {
     <SettingsBox>
       <Formik
         initialValues={{
-          currentPhone: userDetails.phoneNumber || '',
-          newPhone: '',
+          currentPassword: '********',
+          newPassword: '',
         }}
         validationSchema={vSchema}
         validateOnMount
-        onSubmit={updatePhone}
+        onSubmit={updatePassword}
       >
         {({
           values,
@@ -67,38 +69,34 @@ const PhoneSettings = () => {
         }) => (
           <form onSubmit={handleSubmit} autoComplete='off'>
             <div className='box-header'>
-              <Typography variant='h6'>Phone settings</Typography>
+              <Typography variant='h6'>Password settings</Typography>
               <Typography variant='body2'>
-                You can update your phone number by changing the new phone
-                number field down below.
+                Careful! proceeding with filling up this form requires extreme
+                caution.
               </Typography>
             </div>
             <div className='box-body'>
               <TextField
-                label='Current phone number'
+                label='Current password'
                 fullWidth
-                placeholder={`${
-                  values.currentPhone !== ''
-                    ? 'Enter your current phone number'
-                    : 'No phone number is set.'
-                }`}
-                type='text'
-                name='currentPhone'
-                value={values.currentPhone}
+                placeholder='Enter your current password'
+                type='password'
+                name='currentPassword'
+                value={values.currentPassword}
                 onChange={handleChange}
                 disabled
               />
               <TextField
-                label='New phone number'
+                label='New password'
                 fullWidth
-                placeholder='Enter your new phone number'
-                type='text'
-                name='newPhone'
-                value={values.newPhone}
+                placeholder='Enter your new password'
+                type='password'
+                name='newPassword'
+                value={values.newPassword}
                 onChange={handleChange}
-                error={touched.newPhone && errors.newPhone}
+                error={touched.newPassword && errors.newPassword}
               >
-                {touched.newPhone && errors.newPhone ? (
+                {touched.newPassword && errors.newPassword ? (
                   <AnimatePresence>
                     <motion.div
                       initial={{ opacity: 0, y: -20, height: 0 }}
@@ -106,7 +104,7 @@ const PhoneSettings = () => {
                       animate={{ opacity: 1, y: 0, height: '100%' }}
                       className='error-text'
                     >
-                      <ErrorMessage name='newPhone' />
+                      <ErrorMessage name='newPassword' />
                     </motion.div>
                   </AnimatePresence>
                 ) : null}
@@ -136,9 +134,9 @@ const PhoneSettings = () => {
                   className={`status-state ${
                     isSubmitting
                       ? '--submitting'
-                      : isSaved && values.newPhone === ''
+                      : isSaved && values.newPassword === ''
                       ? '--saved'
-                      : values.newPhone !== ''
+                      : values.newPassword !== ''
                       ? '--on-change'
                       : !isSaved
                       ? '--no-save'
@@ -148,9 +146,9 @@ const PhoneSettings = () => {
                   <Typography variant='body2' className='info-value'>
                     {isSubmitting
                       ? 'Saving changes..'
-                      : !isSaved && values.newPhone === ''
+                      : !isSaved && values.newPassword === ''
                       ? 'No changes'
-                      : values.newPhone !== ''
+                      : values.newPassword !== ''
                       ? 'Not saved'
                       : 'Saved'}
                   </Typography>
@@ -180,4 +178,4 @@ const PhoneSettings = () => {
   );
 };
 
-export default PhoneSettings;
+export default PasswordSettings;

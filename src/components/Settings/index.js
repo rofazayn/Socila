@@ -8,6 +8,7 @@ import { ReactComponent as SettingsIllustrationSvg } from '../../assets/svg/Medi
 import EmailSettings from '../EmailSettings';
 import UsernameSettings from '../UsernameSettings';
 import PhoneSettings from '../PhoneSettings';
+import PasswordSettings from '../PasswordSettings';
 
 const Settings = () => {
   return (
@@ -26,6 +27,7 @@ const Settings = () => {
           <Route exact path='/settings/email' component={EmailSettings} />
           <Route exact path='/settings/username' component={UsernameSettings} />
           <Route exact path='/settings/phone' component={PhoneSettings} />
+          <Route exact path='/settings/password' component={PasswordSettings} />
           <Redirect to='/settings/email' />
         </Switch>
       </Styled.Settings>

@@ -19,7 +19,10 @@ const EmailSettings = () => {
     setSaved(false);
   }, []);
 
-  async function updateEmail(values, { setSubmitting, resetForm }) {
+  async function updateEmail(
+    values,
+    { setSubmitting, resetForm, setFieldError }
+  ) {
     let userRef = firestore.collection('users').doc(userDetails.userId);
 
     try {
@@ -38,11 +41,12 @@ const EmailSettings = () => {
             })
             .catch((err) => {
               setSubmitting(false);
-              console.error(err);
+              console.error('test', err);
             });
         })
         .catch((err) => {
           setSubmitting(false);
+          setFieldError('general', err.message);
           console.error(err);
         });
     } catch (error) {
@@ -59,7 +63,7 @@ const EmailSettings = () => {
           newEmail: '',
         }}
         validationSchema={vSchema}
-        // validateOnMount
+        validateOnMount
         onSubmit={updateEmail}
       >
         {({
@@ -111,6 +115,19 @@ const EmailSettings = () => {
                   </AnimatePresence>
                 ) : null}
               </TextField>
+
+              {errors.general ? (
+                <AnimatePresence>
+                  <motion.div
+                    initial={{ opacity: 0, y: -20, height: 0 }}
+                    exit={{ opacity: 0, y: 20, height: 0 }}
+                    animate={{ opacity: 1, y: 0, height: '100%' }}
+                    className='--error'
+                  >
+                    {errors.general}
+                  </motion.div>
+                </AnimatePresence>
+              ) : null}
             </div>
 
             <div className='box-footer'>

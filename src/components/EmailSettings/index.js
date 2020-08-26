@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import SettingsBox from '../SettingsBox';
 import { Typography, Button, CircularProgress } from '@material-ui/core';
 import TextField from '../layout/TextField';
-import { ReactComponent as CheckIconSvg } from '../../assets/icons/bx-check.svg';
+import { ReactComponent as InfoIconSvg } from '../../assets/icons/bx-info-circle.svg';
 import { ReactComponent as SaveIconSvg } from '../../assets/icons/bx-save.svg';
 import { Formik, ErrorMessage } from 'formik';
 import { AuthContext } from '../../context/auth-context';
@@ -13,6 +13,11 @@ import { AnimatePresence, motion } from 'framer-motion';
 const EmailSettings = () => {
   const { userDetails } = useContext(AuthContext);
   const user = fb.auth().currentUser;
+  const [isSaved, setSaved] = useState(false);
+
+  useEffect(() => {
+    setSaved(false);
+  }, []);
 
   async function updateEmail(values, { setSubmitting, resetForm }) {
     let userRef = firestore.collection('users').doc(userDetails.userId);
@@ -29,6 +34,7 @@ const EmailSettings = () => {
               resetForm({
                 values: { currentEmail: values.newEmail, newEmail: '' },
               });
+              setSaved(true);
             })
             .catch((err) => {
               setSubmitting(false);
@@ -53,7 +59,7 @@ const EmailSettings = () => {
           newEmail: '',
         }}
         validationSchema={vSchema}
-        validateOnMount
+        // validateOnMount
         onSubmit={updateEmail}
       >
         {({
@@ -65,7 +71,7 @@ const EmailSettings = () => {
           touched,
           errors,
         }) => (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} autoComplete='off'>
             <div className='box-header'>
               <Typography variant='h6'>Email settings</Typography>
               <Typography variant='body2'>
@@ -90,42 +96,51 @@ const EmailSettings = () => {
                 name='newEmail'
                 value={values.newEmail}
                 onChange={handleChange}
-              />
-              {touched.newEmail && errors.newEmail ? (
-                <AnimatePresence>
-                  <motion.div
-                    initial={{ opacity: 0, y: -20, height: 0 }}
-                    exit={{ opacity: 0, y: 20, height: 0 }}
-                    animate={{ opacity: 1, y: 0, height: '100%' }}
-                    className='--error'
-                  >
-                    <ErrorMessage name='newEmail' />
-                  </motion.div>
-                </AnimatePresence>
-              ) : null}
+                error={touched.newEmail && errors.newEmail}
+              >
+                {touched.newEmail && errors.newEmail ? (
+                  <AnimatePresence>
+                    <motion.div
+                      initial={{ opacity: 0, y: -20, height: 0 }}
+                      exit={{ opacity: 0, y: 20, height: 0 }}
+                      animate={{ opacity: 1, y: 0, height: '100%' }}
+                      className='error-text'
+                    >
+                      <ErrorMessage name='newEmail' />
+                    </motion.div>
+                  </AnimatePresence>
+                ) : null}
+              </TextField>
             </div>
 
             <div className='box-footer'>
               <div className='status'>
-                <Typography variant='body2' className='info-text'>
+                {/* <Typography variant='body2' className='info-text'>
                   Status{' '}
-                </Typography>
+                </Typography> */}
                 <div
                   className={`status-state ${
-                    isSubmitting ? '--submitting' : ''
+                    isSubmitting
+                      ? '--submitting'
+                      : isSaved && values.newEmail === ''
+                      ? '--saved'
+                      : values.newEmail !== ''
+                      ? '--on-change'
+                      : !isSaved
+                      ? '--no-save'
+                      : ''
                   }`}
                 >
-                  {isSubmitting ? (
-                    <CircularProgress
-                      size={14}
-                      style={{ marginInlineEnd: 8 }}
-                    />
-                  ) : (
-                    <CheckIconSvg />
-                  )}
+                  <InfoIconSvg />
 
                   <Typography variant='body2' className='info-value'>
-                    {isSubmitting ? 'Saving changes..' : 'Saved'}
+                    {isSubmitting
+                      ? 'Saving changes..'
+                      : !isSaved && values.newEmail === ''
+                      ? 'No changes'
+                      : values.newEmail !== ''
+                      ? 'Not saved'
+                      : 'Saved'}
                   </Typography>
                 </div>
               </div>

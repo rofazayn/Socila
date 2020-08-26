@@ -57,21 +57,62 @@ const SettingsBox = styled.div`
         justify-content: center;
         align-items: center;
         .info-value {
-          color: green;
+          color: ${({ theme }) => theme.palette.text.disabled};
           font-weight: 700;
         }
 
-        margin-inline-start: 8px;
+        /* margin-inline-start: 8px; */
         svg {
-          fill: green;
+          fill: ${({ theme }) => theme.palette.text.disabled};
+          margin-inline-end: 4px;
+          width: 20px;
         }
         &.--submitting {
           .info-value {
             color: orange;
           }
+          svg {
+            fill: orange;
+          }
           .MuiCircularProgress-svg {
             fill: orange;
             color: orange;
+          }
+        }
+        &.--on-change {
+          .info-value {
+            color: ${({ theme }) => theme.palette.warning.main};
+          }
+          svg {
+            fill: ${({ theme }) => theme.palette.warning.main};
+          }
+          .MuiCircularProgress-svg {
+            fill: ${({ theme }) => theme.palette.warning.main};
+            color: ${({ theme }) => theme.palette.warning.main};
+          }
+        }
+        &.--saved {
+          .info-value {
+            color: ${({ theme }) => theme.palette.success.main};
+          }
+          svg {
+            fill: ${({ theme }) => theme.palette.success.main};
+          }
+          .MuiCircularProgress-svg {
+            fill: ${({ theme }) => theme.palette.success.main};
+            color: ${({ theme }) => theme.palette.success.main};
+          }
+        }
+        &.--submitting {
+          .info-value {
+            color: ${({ theme }) => theme.palette.text.disabled};
+          }
+          svg {
+            fill: ${({ theme }) => theme.palette.text.disabled};
+          }
+          .MuiCircularProgress-svg {
+            fill: ${({ theme }) => theme.palette.text.disabled};
+            color: ${({ theme }) => theme.palette.text.disabled};
           }
         }
       }

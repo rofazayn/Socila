@@ -4,16 +4,25 @@ const TextField = styled.div`
   display: flex;
   /* background: red; */
   flex-direction: column;
+
   .label {
     padding-bottom: 8px;
     .label-text {
       font-weight: 700;
       color: ${({ theme }) => theme.palette.grey[800]};
       font-family: 'Montserrat';
+      transition: all ease-in-out 200ms;
+    }
+    &.--error {
+      .label-text {
+        color: ${({ theme }) => theme.palette.error.main};
+      }
     }
   }
+
   .input {
     position: relative;
+    margin-bottom: 16px;
     input {
       width: 100%;
       height: 48px;
@@ -28,7 +37,6 @@ const TextField = styled.div`
       outline: none;
       border: 3px solid transparent;
       transition: all 200ms ease-in-out;
-      margin-bottom: 8px;
 
       &::placeholder {
         color: ${({ theme }) => theme.palette.grey[400]};
@@ -36,7 +44,7 @@ const TextField = styled.div`
 
       &:hover {
         background-color: ${({ theme }) => theme.palette.grey[200]};
-        border-color: ${({ theme }) => theme.palette.grey[200]};
+        /* border-color: ${({ theme }) => theme.palette.grey[200]}; */
         &::placeholder {
           border-color: ${({ theme }) => theme.palette.grey[500]};
         }
@@ -46,6 +54,17 @@ const TextField = styled.div`
         border: 3px solid ${({ theme }) => theme.palette.primary.main};
         ${(props) => props.error && `border-color: red`}
       }
+
+      &[disabled],
+      &:disabled {
+        background-color: ${({ theme }) => theme.palette.grey[100]};
+        color: ${({ theme }) => theme.palette.text.disabled};
+        cursor: not-allowed;
+        &:hover {
+          background-color: ${({ theme }) => theme.palette.grey[100]};
+        }
+      }
+
       ${(props) => props.error && `border-color: red`}
     }
     .icon-end {
@@ -63,6 +82,16 @@ const TextField = styled.div`
       input {
         height: 56px;
       }
+    }
+    &.--error {
+      margin-bottom: 0px;
+    }
+  }
+  &.--error {
+    .error-text {
+      padding-top: 8px;
+      color: ${({ theme }) => theme.palette.error.main};
+      margin-bottom: 16px;
     }
   }
 `;

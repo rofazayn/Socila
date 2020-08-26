@@ -7,7 +7,7 @@ const TrendingList = styled.div`
   padding: 0 16px;
   border-radius: 16px;
   background-color: ${({ theme }) => theme.palette.grey[100]};
-  margin-top: 24px;
+  margin-top: 8px;
   .trending-header {
     padding: 16px 0;
     border-bottom: 1px solid ${({ theme }) => theme.palette.grey[200]};

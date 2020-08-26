@@ -6,7 +6,7 @@ const SettingsMenu = styled.div`
   /* padding: 16px; */
   display: flex;
   flex-direction: column;
-  margin-top: 24px;
+  margin-top: 8px;
   /* padding-bottom: 8px; */
   background-color: ${({ theme }) => theme.palette.grey[100]};
 `;

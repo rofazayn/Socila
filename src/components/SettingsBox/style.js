@@ -52,21 +52,24 @@ const SettingsBox = styled.div`
         align-items: center;
         color: ${({ theme }) => theme.palette.text.disabled};
       }
+      svg {
+        fill: ${({ theme }) => theme.palette.text.disabled};
+        margin-inline-end: 4px;
+        width: 20px;
+      }
       .status-state {
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-inline-start: 8px;
+
         .info-value {
           color: ${({ theme }) => theme.palette.text.disabled};
           font-weight: 700;
         }
 
         /* margin-inline-start: 8px; */
-        svg {
-          fill: ${({ theme }) => theme.palette.text.disabled};
-          margin-inline-end: 4px;
-          width: 20px;
-        }
+
         &.--submitting {
           .info-value {
             color: orange;

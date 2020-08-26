@@ -93,19 +93,21 @@ const SignUpForm = () => {
               autoComplete='firstName'
               label='First name'
               error={touched.firstName && errors.firstName ? true : false}
-            />
-            {touched.firstName && errors.firstName ? (
-              <AnimatePresence>
-                <motion.div
-                  initial={{ opacity: 0, y: -20, height: 0 }}
-                  exit={{ opacity: 0, y: 20, height: 0 }}
-                  animate={{ opacity: 1, y: 0, height: '100%' }}
-                  className='--error --center-text'
-                >
-                  <ErrorMessage name='firstName' />
-                </motion.div>
-              </AnimatePresence>
-            ) : null}
+            >
+              {touched.firstName && errors.firstName ? (
+                <AnimatePresence>
+                  <motion.div
+                    initial={{ opacity: 0, y: -20, height: 0 }}
+                    exit={{ opacity: 0, y: 20, height: 0 }}
+                    animate={{ opacity: 1, y: 0, height: '100%' }}
+                    className='error-text'
+                  >
+                    <ErrorMessage name='firstName' />
+                  </motion.div>
+                </AnimatePresence>
+              ) : null}
+            </TextField>
+
             <TextField
               variant='outlined'
               type='text'
@@ -117,19 +119,21 @@ const SignUpForm = () => {
               autoComplete='lastName'
               label='Last name'
               error={touched.lastName && errors.lastName ? true : false}
-            />
-            {touched.lastName && errors.lastName ? (
-              <AnimatePresence>
-                <motion.div
-                  initial={{ opacity: 0, y: -20, height: 0 }}
-                  exit={{ opacity: 0, y: 20, height: 0 }}
-                  animate={{ opacity: 1, y: 0, height: '100%' }}
-                  className='--error --center-text'
-                >
-                  <ErrorMessage name='lastName' />
-                </motion.div>
-              </AnimatePresence>
-            ) : null}
+            >
+              {touched.lastName && errors.lastName ? (
+                <AnimatePresence>
+                  <motion.div
+                    initial={{ opacity: 0, y: -20, height: 0 }}
+                    exit={{ opacity: 0, y: 20, height: 0 }}
+                    animate={{ opacity: 1, y: 0, height: '100%' }}
+                    className='error-text'
+                  >
+                    <ErrorMessage name='lastName' />
+                  </motion.div>
+                </AnimatePresence>
+              ) : null}
+            </TextField>
+
             <TextField
               variant='outlined'
               type='text'
@@ -141,19 +145,20 @@ const SignUpForm = () => {
               autoComplete='Username'
               label='Username'
               error={touched.username && errors.username ? true : false}
-            />
-            {touched.username && errors.username ? (
-              <AnimatePresence>
-                <motion.div
-                  initial={{ opacity: 0, y: -20, height: 0 }}
-                  exit={{ opacity: 0, y: 20, height: 0 }}
-                  animate={{ opacity: 1, y: 0, height: '100%' }}
-                  className='--error --center-text'
-                >
-                  <ErrorMessage name='username' />
-                </motion.div>
-              </AnimatePresence>
-            ) : null}
+            >
+              {touched.username && errors.username ? (
+                <AnimatePresence>
+                  <motion.div
+                    initial={{ opacity: 0, y: -20, height: 0 }}
+                    exit={{ opacity: 0, y: 20, height: 0 }}
+                    animate={{ opacity: 1, y: 0, height: '100%' }}
+                    className='error-text'
+                  >
+                    <ErrorMessage name='username' />
+                  </motion.div>
+                </AnimatePresence>
+              ) : null}
+            </TextField>
             <TextField
               variant='outlined'
               type='email'
@@ -165,19 +170,21 @@ const SignUpForm = () => {
               autoComplete='email'
               label='Email'
               error={touched.email && errors.email ? true : false}
-            />
-            {touched.email && errors.email ? (
-              <AnimatePresence>
-                <motion.div
-                  initial={{ opacity: 0, y: -20, height: 0 }}
-                  exit={{ opacity: 0, y: 20, height: 0 }}
-                  animate={{ opacity: 1, y: 0, height: '100%' }}
-                  className='--error --center-text'
-                >
-                  <ErrorMessage name='email' />
-                </motion.div>
-              </AnimatePresence>
-            ) : null}
+            >
+              {touched.email && errors.email ? (
+                <AnimatePresence>
+                  <motion.div
+                    initial={{ opacity: 0, y: -20, height: 0 }}
+                    exit={{ opacity: 0, y: 20, height: 0 }}
+                    animate={{ opacity: 1, y: 0, height: '100%' }}
+                    className='error-text'
+                  >
+                    <ErrorMessage name='email' />
+                  </motion.div>
+                </AnimatePresence>
+              ) : null}
+            </TextField>
+
             <TextField
               variant='outlined'
               type='password'
@@ -189,19 +196,20 @@ const SignUpForm = () => {
               autoComplete='current-password'
               label='Password'
               error={touched.password && errors.password ? true : false}
-            />
-            {touched.password && errors.password ? (
-              <AnimatePresence>
-                <motion.div
-                  initial={{ opacity: 0, y: -20, height: 0 }}
-                  exit={{ opacity: 0, y: 20, height: 0 }}
-                  animate={{ opacity: 1, y: 0, height: '100%' }}
-                  className='--error --center-text'
-                >
-                  <ErrorMessage name='password' />
-                </motion.div>
-              </AnimatePresence>
-            ) : null}
+            >
+              {touched.password && errors.password ? (
+                <AnimatePresence>
+                  <motion.div
+                    initial={{ opacity: 0, y: -20, height: 0 }}
+                    exit={{ opacity: 0, y: 20, height: 0 }}
+                    animate={{ opacity: 1, y: 0, height: '100%' }}
+                    className='error-text'
+                  >
+                    <ErrorMessage name='password' />
+                  </motion.div>
+                </AnimatePresence>
+              ) : null}
+            </TextField>
 
             {errors.general ? (
               <AnimatePresence>

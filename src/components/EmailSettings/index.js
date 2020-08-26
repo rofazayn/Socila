@@ -115,9 +115,10 @@ const EmailSettings = () => {
 
             <div className='box-footer'>
               <div className='status'>
-                {/* <Typography variant='body2' className='info-text'>
-                  Status{' '}
-                </Typography> */}
+                <InfoIconSvg />
+                <Typography variant='body2' className='info-text'>
+                  Status
+                </Typography>
                 <div
                   className={`status-state ${
                     isSubmitting
@@ -131,8 +132,6 @@ const EmailSettings = () => {
                       : ''
                   }`}
                 >
-                  <InfoIconSvg />
-
                   <Typography variant='body2' className='info-value'>
                     {isSubmitting
                       ? 'Saving changes..'

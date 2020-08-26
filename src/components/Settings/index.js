@@ -11,6 +11,7 @@ import PhoneSettings from '../PhoneSettings';
 import PasswordSettings from '../PasswordSettings';
 import LanguageSettings from '../LanguageSettings';
 import LocationSettings from '../LocationSettings';
+import AccountDeactivationSettings from '../AccountDeactivationSettings';
 
 const Settings = () => {
   return (
@@ -32,6 +33,11 @@ const Settings = () => {
           <Route exact path='/settings/password' component={PasswordSettings} />
           <Route exact path='/settings/language' component={LanguageSettings} />
           <Route exact path='/settings/location' component={LocationSettings} />
+          <Route
+            exact
+            path='/settings/deactivation'
+            component={AccountDeactivationSettings}
+          />
           <Redirect to='/settings/email' />
         </Switch>
       </Styled.Settings>

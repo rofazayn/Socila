@@ -18,6 +18,20 @@ const SettingsBox = styled.div`
   .box-header,
   .box-body {
     margin-bottom: 24px;
+    .soon {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      svg {
+        fill: ${({ theme }) => theme.palette.warning.main};
+        margin-inline-end: 8px;
+        width: 20px;
+      }
+      p {
+        color: ${({ theme }) => theme.palette.warning.main};
+        font-weight: 700;
+      }
+    }
   }
 
   .box-header {

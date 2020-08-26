@@ -70,6 +70,9 @@ let themeObject = createMuiTheme({
     body1: {
       lineHeight: 1.7,
     },
+    body2: {
+      lineHeight: 1.6,
+    },
   },
 });
 

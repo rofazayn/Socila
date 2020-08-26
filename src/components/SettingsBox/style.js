@@ -20,11 +20,11 @@ const SettingsBox = styled.div`
 
   .box-header {
     h6 {
-      margin-bottom: 2px;
+      margin-bottom: 8px;
     }
     p {
       color: ${({ theme }) => theme.palette.text.secondary};
-      max-width: 320px;
+      max-width: 360px;
     }
   }
 

@@ -86,7 +86,8 @@ const GlobalStyle = createGlobalStyle`
     align-items: center;
     justify-content: center;
     text-align: center;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
     max-width: 250px;
   }
 

@@ -57,19 +57,21 @@ const SignInForm = () => {
               autoComplete='email'
               label='Email'
               error={touched.email && errors.email ? true : false}
-            />
-            {touched.email && errors.email ? (
-              <AnimatePresence>
-                <motion.div
-                  initial={{ opacity: 0, y: -20, height: 0 }}
-                  exit={{ opacity: 0, y: 20, height: 0 }}
-                  animate={{ opacity: 1, y: 0, height: '100%' }}
-                  className='--error --center-text'
-                >
-                  <ErrorMessage name='email' />
-                </motion.div>
-              </AnimatePresence>
-            ) : null}
+            >
+              {touched.email && errors.email ? (
+                <AnimatePresence>
+                  <motion.div
+                    initial={{ opacity: 0, y: -20, height: 0 }}
+                    exit={{ opacity: 0, y: 20, height: 0 }}
+                    animate={{ opacity: 1, y: 0, height: '100%' }}
+                    className='error-text'
+                  >
+                    <ErrorMessage name='email' />
+                  </motion.div>
+                </AnimatePresence>
+              ) : null}
+            </TextField>
+
             <TextField
               type='password'
               name='password'
@@ -80,19 +82,20 @@ const SignInForm = () => {
               autoComplete='current-password'
               label='Password'
               error={touched.password && errors.password ? true : false}
-            />
-            {touched.password && errors.password ? (
-              <AnimatePresence>
-                <motion.div
-                  initial={{ opacity: 0, y: -20, height: 0 }}
-                  exit={{ opacity: 0, y: 20, height: 0 }}
-                  animate={{ opacity: 1, y: 0, height: '100%' }}
-                  className='--error --center-text'
-                >
-                  <ErrorMessage name='password' />
-                </motion.div>
-              </AnimatePresence>
-            ) : null}
+            >
+              {touched.password && errors.password ? (
+                <AnimatePresence>
+                  <motion.div
+                    initial={{ opacity: 0, y: -20, height: 0 }}
+                    exit={{ opacity: 0, y: 20, height: 0 }}
+                    animate={{ opacity: 1, y: 0, height: '100%' }}
+                    className='error-text'
+                  >
+                    <ErrorMessage name='password' />
+                  </motion.div>
+                </AnimatePresence>
+              ) : null}
+            </TextField>
 
             {errors.general ? (
               <AnimatePresence>

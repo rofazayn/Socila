@@ -10,6 +10,7 @@ import UsernameSettings from '../UsernameSettings';
 import PhoneSettings from '../PhoneSettings';
 import PasswordSettings from '../PasswordSettings';
 import LanguageSettings from '../LanguageSettings';
+import LocationSettings from '../LocationSettings';
 
 const Settings = () => {
   return (
@@ -30,6 +31,7 @@ const Settings = () => {
           <Route exact path='/settings/phone' component={PhoneSettings} />
           <Route exact path='/settings/password' component={PasswordSettings} />
           <Route exact path='/settings/language' component={LanguageSettings} />
+          <Route exact path='/settings/location' component={LocationSettings} />
           <Redirect to='/settings/email' />
         </Switch>
       </Styled.Settings>

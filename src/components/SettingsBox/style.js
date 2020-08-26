@@ -13,12 +13,31 @@ const SettingsBox = styled.div`
   margin: 0 auto;
   /* margin: 0 16px; */
   padding: 24px;
+  box-shadow: 0 0 20px 0 ${({ theme }) => theme.palette.grey[50]};
+
   .box-header,
   .box-body {
     margin-bottom: 24px;
   }
 
   .box-header {
+    /* position: relative;
+    &:before {
+      position: absolute;
+      content: '';
+      top: 2px;
+      bottom: 0;
+      left: -26px;
+      height: 100%;
+      width: 4px;
+      background-color: ${({
+      theme,
+    }) =>
+      theme.palette
+        .grey[200]};
+      border-radius: 16px;
+      margin: auto 0;
+    } */
     h6 {
       margin-bottom: 8px;
     }

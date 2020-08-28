@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const ProfileInfo = styled.div`
   display: flex;
@@ -113,7 +113,8 @@ const ProfileInfo = styled.div`
     align-items: center;
     justify-content: space-between;
     .actions {
-      button {
+      button,
+      a {
         margin-inline-end: 16px;
         &:last-of-type {
           margin-inline-end: 0;

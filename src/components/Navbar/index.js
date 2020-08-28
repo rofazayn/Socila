@@ -50,7 +50,7 @@ const Navbar = () => {
             </li>
             <li>
               <Typography variant='button'>
-                <NavLink to='/profile' exact>
+                <NavLink to='/profile'>
                   <div className='icon'>
                     <UserIconSvg />
                   </div>

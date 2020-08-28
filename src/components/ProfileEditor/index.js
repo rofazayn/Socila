@@ -97,6 +97,7 @@ const ProfileEditor = () => {
                 name='firstName'
                 value={values.firstName}
                 onChange={handleChange}
+                error={touched.firstName && errors.firstName}
               >
                 {touched.firstName && errors.firstName ? (
                   <AnimatePresence>
@@ -111,6 +112,7 @@ const ProfileEditor = () => {
                   </AnimatePresence>
                 ) : null}
               </TextField>
+
               <TextField
                 label='Last name'
                 fullWidth
@@ -133,6 +135,7 @@ const ProfileEditor = () => {
                   </AnimatePresence>
                 ) : null}
               </TextField>
+
               <TextField
                 label='Biography'
                 fullWidth
@@ -180,9 +183,14 @@ const ProfileEditor = () => {
                   className={`status-state ${
                     isSubmitting
                       ? '--submitting'
-                      : isSaved && values.newEmail === ''
+                      : isSaved &&
+                        values.firstName === userDetails.firstName &&
+                        values.lastName === userDetails.lastName &&
+                        values.bio === userDetails.bio
                       ? '--saved'
-                      : values.newEmail !== ''
+                      : values.firstName !== userDetails.firstName ||
+                        values.lastName !== userDetails.lastName ||
+                        values.bio !== userDetails.bio
                       ? '--on-change'
                       : !isSaved
                       ? '--no-save'
@@ -192,9 +200,14 @@ const ProfileEditor = () => {
                   <Typography variant='body2' className='info-value'>
                     {isSubmitting
                       ? 'Saving changes..'
-                      : !isSaved && values.newEmail === ''
+                      : !isSaved &&
+                        values.firstName === userDetails.firstName &&
+                        values.lastName === userDetails.lastName &&
+                        values.bio === userDetails.bio
                       ? 'No changes'
-                      : values.newEmail !== ''
+                      : values.firstName !== userDetails.firstName ||
+                        values.lastName !== userDetails.lastName ||
+                        values.bio !== userDetails.bio
                       ? 'Not saved'
                       : 'Saved'}
                   </Typography>

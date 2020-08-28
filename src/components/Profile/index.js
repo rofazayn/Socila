@@ -7,6 +7,7 @@ import ProfileInfo from '../ProfileInfo';
 import PostsList from '../PostsList';
 import { AuthContext } from '../../context/auth-context';
 import { useFetchPosts } from '../../hooks/usePosts';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 const Profile = () => {
   const { userDetails } = useContext(AuthContext);
@@ -21,7 +22,15 @@ const Profile = () => {
       <Styled.Profile className='profile-page'>
         <TopBar title={'Profile'} icon={<UserIconSvg />} />
         <ProfileInfo user={userDetails} />
-        <PostsList posts={posts} />
+        <Switch>
+          <Route
+            exact
+            path='/profile'
+            render={() => <PostsList posts={posts} />}
+          />
+          {/* <Route exact path='/profile/edit' component={} /> */}
+          <Redirect to='/' />
+        </Switch>
         {/* <ProfileActions />
         <ProfileContent /> */}
       </Styled.Profile>

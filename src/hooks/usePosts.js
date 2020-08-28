@@ -295,9 +295,9 @@ export function useFetchPosts(userId) {
     fetchPosts();
 
     return () => {
-      return postsDispatch({
-        type: postsTypes.CLEAR_POSTS,
-      });
+      // return postsDispatch({
+      //   type: postsTypes.CLEAR_POSTS,
+      // });
     };
   }, [postsDispatch, userId]);
 

@@ -9,6 +9,7 @@ import { AuthContext } from '../../context/auth-context';
 import { useFetchPosts } from '../../hooks/usePosts';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import ProfileEditor from '../ProfileEditor';
+import UserFollowers from '../UserFollowers';
 
 const Profile = () => {
   const { userDetails } = useContext(AuthContext);
@@ -29,6 +30,7 @@ const Profile = () => {
             path='/profile'
             render={() => <PostsList posts={posts} />}
           />
+          <Route exact path='/profile/followers' component={UserFollowers} />
           <Route exact path='/profile/edit' component={ProfileEditor} />
           <Redirect to='/' />
         </Switch>

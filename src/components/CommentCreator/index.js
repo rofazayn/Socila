@@ -1,11 +1,9 @@
-import React, { useContext, useRef, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Styled } from './style';
 import {
   Dialog,
-  DialogTitle,
   CircularProgress,
   IconButton,
-  DialogContent,
 } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import Avatar from '../Avatar';
@@ -15,8 +13,7 @@ import { ReactComponent as CloseIconSvg } from '../../assets/icons/bx-x.svg';
 import { ReactComponent as SendIconSvg } from '../../assets/icons/bx-send.svg';
 
 import { AuthContext } from '../../context/auth-context';
-import { AnimatePresence, motion } from 'framer-motion';
-import { ErrorMessage, Formik } from 'formik';
+import {  Formik } from 'formik';
 import { useComments } from '../../hooks/useComments';
 const CommentCreator = (props) => {
   const { commentsActions } = useComments();

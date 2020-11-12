@@ -1,7 +1,6 @@
 import React, { Component, createRef } from 'react';
 import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
-import { v4 as uuid } from 'uuid';
 
 class CropperInput extends Component {
   cropper = createRef();

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Styled } from "./style";
 import { Dialog, Typography, IconButton } from "@material-ui/core";
 import { ReactComponent as CloseIconSvg } from "../../../assets/icons/bx-x.svg";

@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Styled } from './style';
 import { motion } from 'framer-motion';
 import TopBar from '../TopBar';
 import { ReactComponent as HashtagIconSvg } from '../../assets/icons/bx-hash.svg';
-import Wrapper from '../Wrapper';
+
 import { useParams } from 'react-router-dom';
 import { useFetchHashtagPosts } from '../../hooks/useHashtags';
 import PostsList from '../PostsList';

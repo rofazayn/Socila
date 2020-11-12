@@ -2,22 +2,20 @@ import { Styled } from './style';
 import { AuthContext } from '../../context/auth-context';
 import { Link } from 'react-router-dom';
 import Avatar from '../Avatar';
-import { ReactComponent as HeartIcon } from '../../assets/icons/bx-heart.svg';
+// import { ReactComponent as HeartIcon } from '../../assets/icons/bx-heart.svg';
 import React, { useContext } from 'react';
-import { Typography, Button, CircularProgress } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import dayjs from '../../helpers/dayjs';
-import { Formik } from 'formik';
+
 
 const CommentPreview = (props) => {
   const {
-    commentId,
     authorId,
     authorImage,
     authorFullName,
     authorUsername,
     createdAt,
     body,
-    likeCount,
   } = props;
 
   const { userDetails } = useContext(AuthContext);

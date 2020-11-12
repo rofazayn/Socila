@@ -4,7 +4,7 @@ import { Styled } from './style';
 import { useFetchComments } from '../../hooks/useComments';
 import CommentPreview from '../CommentPreview';
 import { ReactComponent as NoPostsSvg } from '../../assets/svg/TreeSwing.svg';
-import { ReactComponent as NoPostsEndSvg } from '../../assets/svg/FinishLine.svg';
+// import { ReactComponent as NoPostsEndSvg } from '../../assets/svg/FinishLine.svg';
 
 const CommentsList = ({ postId }) => {
   const { comments } = useFetchComments(postId);

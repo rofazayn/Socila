@@ -1,18 +1,18 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import SettingsBox from '../SettingsBox';
-import { Typography, Button, CircularProgress } from '@material-ui/core';
-import TextField from '../layout/TextField';
+import { Typography } from '@material-ui/core';
+// import TextField from '../layout/TextField';\
 import { ReactComponent as InfoIconSvg } from '../../assets/icons/bx-info-circle.svg';
-import { ReactComponent as SaveIconSvg } from '../../assets/icons/bx-save.svg';
-import { Formik, ErrorMessage } from 'formik';
-import { AuthContext } from '../../context/auth-context';
-import fb, { firestore } from '../../firebase';
+// import { ReactComponent as SaveIconSvg } from '../../assets/icons/bx-save.svg';
+import { Formik, } from 'formik';
+// import { AuthContext } from '../../context/auth-context';
+// import fb, { firestore } from '../../firebase';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
 const AccountDeactivationSettings = () => {
-  const { userDetails } = useContext(AuthContext);
-  const user = fb.auth().currentUser;
+  // const { userDetails } = useContext(AuthContext);
+  // const user = fb.auth().currentUser;
   const [isSaved, setSaved] = useState(false);
 
   useEffect(() => {
@@ -20,8 +20,7 @@ const AccountDeactivationSettings = () => {
   }, []);
 
   async function updateLanguage(
-    values,
-    { setSubmitting, resetForm, setFieldError }
+    { setSubmitting }
   ) {
     // let userRef = firestore.collection('users').doc(userDetails.userId);
 
@@ -65,12 +64,7 @@ const AccountDeactivationSettings = () => {
         onSubmit={updateLanguage}
       >
         {({
-          values,
           handleSubmit,
-          handleChange,
-          isSubmitting,
-          isValid,
-          touched,
           errors,
         }) => (
           <form onSubmit={handleSubmit} autoComplete='off'>

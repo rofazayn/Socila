@@ -6,7 +6,6 @@ import {
   Button,
   IconButton,
   CircularProgress,
-  Icon,
 } from '@material-ui/core';
 import { ReactComponent as EditIcon } from '../../assets/icons/bx-edit.svg';
 import { ReactComponent as FollowIcon } from '../../assets/icons/bx-user-plus.svg';

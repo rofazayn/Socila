@@ -1,17 +1,17 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import SettingsBox from '../SettingsBox';
 import { Typography, Button, CircularProgress } from '@material-ui/core';
 import TextField from '../layout/TextField';
 import { ReactComponent as InfoIconSvg } from '../../assets/icons/bx-info-circle.svg';
 import { ReactComponent as SaveIconSvg } from '../../assets/icons/bx-save.svg';
 import { Formik, ErrorMessage } from 'formik';
-import { AuthContext } from '../../context/auth-context';
-import fb, { firestore } from '../../firebase';
+// import { AuthContext } from '../../context/auth-context';
+import fb from '../../firebase';
 import vSchema from './validation';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const PasswordSettings = () => {
-  const { userDetails } = useContext(AuthContext);
+  // const { userDetails } = useContext(AuthContext);
   const user = fb.auth().currentUser;
   const [isSaved, setSaved] = useState(false);
 
@@ -23,7 +23,7 @@ const PasswordSettings = () => {
     values,
     { setSubmitting, resetForm, setFieldError }
   ) {
-    let userRef = firestore.collection('users').doc(userDetails.userId);
+    // let userRef = firestore.collection('users').doc(userDetails.userId);
 
     try {
       setSubmitting(true);

@@ -5,7 +5,7 @@ import Hashtag from '../Hashtag';
 import { Typography, IconButton, CircularProgress } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { ReactComponent as ArrowRightIconSvg } from '../../assets/icons/bx-right-arrow-alt.svg';
-import { ReactComponent as NoHashtagsSvg } from '../../assets/svg/GroovyDoodle.svg';
+// import { ReactComponent as NoHashtagsSvg } from '../../assets/svg/GroovyDoodle.svg';
 
 const TrendingList = () => {
   const { hashtags } = useFetchTrending();

@@ -1,6 +1,6 @@
 import fb from '../firebase';
 import { useEffect, useContext } from 'react';
-import { commentsTypes, userTypes, postsTypes } from '../constants';
+import { commentsTypes, postsTypes } from '../constants';
 import { PostsContext } from '../context/posts-context';
 import { AuthContext } from '../context/auth-context';
 import { useHistory } from 'react-router-dom';

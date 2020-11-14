@@ -1,4 +1,4 @@
-import { userTypes } from '../constants';
+import { userTypes } from "../constants";
 
 const userReducer = (state, action) => {
   switch (action.type) {
@@ -18,7 +18,11 @@ const userReducer = (state, action) => {
       return { ...state, following: [...action.payload] };
 
     case userTypes.ADD_USER_FOLLOWING:
-      return { ...state, following: [...state.following, action.payload] };
+      console.log("test", state);
+      return {
+        ...state,
+        following: [...(state.following || []), action.payload],
+      };
 
     case userTypes.REMOVE_USER_FOLLOWING:
       return {

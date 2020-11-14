@@ -206,10 +206,10 @@ const ProfileInfo = ({ user }) => {
       </div>
       <div className='profile-actions'>
         <div className='actions'>
-          <NavLink to='/profile/' className='profile-link' exact>
+          {/* <NavLink to='/profile/' className='profile-link' exact> */}
             <Button className='fancy-button'>Posts</Button>
-          </NavLink>
-          <NavLink to='/profile/followings' className='profile-link' exact>
+          {/* </NavLink> */}
+          {/* <NavLink to='/profile/followings' className='profile-link' exact> */}
             <Button
               className='fancy-button'
               onClick={() => {
@@ -218,9 +218,9 @@ const ProfileInfo = ({ user }) => {
             >
               <span className='count'>{followingCount}</span> Following
             </Button>
-          </NavLink>
+          {/* </NavLink> */}
 
-          <NavLink to='/profile/followers' className='profile-link' exact>
+          {/* <NavLink to='/profile/followers' className='profile-link' exact> */}
             <Button
               className='fancy-button'
               onClick={() => {
@@ -229,7 +229,7 @@ const ProfileInfo = ({ user }) => {
             >
               <span className='count'>{followersCount}</span> Followers
             </Button>
-          </NavLink>
+          {/* </NavLink> */}
         </div>
         {isCurrentUser() ? (
           <div className='actions edit-profile'>

@@ -1,3 +1,3 @@
 ## Socila
 
-A social media app, a side project for https://rofazayn.me made by Abderraouf Zine.
+End of study project, Bachelor's degree on Computer Science, Hmd!

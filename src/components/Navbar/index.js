@@ -28,7 +28,7 @@ const Navbar = () => {
                 </NavLink>
               </Typography>
             </li>
-            <li>
+            {/* <li>
               <Typography variant='button'>
                 <NavLink to='/notifications' exact>
                   <div className='icon'>
@@ -37,8 +37,8 @@ const Navbar = () => {
                   Notifications
                 </NavLink>
               </Typography>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <Typography variant='button'>
                 <NavLink to='/messages' exact>
                   <div className='icon'>
@@ -47,7 +47,7 @@ const Navbar = () => {
                   Messages
                 </NavLink>
               </Typography>
-            </li>
+            </li> */}
             <li>
               <Typography variant='button'>
                 <NavLink to='/profile'>

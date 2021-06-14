@@ -80,7 +80,7 @@ const SignInForm = () => {
               placeholder='Password'
               onChange={handleChange}
               onBlur={handleBlur}
-              autoComplete='current-password'
+              autoComplete='password'
               label='Password'
               error={touched.password && errors.password ? true : false}
             >

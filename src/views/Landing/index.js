@@ -1,8 +1,9 @@
 import React from 'react';
 import { Styled } from './style';
 import { motion } from 'framer-motion';
-import { Typography } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import Container from '../../components/layout/Container';
+import { NavLink } from 'react-router-dom';
 
 const Landing = () => {
   return (
@@ -17,6 +18,11 @@ const Landing = () => {
           <Typography variant='h3' className='hero-text'>
             See what's happening in the world right now.
           </Typography>
+          <NavLink to='/sign-in'>
+            <Button variant='contained' color='primary'>
+              Start here
+            </Button>
+          </NavLink>
         </Container>
       </Styled.Landing>
     </motion.div>

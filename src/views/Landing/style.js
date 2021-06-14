@@ -7,6 +7,7 @@ const Landing = styled.div`
   justify-content: center;
   align-items: center;
   .hero-text {
+    margin-bottom: 32px;
     max-width: 540px;
     font-weight: 900;
     letter-spacing: 1px;
@@ -14,5 +15,5 @@ const Landing = styled.div`
 `;
 
 export const Styled = {
-  Landing
+  Landing,
 };
